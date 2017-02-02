@@ -1,7 +1,8 @@
-<manifest alg="2" build="2017.0.1.363" opt="true" iceEnabled="true" iceMarkupVersion="2" iceEnabledOptions="link,responsive,cachebuster" exportTarget="other" domain="savour.com" resolutions="1x" timestamp="1484690909501">
+<manifest alg="2" build="2017.0.1.363" opt="true" iceEnabled="true" iceMarkupVersion="2" iceEnabledOptions="link,responsive,cachebuster" exportTarget="other" domain="savour.com" resolutions="1x" timestamp="1486071928984">
   <folder name="css">
     <file name="site_global.css" crc="443350757"/>
-    <file name="index.css" crc="4179717391" ref="index"/>
+    <file name="index.css" crc="3833324654" ref="index"/>
+    <file name="master_a-master.css" crc="4197817313" ref="index"/>
   </folder>
   <folder name="scripts">
     <file name="jquery-1.8.3.min.js" crc="209076791" ref="index"/>
@@ -12,7 +13,9 @@
     <file name="require.js" crc="4159430777" ref="index"/>
   </folder>
   <folder name="images">
-    <file name="u94-4.png" crc="141178684" ref="index"/>
+    <file name="u94-4.png" crc="3930201929" ref="index"/>
+    <file name="pasted image 1620x1069.jpg" crc="4267046571" seo="true" ref="index"/>
+    <file name="pasted image 512x512.jpg" crc="4088817241" seo="true" ref="index"/>
   </folder>
-  <file name="index.html" crc="412273865" seo="true" mt="1484690309225" redirect="true"/>
+  <file name="index.html" crc="292749888" seo="true" mt="1486071674009" redirect="true"/>
 </manifest>
