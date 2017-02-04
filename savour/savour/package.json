@@ -1,0 +1,9 @@
+{
+  "name": "savour",
+  "version": "0.0.0",
+  "description": "savour",
+  "main": "server.js",
+  "author": {
+    "name": "MattG"
+  }
+}
