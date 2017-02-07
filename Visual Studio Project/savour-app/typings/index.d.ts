@@ -1,4 +1,5 @@
 /// <reference path="globals/body-parser/index.d.ts" />
+/// <reference path="globals/bootstrap/index.d.ts" />
 /// <reference path="globals/cookie-parser/index.d.ts" />
 /// <reference path="globals/debug/index.d.ts" />
 /// <reference path="globals/express-serve-static-core/index.d.ts" />
