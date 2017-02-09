@@ -1,0 +1,21 @@
+﻿<!-- maps.html -->
+<div id="map"></div>
+<script>
+    function initMap() {
+        // OMH: 47.651395, -122.361466
+        var uluru = { lat: 47.651395, lng: -122.361466 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+</script>
+<!-- Matt has the APU Key -->
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi-ncVIncoUwpSGqxxRpR2loOmNB2tp8Y&callback=initMap">
+</script>
+<!-- /maps.html -->

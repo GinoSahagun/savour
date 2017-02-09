@@ -42,10 +42,11 @@
     <Content Include="public\stylesheets\bootstrap.css" />
     <Content Include="public\stylesheets\header-color.css" />
     <Content Include="public\stylesheets\header.css" />
+    <Content Include="public\stylesheets\maps.css" />
     <Content Include="public\stylesheets\style.css" />
     <Content Include="README.md" />
     <Content Include="typings.json" />
-    <Content Include="views\content.html" />
+    <Content Include="views\maps.html" />
     <Content Include="views\header.html" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
