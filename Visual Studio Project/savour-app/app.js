@@ -12,7 +12,6 @@ var users = require('./routes/users');
 var app = express();
 
 //Connect to database
-mongoose.connect('mongodb://localhost/savour');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
