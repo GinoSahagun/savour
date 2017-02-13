@@ -34,6 +34,7 @@
     <Compile Include="app.js" />
     <Compile Include="public\javascripts\bootstrap.min.js" />
     <Compile Include="public\javascripts\jQuery.min.js" />
+    <Compile Include="routes\about.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
@@ -43,9 +44,12 @@
     <Content Include="public\stylesheets\header-color.css" />
     <Content Include="public\stylesheets\header.css" />
     <Content Include="public\stylesheets\maps.css" />
+    <Content Include="public\stylesheets\round-about.css" />
     <Content Include="public\stylesheets\style.css" />
     <Content Include="README.md" />
     <Content Include="typings.json" />
+    <Content Include="views\about.jade" />
+    <Content Include="views\description.html" />
     <Content Include="views\maps.html" />
     <Content Include="views\header.html" />
     <Content Include="views\index.jade" />
@@ -69,6 +73,7 @@
     <Folder Include="typings\globals\express\" />
     <Folder Include="typings\globals\jade\" />
     <Folder Include="typings\globals\mime\" />
+    <Folder Include="typings\globals\mongoose\" />
     <Folder Include="typings\globals\morgan\" />
     <Folder Include="typings\globals\node\" />
     <Folder Include="typings\globals\serve-favicon\" />
@@ -93,6 +98,7 @@
     <TypeScriptCompile Include="typings\globals\express\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jade\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\mime\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\mongoose\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\morgan\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\serve-favicon\index.d.ts" />
