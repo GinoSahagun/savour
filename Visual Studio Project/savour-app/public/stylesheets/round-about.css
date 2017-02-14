@@ -3,7 +3,8 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
-
+@import url("header-color.css");
+@import url("header.css");
 
 .img-center {
 	margin: 0 auto;
@@ -12,3 +13,17 @@
 footer {
     margin: 50px 0;
 }
+
+.divider {
+  height: 1px;
+  width:100%;
+  display:block; /* for use on default inline elements like span */
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+
+.bg-2{
+    background-color:cornflowerblue;
+}
+
