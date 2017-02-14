@@ -35,7 +35,7 @@
     <Compile Include="public\javascripts\bootstrap.min.js" />
     <Compile Include="public\javascripts\jQuery.min.js" />
     <Compile Include="routes\about.js" />
-    <Compile Include="routes\aboutRestaurants.js" />
+    <Compile Include="routes\restaurant.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
@@ -52,7 +52,7 @@
     <Content Include="README.md" />
     <Content Include="typings.json" />
     <Content Include="views\about.jade" />
-    <Content Include="views\descRestaurant.html" />
+    <Content Include="views\restaurant.html" />
     <Content Include="views\description.html" />
     <Content Include="views\maps.html" />
     <Content Include="views\header.html" />
@@ -87,7 +87,7 @@
     <Folder Include="views\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="views\restaurantDesc.jade" />
+    <Content Include="views\restaurant.jade" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config" />
     <Content Include="bin\ChangeConfig.ps1" />

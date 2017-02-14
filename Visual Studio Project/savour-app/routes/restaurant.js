@@ -6,7 +6,7 @@ var router = express.Router();
 
 /* GET about page. */
 router.get('/', function (req, res) {
-    res.render('restaurantDesc', { title: 'Express' });
+    res.render('restaurant', { title: 'Express' });
     //res.res('about', { title: 'Express' });
 });
 
