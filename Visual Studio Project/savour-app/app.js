@@ -6,28 +6,41 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost/myTestDB');
+var Restaurant = require('./Restaurant.model');
+var db = 'mongodb://localhost/Savour'; //Local database name is Savour **CHANGE YOUR DATABASE HERE**
+mongoose.Promise = global.Promise;
 
-//var db = mongoose.connection;
+var app = express();
 
-//db.on('error', function (err) {
-//    console.log('connection error', err);
-//});
-//db.once('open', function () {
-//    console.log('connected.');
-//});
+//Connect to database
+mongoose.connect(db);
+var connection = mongoose.connection;
+connection.on('error', console.error.bind(console, 'connection error:'));
 
+//Insert data into database test
+/*var tempRest = new Restaurant({ Name: 'Yasuko Teriyaki', Location: 'Magnolia' });
+tempRest.save(function (err, tempRest) {
+    if (err) return console.error(err);
+});*/
 
-
+//Retrieve collections from database
+app.get('/search', function (req, res) {
+    console.log('Getting Restaurants...');
+    Restaurant.find({})
+            .exec(function (err, results) {
+                if (err) {
+                    res.send('Error Has Occured')
+                } else {
+                    console.log(results);
+                    res.json(results);
+                }
+                });
+});
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var about = require('./routes/about');
 var restaurant = require('./routes/restaurant');
-
-var app = express();
-
-//Connect to database
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
