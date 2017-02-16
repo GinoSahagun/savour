@@ -27,3 +27,13 @@
   <li>Publish</li>
   <li>Push changes to savour-deployment</li>
 </ol>
+
+<h3>Get data in your database</h3>
+<ol>
+  <li>Run mongod.exe, then open new command prompt, run mongo.exe</li>
+  <li> -> Use Savour //Creates Savour database</li>
+  <li>-> db.Restaurant.insert({ name : 'Curbside', location : 'Queen Anne'}); //Restaurant collection is created, only using two properties for testing</li>
+  <li>-> show collections //to view the created collections</li>
+  <li>-> db.Restaurant.find({}) //List all elements in Restaurant collection, should list 'curbside' at this point</li>
+  <li>-> db.Restaurant.insert({ name : '', location : ''}); //Repeat to add more restaurants</li>
+</ol>
