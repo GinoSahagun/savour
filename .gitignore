@@ -1,2 +1,2 @@
-**obj/**
-**node_modules/**
+savour-app/node_modules/*
+savour-app/obj/Release/*
