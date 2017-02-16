@@ -1,9 +1,11 @@
 # Software Engineering Project
+This is the git Repository for the Savour and Sip app, created for the computer science senior project class, Software Engineering.
+The project was built by [Matt G. Hall](githubb.com/mattghall), [Brandon Duncan](githubb.com/brandondunc94), and [Gino Sahagun](GinoSahagun).
 
 ## Server
 When installing packages on the server, please list them here
 - [Set up Digital Ocean Node JS Machine.](https://cloud.digitalocean.com/support/suggestions?article=initial-server-setup-with-ubuntu-14-04&i=bbf02d&page=0&query=ubuntu%20setup)
-- [Connect To Droplet with SSH. Essentially this just requires creating a new public/private key with PuTTY, saving the public key to the server, then saving the private key in PuTTY.](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-putty-on-digitalocean-droplets-windows-users)
+- [Connect To Droplet with SSH.](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-putty-on-digitalocean-droplets-windows-users) Essentially this just requires creating a new public/private key with PuTTY, saving the public key to the server, then saving the private key in PuTTY.
 
 
 ## Enviornment
@@ -28,10 +30,12 @@ How to deploy to the server
 ## Get data in your database
 - Run mongod.exe, then open new command prompt, run mongo.exe
 - `> use Savour` //Creates Savour database
-- `> db.Restaurant.insert({ name : 'Curbside', location : 'Queen Anne'});`` //Restaurant collection is created, only using two properties for testing
-- `> show collections` //to view the created collections/tables
-- `> db.Restaurant.find({})`` //List all elements in Restaurant collection, should list 'curbside' at this point
-- `> db.Restaurant.insert({ name : '', location : ''});` //Repeat to add more restaurants
+- `> db.Restaurant.insert({ name : 'Curbside', location : 'Queen Anne'});` _Restaurant collection is created, only using two properties for testing_
+- `> show collections` _to view the created collections/tables_
+- `> db.Restaurant.find({})` _List all elements in Restaurant collection, should list 'curbside' at this point_
+- `> db.Restaurant.insert({ name : '', location : ''});` _Repeat to add more restaurants_
 
 
-## Please use GitHubs [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for updating the README
+
+
+> Please use GitHub's [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for updating the README
