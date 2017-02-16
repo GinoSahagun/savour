@@ -54,7 +54,7 @@
     <Content Include="typings.json" />
     <Content Include="views\about.jade" />
     <Content Include="views\restaurant.html" />
-    <Content Include="views\description.html" />
+    <Content Include="views\about.html" />
     <Content Include="views\maps.html" />
     <Content Include="views\header.html" />
     <Content Include="views\index.jade" />
