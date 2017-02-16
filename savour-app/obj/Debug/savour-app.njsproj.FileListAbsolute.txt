@@ -1,0 +1,3 @@
+D:\savour-dev\Visual Studio Project\savour-app\bin\Microsoft.NodejsTools.WebRole.dll
+D:\savour-dev\savour-app\obj\Debug\savour-app.njsprojResolveAssemblyReference.cache
+D:\savour-dev\savour-app\bin\Microsoft.NodejsTools.WebRole.dll
