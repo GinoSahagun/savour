@@ -1,2 +1,3 @@
 savour-app/node_modules/*
 savour-app/obj/Release/*
+savour-app/typings/globals/*
