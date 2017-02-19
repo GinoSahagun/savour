@@ -8,7 +8,7 @@
     "jade": "registry:dt/jade#0.0.0+20160316155526",
     "materialize-css": "registry:dt/materialize-css#0.98.0+20170131031752",
     "mime": "registry:dt/mime#0.0.0+20160316155526",
-    "mongoose": "registry:dt/mongoose#4.7.0+20170207211824",
+    "mongoose": "registry:dt/mongoose#4.7.0+20170212093753",
     "morgan": "registry:dt/morgan#1.7.0+20160524142355",
     "node": "registry:dt/node#7.0.0+20170204020307",
     "serve-favicon": "registry:dt/serve-favicon#0.0.0+20160316155526",

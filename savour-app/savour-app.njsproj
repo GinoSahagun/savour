@@ -47,7 +47,8 @@
     <Content Include="public\stylesheets\header-color.css" />
     <Content Include="public\stylesheets\header.css" />
     <Content Include="public\stylesheets\maps.css" />
-    <Content Include="public\stylesheets\materialize.min.css" />
+    <Content Include="public\stylesheets\metro-bootstrap.min.css" />
+    <Content Include="public\stylesheets\metroStyle.css" />
     <Content Include="public\stylesheets\round-about.css" />
     <Content Include="public\stylesheets\style.css" />
     <Content Include="README.md" />
@@ -89,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="views\restaurant.jade" />
+    <Content Include="views\search.jade" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config" />
     <Content Include="bin\ChangeConfig.ps1" />

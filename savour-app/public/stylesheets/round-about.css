@@ -3,8 +3,7 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
-@import url("header-color.css");
-@import url("header.css");
+
 
 .img-center {
 	margin: 0 auto;
@@ -26,4 +25,18 @@ footer {
 .bg-2{
     background-color:cornflowerblue;
 }
+
+/*.tile{ height:auto; width:100%; float:left; margin:0 5px 0 0; padding:2px; } .tileLargo{ width:100%; } 
+
+
+.amarelo{ background:#DAA520; } .vermelho{ background:#CD0000; } .azul{ background:#4682B4; } .verde{ background-color: #2E8B57; }
+
+.pagina{ width:100%; height:auto; } .linha{ width:auto; padding:5px; height:auto; display:table; }*/
+
+@font-face { font-family: Century; src: url('GOTHIC.ttf'); } body{ font-family: Century; background: rgb(51,51,51) url("wallpaper.jpg"); color: #fff; padding:20px; }
+
+
+
+
+
 
