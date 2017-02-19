@@ -26,16 +26,32 @@ tempRest.save(function (err, tempRest) {
 //Retrieve collections from database
 app.get('/search', function (req, res) {
     console.log('Getting Restaurants...');
-    Restaurant.find({})
-            .exec(function (err, results) {
-                if (err) {
-                    res.send('Error Has Occured')
-                } else {
-                    console.log(results);
-                    res.json(results);
-                }
-                });
+    var resultsStr = [];
+    Restaurant.find(function (err, results) {
+        if (err) {
+            res.send('Error Has Occured')
+        } else {
+            //console.log(results);
+            //res.json(results);
+            
+            console.log(results);
+
+
+
+            resultsStr = JSON.parse(JSON.stringify(results))
+            //stuff = JSON.parse(results);
+            //console.log(resultsStr + "\n");
+
+            //console.log(resultsStr);
+            res.render('search', { title: 'Express', results : resultsStr });
+
+        }
+
+    });
+
 });
+
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');

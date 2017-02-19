@@ -1,0 +1,20 @@
+﻿link(href='/stylesheets/style.css', rel='stylesheet')
+script(src="javascripts/jQuery.min.js")
+script(src="javascripts/bootstrap.min.js")
+block content
+    h1= title
+    p Welcome to #{title}
+    -var list = results
+    div.container
+    table.table.table-striped
+        thead
+            tr
+                th Name
+                th Location
+        tbody
+        each obj, i in list
+            tr
+                td #{obj.name}
+                td #{obj.location}
+                
+          
