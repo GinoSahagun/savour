@@ -8,3 +8,6 @@
 body {
     
 }
+select{
+    min-width:70px;
+}

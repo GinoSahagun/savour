@@ -5,7 +5,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <Name>savour-app</Name>
     <RootNamespace>savour-app</RootNamespace>
-    <NameOfLastUsedPublishProfile>Matt Laptop</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>Matt Desktop</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -32,10 +32,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="public\javascripts\add.js" />
     <Compile Include="public\javascripts\bootstrap.min.js" />
     <Compile Include="public\javascripts\jQuery.min.js" />
     <Compile Include="restaurant.model.js" />
     <Compile Include="routes\about.js" />
+    <Compile Include="routes\add.js" />
     <Compile Include="routes\restaurant.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
@@ -53,6 +55,8 @@
     <Content Include="public\stylesheets\style.css" />
     <Content Include="README.md" />
     <Content Include="typings.json" />
+    <Content Include="views\add.html" />
+    <Content Include="views\add.jade" />
     <Content Include="views\about.jade" />
     <Content Include="views\restaurant.html" />
     <Content Include="views\about.html" />

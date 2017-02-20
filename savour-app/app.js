@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Restaurant = require('./Restaurant.model');
-var db = 'mongodb://localhost/Savour'; //Local database name is Savour **CHANGE YOUR DATABASE HERE**
+var db = 'mongodb://localhost/savour'; //Server db is savour
 mongoose.Promise = global.Promise;
 
 var app = express();
@@ -29,6 +29,7 @@ app.get('/search', function (req, res) {
     var resultsStr = [];
     Restaurant.find(function (err, results) {
         if (err) {
+            console.log('Getting Restaurants...');
             res.send('Error Has Occured')
         } else {
             //console.log(results);
@@ -43,7 +44,7 @@ app.get('/search', function (req, res) {
             //console.log(resultsStr + "\n");
 
             //console.log(resultsStr);
-            res.render('search', { title: 'Express', results : resultsStr });
+            res.render('search', { title: 'Search', results : resultsStr });
 
         }
 
@@ -54,9 +55,10 @@ app.get('/search', function (req, res) {
 
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var about = require('./routes/about');
+var add = require('./routes/add');
 var restaurant = require('./routes/restaurant');
+var users = require('./routes/users');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -73,8 +75,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/about', about);
-app.use('/users', users);
+app.use('/add', add);
 app.use('/restaurant', restaurant);
+app.use('/users', users);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
