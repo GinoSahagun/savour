@@ -29,6 +29,7 @@ app.get('/search', function (req, res) {
     var resultsStr = [];
     Restaurant.find(function (err, results) {
         if (err) {
+            console.log('Getting Restaurants...');
             res.send('Error Has Occured')
         } else {
             //console.log(results);
