@@ -6,6 +6,7 @@ The project was built by [Matt G. Hall](githubb.com/mattghall), [Brandon Duncan]
 When installing packages on the server, please list them here
 - [Set up Digital Ocean Node JS Machine.](https://cloud.digitalocean.com/support/suggestions?article=initial-server-setup-with-ubuntu-14-04&i=bbf02d&page=0&query=ubuntu%20setup)
 - [Connect To Droplet with SSH.](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-putty-on-digitalocean-droplets-windows-users) Essentially this just requires creating a new public/private key with PuTTY, saving the public key to the server, then saving the private key in PuTTY.
+- [Install mongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
 
 
 ## Enviornment
@@ -27,13 +28,25 @@ How to deploy to the server
 - Push changes to savour-deployment
 
 
-## Get data in your database
+## Talk to the database on the server
+From any directory, type `mongo --shell`
+CTRL^C to exit
+
+
+## Get data in your local database - please use camel case for table and key names
 - Run mongod.exe, then open new command prompt, run mongo.exe
-- `> use Savour` //Creates Savour database
-- `> db.Restaurant.insert({ name : 'Curbside', location : 'Queen Anne'});` _Restaurant collection is created, only using two properties for testing_
+- `> use savour` //Creates Savour database
+- `> db.rest.insert({ name : 'Curbside', location : 'Queen Anne'});` _Restaurant collection is created, only using two properties for testing_
 - `> show collections` _to view the created collections/tables_
-- `> db.Restaurant.find({})` _List all elements in Restaurant collection, should list 'curbside' at this point_
-- `> db.Restaurant.insert({ name : '', location : ''});` _Repeat to add more restaurants_
+- `> db.rest.find({})` _List all elements in Restaurant collection, should list 'curbside' at this point_
+- `> db.rest.insert({ name : '', location : ''});` _Repeat to add more restaurants_
+
+#### I added these two to my test db
+- `> db.rest.insert({ name : "Test Restaurant", phone : "(206) 421-1061", hours: "{'SUN': '9-5', 'MON': '9-5', 'TUE': '9-5', 'WED': '9-5', 'THU': '9-5', 'FRI': '9-5', 'SAT': '9-5'}",pricing:3, rating:3, address:"3307 3rd Ave W. Seattle, WA 98119", location:"{ 'LAT': '47.35124', 'LON': '124.1265' }", desc:"This is a test restaurant. Does not really exist.", website:"sample.com", menu:"sample.com/menu", green: true, local: true, ownership: true, vegan: true, aca: true});`
+- `> db.rest.insert({ name : "WEST Restaurant", phone : "(206) 421-1061", hours: "{'SUN': '9-5', 'MON': '9-5', 'TUE': '9-5', 'WED': '9-5', 'THU': '9-5', 'FRI': '9-5', 'SAT': '9-5'}",pricing:3, rating:3, address:"3307 3rd Ave W. Seattle, WA 98119", location:"{ 'LAT': '47.35124', 'LON': '124.1265' }", desc:"This is a test restaurant. Does not really exist.", website:"sample.com", menu:"sample.com/menu", green: true, local: true, ownership: true, vegan: false, aca: true});`
+
+#### Some good things to know
+- `> db.rest.find( { rating: 3 } )`
 
 
 
