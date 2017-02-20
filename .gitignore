@@ -1,4 +1,6 @@
-savour-app/node_modules/*
-savour-app/obj/Release/*
-savour-app/typings/globals/*
-.vs/savour-app/v14/.suo
+# TIL - make sure you use ** instead of *
+savour-app/node_modules/**
+savour-app/obj/Release/**
+savour-app/typings/globals/**
+savour-app/v14/.suo
+**/keys/**
