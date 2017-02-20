@@ -1,9 +1,10 @@
-﻿var express = require('express');
+﻿
+var express = require('express');
 var router = express.Router();
 
-/* GET about page. */
+/* GET add rest page. */
 router.get('/', function (req, res) {
-    res.render('add', { title: 'Add Restaurant or Coffee Shop' });
+    res.render('add', { title: 'Add new Restaurant' });
     //res.res('about', { title: 'Express' });
 });
 
