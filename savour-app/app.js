@@ -55,10 +55,10 @@ app.get('/search', function (req, res) {
 
 
 var routes = require('./routes/index');
-var about = require('./routes/about');
-var add = require('./routes/add');
-var restaurant = require('./routes/restaurant');
-var users = require('./routes/users');
+//var about = require('./routes/about');
+//var add = require('./routes/add');
+//var restaurant = require('./routes/restaurant');
+//var users = require('./routes/users');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -74,10 +74,10 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/about', about);
-app.use('/add', add);
-app.use('/restaurant', restaurant);
-app.use('/users', users);
+//app.get('/about', routes.about);
+//app.get('/add', routes.add);
+//app.get('/restaurant', routes.restaurant);
+//app.get('/users', users);
 
 
 // catch 404 and forward to error handler

@@ -2,7 +2,7 @@
 var router = express.Router();
 
 /* GET about page. */
-router.get('/', function (req, res) {
+router.get('/add', function (req, res) {
     res.render('add', { title: 'Add Restaurant or Coffee Shop' });
     //res.res('about', { title: 'Express' });
 });
