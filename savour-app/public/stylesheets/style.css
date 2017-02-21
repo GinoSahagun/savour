@@ -2,12 +2,10 @@
 @import url("header-color.css");
 @import url("header.css");
 @import url("maps.css");
+@import url("add.css");
 @import url("round-about.css");
 /*@import url("materialize.min.css");*/
 
 body {
     
-}
-select{
-    min-width:70px;
 }

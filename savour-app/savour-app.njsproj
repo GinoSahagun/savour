@@ -5,7 +5,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <Name>savour-app</Name>
     <RootNamespace>savour-app</RootNamespace>
-    <NameOfLastUsedPublishProfile>Matt Desktop</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>Matt Laptop</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -46,6 +46,7 @@
     <None Include="Matt Desktop.pubxml" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\bootstrap.css" />
+    <Content Include="public\stylesheets\add.css" />
     <Content Include="public\stylesheets\header-color.css" />
     <Content Include="public\stylesheets\header.css" />
     <Content Include="public\stylesheets\maps.css" />
