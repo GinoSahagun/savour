@@ -15,12 +15,8 @@ var restaurantSchema = new Schema({
     desc: String,
     website: String,
     menu: String,
-    green: Boolean,
-    local: Boolean,
-    ownership: Boolean,
-    vegan: Boolean,
-    disability: Boolean
-}, { collection: 'Restaurant' });
+    owner: String
+}, { collection: 'rest' });
 
 //Create Model and export it
-module.exports = mongoose.model('restaurant-data', restaurantSchema);
+module.exports = mongoose.model('rest', restaurantSchema);
