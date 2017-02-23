@@ -8,7 +8,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var path = require('path');
 var restaurant = require('./restaurant.model');
-var routes = require('./routes/index');
+var routes = require('./routes.js');
 
 var app = express();
 

@@ -1,0 +1,92 @@
+﻿// routes.js
+// All routes are routed through here
+var bodyParser = require("body-parser");
+var express = require('express');
+var restaurant = require('./restaurant.model');
+var router = express.Router();
+
+var app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+/* GET home page. */
+router.get('/', function (req, res) {
+    res.render('index', { title: 'Savour and Sip' });
+});
+
+/* GET about page. */
+router.get('/about', function (req, res) {
+    res.render('about', { title: 'About Savour and Sip' });
+    //res.res('about', { title: 'Express' });
+});
+
+//Get add restaurant page
+router.get('/add', function (req, res) {
+    res.render('add', { title: 'Add Restaurant or Coffee Shop' });
+});
+
+//Get add restaurant page
+router.post('/add', function (req, res) {
+    //Insert data into database test
+    var deets = req.body;
+    console.log(deets.id + "  -  " + deets.name);
+
+    try {
+        var tempRest = new restaurant({
+            name: deets.name,
+            location: deets.location,
+            phone: deets.phone,
+            hours: deets.hours,
+            pricing: deets.pricing,
+            rating: deets.rating,
+            address: deets.address,
+            category: deets.category,
+            desc: deets.desc,
+            website: deets.website,
+            menu: deets.menu,
+            owner: deets.owner
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+
+    tempRest.save(function (err, tempRest) {
+        if (err != null) {
+            return console.error(err);
+            res.sendStatus(500);
+        }
+        console.log("Restaurant added");
+        res.sendStatus(200)
+    });
+    
+});
+
+// Get restaurant page
+router.get('/restaurant', function (req, res) {
+    res.render('Restaurant', { title: 'Restaurant' });
+});
+
+//Retrieve collections from database
+router.get('/search', function (req, res) {
+    console.log('Getting Restaurants...');
+    var resultsStr = [];
+    restaurant.find(function (err, results) {
+        if (err) {
+            console.log('Getting Restaurants...');
+            res.send('Error Has Occurred')
+        } else {
+            console.log(results);
+            resultsStr = JSON.parse(JSON.stringify(results))
+            //stuff = JSON.parse(results);
+            //console.log(resultsStr + "\n");
+
+            //console.log(resultsStr);
+            res.render('search', { title: 'Search', results: resultsStr });
+        }
+
+    });
+
+});
+module.exports = router;
