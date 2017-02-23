@@ -53,10 +53,7 @@ router.post('/add', function (req, res) {
     }
 
     tempRest.save(function (err, tempRest) {
-        if (err != null) {
-            return console.error(err);
-            res.sendStatus(500);
-        }
+        if (err != null) return console.error(err);
         console.log("Restaurant added");
         res.sendStatus(200)
     });

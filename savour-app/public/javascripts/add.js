@@ -8,6 +8,16 @@ $(function () {
 function submitform() {
     var rest = new RestaurantClass();
     console.log(rest);
+
+    $.ajax({
+        url: "./add",
+        type: "POST",
+        data: JSON.parse(JSON.stringify(rest)),
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("could not post data");
+            window.alert("Could not add Restaurant");
+        }
+    });
 }
 
 function RestaurantClass(){
