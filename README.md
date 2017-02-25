@@ -48,6 +48,12 @@ CTRL^C to exit
 #### Some good things to know
 - `> db.rest.find( { rating: 3 } )`
 
+### Enable remote access to database
+- '> sudo vim /etc/mongod.conf
+- '> Network
+	port: 27017
+	#comment out "bind_ip = 127.0.0.1"
+
 
 
 
