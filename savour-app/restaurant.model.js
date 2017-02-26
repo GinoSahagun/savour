@@ -3,8 +3,8 @@ var Schema = mongoose.Schema;
 
 //Define Restaurant schema
 var restaurantSchema = new Schema({
-    Name: String,
-    Location: String,
+    name: String,
+    location: String,
     id: String,
     phone: String,
     hours: String,
@@ -15,12 +15,8 @@ var restaurantSchema = new Schema({
     desc: String,
     website: String,
     menu: String,
-    green: Boolean,
-    local: Boolean,
-    ownership: Boolean,
-    vegan: Boolean,
-    disability: Boolean
-}, { collection: 'Restaurant' });
+    owner: String
+}, { collection: 'rest' });
 
 //Create Model and export it
-module.exports = mongoose.model('restaurant-data', restaurantSchema);
+module.exports = mongoose.model('rest', restaurantSchema);
