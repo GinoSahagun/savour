@@ -74,9 +74,9 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-//app.get('/about', routes.about);
-//app.get('/add', routes.add);
-//app.get('/restaurant', routes.restaurant);
+//app.get('/about', about);
+//app.get('/add', add);
+//app.get('/restaurant', restaurant);
 //app.get('/users', users);
 
 
