@@ -1,55 +1,52 @@
-﻿<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href=".">Savour and Sip</a>
+﻿<!-- Already included?
+<script src="//code.jquery.com/jquery.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+ -->
+
+    <div class="navbar navbar-savour navbar-fixed-top" role="navigation" id="slide-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a href="./">
+                    <img class="header-logo" src="images/ss-logo-wide.png" />
+                </a>
+            </div>
+            <div id="slidemenu">
+                <a href="./">
+                    <img class="menu-logo" src="images/ss-logo-round.png" />
+                </a>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a class="nav-text" href="./">Home</a></li>
+                    <li><a class="nav-text" href="about">Aboot</a></li>
+                    <li><a class="nav-text" href="#contact">My Places</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle nav-text" data-toggle="dropdown">More<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-text" href="add">Add Restaurant</a></li>
+                            <li><a class="nav-text" href="search">Search</a></li>
+                            <li><a class="nav-text" href="restaurant">Restaurant</a></li>                  
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle nav-text" data-toggle="dropdown">I feel like <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-text" href="add">Coffee</a></li>
+                            <li><a class="nav-text" href="search">Tea</a></li>
+                            <li><a class="nav-text" href="restaurant">Baked Goods</a></li>
+                            <li class="divider"></li>
+                            <li><a class="nav-text" href="restaurant">Breakfast</a></li>
+                            <li><a class="nav-text" href="restaurant">Lunch</a></li>
+                            <li><a class="nav-text" href="restaurant">Dinner</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="about">Aboot <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">My Places</a></li>
-                <li><a href="restaurant">Restaurant</a></li>
-                <li><a href="add">Add</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">I feel like <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Coffee</a></li>
-                        <li><a href="#">Tea</a></li>
-                        <li><a href="#">Baked Goods</a></li>
-                        <li><a href="#">Breakfast</a></li>
-                        <li><a href="#">Lunch</a></li>
-                        <li><a href="#">Dinner</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <form class="navbar-form navbar-left" method="post">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" value="Add" class="btn btn-default">Search</button>                
-            </form>
-            <!--
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-                -->
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
+    </div>
