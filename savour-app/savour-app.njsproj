@@ -34,6 +34,7 @@
     <Compile Include="app.js" />
     <Compile Include="public\javascripts\add.js" />
     <Compile Include="public\javascripts\bootstrap.min.js" />
+    <Compile Include="public\javascripts\header.js" />
     <Compile Include="public\javascripts\jQuery.min.js" />
     <Compile Include="restaurant.model.js" />
     <Compile Include="routes.js" />
@@ -47,6 +48,11 @@
     <None Include="misc\Matt Laptop.pubxml" />
     <Content Include="misc\Matt Laptop.pubxml.user" />
     <Content Include="package.json" />
+    <Content Include="public\images\brandon.jpg" />
+    <Content Include="public\images\gino.jpg" />
+    <Content Include="public\images\matt.jpg" />
+    <Content Include="public\images\ss-logo-round.png" />
+    <Content Include="public\images\ss-logo-wide.png" />
     <Content Include="public\stylesheets\bootstrap.css" />
     <Content Include="public\stylesheets\add.css" />
     <Content Include="public\stylesheets\header-color.css" />
@@ -61,6 +67,8 @@
     <Content Include="views\add.html" />
     <Content Include="views\add.jade" />
     <Content Include="views\about.jade" />
+    <Content Include="views\neighborhood.html" />
+    <Content Include="views\neighborhood.jade" />
     <Content Include="views\restaurant.html" />
     <Content Include="views\about.html" />
     <Content Include="views\maps.html" />
