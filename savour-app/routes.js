@@ -21,6 +21,11 @@ router.get('/about', function (req, res) {
     //res.res('about', { title: 'Express' });
 });
 
+/* GET neighborhood page. */
+router.get('/neighborhood', function (req, res) {
+    res.render('Neighborhood', { title: 'Neighborhood' });
+});
+
 //Get add restaurant page
 router.get('/add', function (req, res) {
     res.render('add', { title: 'Add Restaurant or Coffee Shop' });

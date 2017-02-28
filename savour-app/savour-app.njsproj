@@ -67,6 +67,8 @@
     <Content Include="views\add.html" />
     <Content Include="views\add.jade" />
     <Content Include="views\about.jade" />
+    <Content Include="views\neighborhood.html" />
+    <Content Include="views\neighborhood.jade" />
     <Content Include="views\restaurant.html" />
     <Content Include="views\about.html" />
     <Content Include="views\maps.html" />
