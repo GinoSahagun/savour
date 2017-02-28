@@ -9,9 +9,9 @@
     var pagewrapper = '#page-content';
     var navigationwrapper = '.navbar-header';
     var menuwidth = '100%'; // the menu inside the slide menu itself
-    var slidewidth = '80%';
+    var slidewidth = '45%';
     var menuneg = '-100%';
-    var slideneg = '-80%';
+    var slideneg = '-45%';
 
 
     $("#slide-nav").on("click", toggler, function (e) {
