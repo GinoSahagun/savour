@@ -1,7 +1,7 @@
 ﻿
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-var db = 'mongodb://104.236.139.134:27017/test'; //Server db is savour
+var db = 'mongodb://104.236.139.134:27017/savour'; //Server db is savour
 var express = require('express');
 var favicon = require('serve-favicon');
 var logger = require('morgan');

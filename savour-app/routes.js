@@ -77,7 +77,7 @@ router.get('/search', function (req, res) {
     restaurant.find(function (err, results) {
         if (err) {
             console.log('Getting Restaurants...');
-            res.send('Error Has Occurred')
+            res.send(err + '\nError Has Occurred')
         } else {
             console.log(results);
             resultsStr = JSON.parse(JSON.stringify(results))
