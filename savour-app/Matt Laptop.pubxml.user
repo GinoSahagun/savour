@@ -8696,6 +8696,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="public/javascripts/bootstrap.min.js">
       <publishTime>02/07/2017 13:37:44</publishTime>
     </File>
+    <File Include="public/javascripts/header.js">
+      <publishTime>02/28/2017 14:32:32</publishTime>
+    </File>
     <File Include="public/javascripts/jQuery.min.js">
       <publishTime>02/07/2017 13:39:12</publishTime>
     </File>
@@ -8869,6 +8872,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="views/maps.html">
       <publishTime>02/14/2017 13:49:48</publishTime>
+    </File>
+    <File Include="views/neighborhood.html">
+      <publishTime>02/28/2017 13:58:40</publishTime>
+    </File>
+    <File Include="views/neighborhood.jade">
+      <publishTime>02/28/2017 13:58:40</publishTime>
     </File>
     <File Include="views/restaurant.html">
       <publishTime>02/20/2017 10:57:54</publishTime>

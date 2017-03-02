@@ -99,13 +99,13 @@ body.slide-active {
         display:block;
     }
     .nav-text{
-        font-size:24px;
+        font-size:20px;
     }
 }
 @media (max-width:320px) {
         /* For the logo on the menu*/
     .header-logo{
-        margin-left: 20;
+        margin-left: 20px;
     }
 }
 
@@ -126,6 +126,7 @@ body.slide-active {
 	    top: -1px;
 	    z-index: 1000;
 	}
+   
 	#slide-nav #slidemenu {
 	    background: #f7f7f7;
 	    left: -100%;
@@ -136,6 +137,7 @@ body.slide-active {
 	    z-index: 2;
 	    top: -8px;
 	    margin: 0;
+        overflow-y: scroll;
 	}
 	#slide-nav #slidemenu .navbar-nav {
 	    min-width: 0;
@@ -188,8 +190,14 @@ body.slide-active {
     .navbar-nav .open .dropdown-menu > li > a {
        line-height: 70px;
     }
+    #slide-nav #slidemenu {
+        height:645px;
+    }
 }
 @media (min-width:768px) { 
+    .header-logo{
+        margin-left: 20px;
+    }
 	#page-content {
 	    left: 0!important
 	}
