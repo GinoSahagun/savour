@@ -61,6 +61,7 @@
     <Content Include="public\stylesheets\add.css" />
     <Content Include="public\stylesheets\header-color.css" />
     <Content Include="public\stylesheets\header.css" />
+    <Content Include="public\stylesheets\list.css" />
     <Content Include="public\stylesheets\maps.css" />
     <Content Include="public\stylesheets\metro-bootstrap.min.css" />
     <Content Include="public\stylesheets\metroStyle.css" />
@@ -71,6 +72,7 @@
     <Content Include="views\add.html" />
     <Content Include="views\add.jade" />
     <Content Include="views\about.jade" />
+    <Content Include="views\list.html" />
     <Content Include="views\neighborhood.html" />
     <Content Include="views\neighborhood.jade" />
     <Content Include="views\restaurant.html" />
