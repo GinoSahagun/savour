@@ -36,6 +36,7 @@
     <Compile Include="public\javascripts\bootstrap.min.js" />
     <Compile Include="public\javascripts\header.js" />
     <Compile Include="public\javascripts\jQuery.min.js" />
+    <Compile Include="public\javascripts\neighborhood.js" />
     <Compile Include="public\javascripts\restaurant.js" />
     <Compile Include="restaurant.model.js" />
     <Compile Include="routes.js" />
@@ -53,6 +54,7 @@
     <Content Include="public\images\curbside.jpg" />
     <Content Include="public\images\gino.jpg" />
     <Content Include="public\images\matt.jpg" />
+    <Content Include="public\images\queenanne.jpg" />
     <Content Include="public\images\ss-logo-round.png" />
     <Content Include="public\images\ss-logo-wide.png" />
     <Content Include="public\stylesheets\bootstrap.css" />
