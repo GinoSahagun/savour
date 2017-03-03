@@ -1,5 +1,13 @@
-﻿table#t01 {
+﻿.navbar-fixed-bottom{
     width: 100%;    
-    background-color: #cccccc;
-    border-top: 3px solid black;
+    background-color: #ffffff;
+}
+
+#dashboard-list{
+    margin-bottom:0px;
+}
+
+.cell-fill{
+    width: 100%;
+    height: 100%;
 }

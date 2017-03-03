@@ -87,7 +87,6 @@ router.get('/search', function (req, res) {
             //console.log(resultsStr);
             res.render('search', { title: 'Search', results: resultsStr });
         }
-
     });
 
 });

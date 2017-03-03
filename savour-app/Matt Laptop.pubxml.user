@@ -8702,6 +8702,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="public/javascripts/jQuery.min.js">
       <publishTime>02/07/2017 13:39:12</publishTime>
     </File>
+    <File Include="public/javascripts/restaurant.js">
+      <publishTime>03/02/2017 13:09:58</publishTime>
+    </File>
     <File Include="public/stylesheets/add.css">
       <publishTime>02/20/2017 11:13:51</publishTime>
     </File>
@@ -8734,6 +8737,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="restaurant.model.js">
       <publishTime>02/16/2017 13:20:43</publishTime>
+    </File>
+    <File Include="routes.js">
+      <publishTime>02/28/2017 13:58:39</publishTime>
     </File>
     <File Include="routes/about.js">
       <publishTime>02/20/2017 10:57:54</publishTime>

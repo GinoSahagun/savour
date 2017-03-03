@@ -36,6 +36,7 @@
     <Compile Include="public\javascripts\bootstrap.min.js" />
     <Compile Include="public\javascripts\header.js" />
     <Compile Include="public\javascripts\jQuery.min.js" />
+    <Compile Include="public\javascripts\list.js" />
     <Compile Include="public\javascripts\neighborhood.js" />
     <Compile Include="public\javascripts\restaurant.js" />
     <Compile Include="restaurant.model.js" />
