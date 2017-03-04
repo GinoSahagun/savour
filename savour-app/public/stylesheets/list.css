@@ -1,0 +1,13 @@
+﻿.navbar-fixed-bottom{
+    width: 100%;    
+    background-color: #ffffff;
+}
+
+#dashboard-list{
+    margin-bottom:0px;
+}
+
+.cell-fill{
+    width: 100%;
+    height: 100%;
+}
