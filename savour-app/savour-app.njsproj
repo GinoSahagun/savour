@@ -37,6 +37,7 @@
     <Compile Include="public\javascripts\header.js" />
     <Compile Include="public\javascripts\jQuery.min.js" />
     <Compile Include="public\javascripts\list.js" />
+    <Compile Include="public\javascripts\maps.js" />
     <Compile Include="public\javascripts\neighborhood.js" />
     <Compile Include="public\javascripts\restaurant.js" />
     <Compile Include="restaurant.model.js" />
@@ -51,6 +52,7 @@
     <None Include="misc\Matt Laptop.pubxml" />
     <Content Include="misc\Matt Laptop.pubxml.user" />
     <Content Include="package.json" />
+    <Content Include="public\images\blue-marker.png" />
     <Content Include="public\images\brandon.jpg" />
     <Content Include="public\images\curbside.jpg" />
     <Content Include="public\images\gino.jpg" />

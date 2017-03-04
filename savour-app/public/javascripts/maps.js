@@ -1,35 +1,55 @@
-﻿function initMap() {
-    // OMH: 47.651395, -122.361466
-    var omhLat = 47.651395;
-    var omhLon = -122.361466;
-    var pos1 = new google.maps.LatLng(omhLat, omhLon);
-    var pos2 = new google.maps.LatLng(omhLat + .004, omhLon + .008);
-    var pos3 = new google.maps.LatLng(omhLat - .008, omhLon - .0075);
-    var pos4 = new google.maps.LatLng(omhLat + .009, omhLon - .0073);
-    var pos5 = new google.maps.LatLng(omhLat - .0085, omhLon + .0041);
+﻿var map;
+var infoWindow;
+var userMarker;
 
-    var map = new google.maps.Map(document.getElementById('map'), {
+function initMap() {
+    // OMH: 47.651395, -122.361466
+    var omh = { lat:47.651395, lng:-122.361466};
+
+    var marks = [omh,
+        { lat: omh.lat + .004, lng: omh.lng + .008 },
+        { lat: omh.lat - .008, lng: omh.lng - .0075 },
+        { lat: omh.lat + .009, lng: omh.lng - .0073 },
+        { lat: omh.lat + .0085, lng: omh.lng + .0041 },
+    ];
+
+    if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(function (position) {
+            var userPos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            var blueMarker = "../images/blue-marker.png";
+            if (userMarker == null) {
+                userMarker = new google.maps.Marker({
+                    position: userPos,
+                    map: map,
+                    icon: blueMarker,
+                    title: 'You are here'
+                });
+                map.setCenter(userPos);
+            } else {
+                userMarker.setPosition(userPos);
+            }
+        });
+    }  
+
+    map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
-        center: pos1
+        center: omh
     });
-    var marker1 = new google.maps.Marker({
-        position: pos1,
-        map: map
+    google.maps.event.addListener(map, 'click', function () {
+        infoWindow.close();
     });
-    var marker2 = new google.maps.Marker({
-        position: pos2,
-        map: map
-    });
-    var marker3 = new google.maps.Marker({
-        position: pos3,
-        map: map
-    });
-    var marker4 = new google.maps.Marker({
-        position: pos4,
-        map: map
-    });
-    var marker5 = new google.maps.Marker({
-        position: pos5,
+
+    for (mark of marks) {
+        AddMarker(mark);
+    }
+}
+
+function AddMarker(pos) {
+    new google.maps.Marker({
+        position: pos,
         map: map
     });
 }

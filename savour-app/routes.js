@@ -89,15 +89,10 @@ router.get('/restaurant-data', function (req, res) {
                 res.send(err + '\nError Has Occurred') //respond with error occured
             }
             else {
-                resStr = JSON.parse(JSON.stringify(doc)); //JsonParse Queried Data
-                
+                resStr = JSON.parse(JSON.stringify(doc)); //JsonParse Queried Data                
                 res.send(resStr); //send response back
-
             }
-
-        }); 
-
-       
+        });        
     }
     
 });
