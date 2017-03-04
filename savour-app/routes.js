@@ -4,8 +4,9 @@ var bodyParser = require("body-parser");
 var express = require('express');
 var restaurant = require('./restaurant.model');
 var router = express.Router();
-
+var mongoose = require('mongoose');
 var app = express();
+var urlArgs;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -67,9 +68,39 @@ router.post('/add', function (req, res) {
 
 // Get restaurant page
 router.get('/restaurant', function (req, res) {
-    res.render('Restaurant', { title: 'Restaurant' });
+    urlArgs = req.query; //get the URL Arguements if any
+    res.render('Restaurant', { title: 'Restaurant'});
 });
 
+//Using load Restaurant Data Function get Json request
+router.get('/restaurant-data', function (req, res) {
+    console.log('Getting Restaurants...');
+    var resStr;
+    if (urlArgs != "") {
+        console.log("id: ", urlArgs.id);
+        var o_id = mongoose.Types.ObjectId(urlArgs.id); //convert into Object ID
+
+        console.log("obj: ", o_id); //Object Id check
+      
+        //then we query the database for the specifc Object ID
+        restaurant.findById(o_id, function (err, doc) {
+            if (err) {
+                console.log("Error Occured");
+                res.send(err + '\nError Has Occurred') //respond with error occured
+            }
+            else {
+                resStr = JSON.parse(JSON.stringify(doc)); //JsonParse Queried Data
+                
+                res.send(resStr); //send response back
+
+            }
+
+        }); 
+
+       
+    }
+    
+});
 //Retrieve collections from database
 router.get('/search', function (req, res) {
     console.log('Getting Restaurants...');
