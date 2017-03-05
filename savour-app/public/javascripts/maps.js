@@ -3,7 +3,6 @@ var infoWindow;
 var userMarker;
 
 function initMap() {
-    // OMH: 47.651395, -122.361466
     var omh = { lat:47.651395, lng:-122.361466};
 
     var marks = [omh,

@@ -57,6 +57,7 @@
     <Content Include="public\images\gino.jpg" />
     <Content Include="public\images\matt.jpg" />
     <Content Include="public\images\queenanne.jpg" />
+    <Content Include="public\images\search.png" />
     <Content Include="public\images\ss-logo-round.png" />
     <Content Include="public\images\ss-logo-wide.png" />
     <Content Include="public\stylesheets\bootstrap.css" />
