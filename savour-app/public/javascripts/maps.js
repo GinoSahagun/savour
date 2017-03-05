@@ -34,12 +34,45 @@ function initMap() {
         });
     }  
 
+    var mapStyle = [
+        {
+            featureType: "administrative",
+            elementType: "labels",
+            stylers: [
+                { visibility: "off" }
+            ]
+        }, {
+            featureType: "poi",
+            elementType: "labels",
+            stylers: [
+                { visibility: "off" }
+            ]
+        }/*, {
+            featureType: "water",
+            elementType: "labels",
+            stylers: [
+                { visibility: "off" }
+            ]
+        }, {
+            featureType: "road",
+            elementType: "labels",
+            stylers: [
+                { visibility: "off" }
+            ]
+        }*/
+    ];
+
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
-        center: omh
+        center: omh,
+        disableDefaultUI: true,
+        mapTypeId: 'mapStyle'
     });
+    map.mapTypes.set('mapStyle', new google.maps.StyledMapType(mapStyle, { name: 'Map Style' }));
     google.maps.event.addListener(map, 'click', function () {
-        infoWindow.close();
+        if (infoWindow != null) {
+            infoWindow.close();
+        }
     });
 
     for (mark of marks) {

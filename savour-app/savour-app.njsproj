@@ -47,7 +47,6 @@
     <Content Include="Matt Desktop.pubxml.user" />
     <None Include="Matt Laptop.pubxml" />
     <Content Include="Matt Laptop.pubxml.user" />
-    <None Include="misc\Matt Desktop.pubxml" />
     <Content Include="misc\Matt Desktop.pubxml.user" />
     <None Include="misc\Matt Laptop.pubxml" />
     <Content Include="misc\Matt Laptop.pubxml.user" />
@@ -88,7 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
-    <Folder Include="misc\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
