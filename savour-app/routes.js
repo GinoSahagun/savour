@@ -24,7 +24,7 @@ router.get('/about', function (req, res) {
 
 /* GET neighborhood page. */
 router.get('/neighborhood', function (req, res) {
-    res.render('Neighborhood', { title: 'Neighborhood' });
+    res.render('neighborhood', { title: 'Neighborhood' });
 });
 
 //Get add restaurant page
@@ -68,8 +68,12 @@ router.post('/add', function (req, res) {
 
 // Get restaurant page
 router.get('/restaurant', function (req, res) {
+//<<<<<<< Updated upstream
     urlArgs = req.query; //get the URL Arguements if any
     res.render('Restaurant', { title: 'Restaurant'});
+//=======
+    res.render('restaurant', { title: 'Restaurant' });
+//>>>>>>> Stashed changes
 });
 
 //Using load Restaurant Data Function get Json request
