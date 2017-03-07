@@ -68,12 +68,8 @@ router.post('/add', function (req, res) {
 
 // Get restaurant page
 router.get('/restaurant', function (req, res) {
-//<<<<<<< Updated upstream
     urlArgs = req.query; //get the URL Arguements if any
-    res.render('Restaurant', { title: 'Restaurant'});
-//=======
     res.render('restaurant', { title: 'Restaurant' });
-//>>>>>>> Stashed changes
 });
 
 //Using load Restaurant Data Function get Json request
