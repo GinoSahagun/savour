@@ -68,7 +68,7 @@ router.post('/add', function (req, res) {
 
 // Get restaurant page
 router.get('/restaurant', function (req, res) {
-    urlArgs = req.query; //get the URL Arguements if any
+    urlArgs = req.query; //get the URL Arguments if any
     res.render('restaurant', { title: 'Restaurant' });
 });
 
