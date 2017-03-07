@@ -5,9 +5,9 @@ width: 100%;
 }
 #search-bar {
   position: absolute;
-  top: 50;
-  left: 25;
-  right:25;
+  top: 55px;
+  left: 25px;
+  right:25px;
 }
 #search-bar {
   z-index: 100;

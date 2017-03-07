@@ -9,9 +9,9 @@
     var pagewrapper = '#page-content';
     var navigationwrapper = '.navbar-header';
     var menuwidth = '100%'; // the menu inside the slide menu itself
-    var slidewidth = '45%';
+    var slidewidth = '250px';
     var menuneg = '-100%';
-    var slideneg = '-45%';
+    var slideneg = '-250px';
 
 
     $("#slide-nav").on("click", toggler, function (e) {
@@ -21,7 +21,7 @@
         $('#slidemenu').stop().animate({
             left: selected ? menuneg : '0px'
         });
-
+        
         $('#navbar-height-col').stop().animate({
             left: selected ? slideneg : '0px'
         });
@@ -34,13 +34,14 @@
             left: selected ? '0px' : slidewidth
         });
 
-
+        
         $(this).toggleClass('slide-active', !selected);
         $('#slidemenu').toggleClass('slide-active');
 
 
         $('#page-content, .navbar, body, .navbar-header').toggleClass('slide-active');
 
+        $('#dashboard-list').toggleClass('invisible');
 
     });
 
