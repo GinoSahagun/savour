@@ -17,6 +17,8 @@ function submitform() {
             console.log("could not post data");
             window.alert("Could not add Restaurant");
         }
+    }).done(function () {
+        window.location = "./..";
     });
 }
 
