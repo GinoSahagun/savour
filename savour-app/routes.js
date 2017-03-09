@@ -123,7 +123,8 @@ router.get('/search', function (req, res) {
 router.get('/neighborhood-data', function (req, res) {
     console.log('Getting Neighborhood...');
     var neighborhoodStr;
-    if (urlArgs != "") {
+    urlArgs = req.query.location;
+    if (urlArgs != "" && urlArgs != null) {
         console.log("id: ", urlArgs.id);
         var o_id = mongoose.Types.ObjectId(urlArgs.id); //convert into Object ID
 
@@ -140,6 +141,10 @@ router.get('/neighborhood-data', function (req, res) {
                 res.send(neighborhoodStr); //send response back
             }
         });
+
+    }
+    else {
+        res.send(err + '\nError Has Occurred') //respond with error occured
     }
 
 });
