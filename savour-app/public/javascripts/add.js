@@ -25,11 +25,11 @@ function submitform() {
 function RestaurantClass(){
     this.name = $("#name").val();
     this.phone = $("#phone").val();
-    this.hours = JSON.parse(GetHours());
+    this.hours = GetHours();
     this.pricing = $("#pricing").val();
     this.rating = $("#rating").val();
     this.address = $("#address").val();
-    this.location = JSON.parse(GetLatLon());
+    this.location = GetLatLon();
     this.desc = $("#desc").val();
     this.website = $("#website").val();
     this.menu = $("#menu").val();

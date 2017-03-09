@@ -40,11 +40,14 @@ router.post('/add', function (req, res) {
     console.log(deets.id + "  -  " + deets.name);
 
     try {
+        var location = JSON.parse(deets.location);
+        var hours = JSON.parse(deets.hours);
+
         var tempRest = new restaurant({
             name: deets.name,
-            location: deets.location,
+            location: location,
             phone: deets.phone,
-            hours: deets.hours,
+            hours: hours,
             pricing: deets.pricing,
             rating: deets.rating,
             address: deets.address,
