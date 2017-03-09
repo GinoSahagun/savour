@@ -3,6 +3,7 @@
 var bodyParser = require("body-parser");
 var express = require('express');
 var restaurant = require('./restaurant.model');
+var neighborhood = require('./neighborhood.model');
 var router = express.Router();
 var mongoose = require('mongoose');
 var app = express();
@@ -96,6 +97,7 @@ router.get('/restaurant-data', function (req, res) {
     }
     
 });
+
 //Retrieve collections from database
 router.get('/search', function (req, res) {
     console.log('Getting Restaurants...');
@@ -114,6 +116,31 @@ router.get('/search', function (req, res) {
             res.render('search', { title: 'Search', results: resultsStr });
         }
     });
+
+});
+
+//Using load Neighborhood Data Function get Json request
+router.get('/neighborhood-data', function (req, res) {
+    console.log('Getting Neighborhood...');
+    var neighborhoodStr;
+    if (urlArgs != "") {
+        console.log("id: ", urlArgs.id);
+        var o_id = mongoose.Types.ObjectId(urlArgs.id); //convert into Object ID
+
+        console.log("obj: ", o_id); //Object Id check
+
+        //then we query the database for the specifc Object ID
+        neighborhood.findById(o_id, function (err, doc) {
+            if (err) {
+                console.log("Error Occured");
+                res.send(err + '\nError Has Occurred') //respond with error occured
+            }
+            else {
+                neighborhoodStr = JSON.parse(JSON.stringify(doc)); //JsonParse Queried Data                
+                res.send(neighborhoodStr); //send response back
+            }
+        });
+    }
 
 });
 module.exports = router;
