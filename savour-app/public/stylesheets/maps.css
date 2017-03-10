@@ -18,6 +18,11 @@ width: 100%;
     /*border-radius:Top-left, Top-right, Bottom-right, Bottom-left;*/
 }
  .search-btn {
-    border-radius: 0px 30px 30px 0px;
+    border-radius: 0px 30px 30px 0px !important;
     cursor:pointer;
 }
+ .filter-btn{
+     border-radius: 30px 30px 30px 30px !important;
+     cursor:pointer;
+     margin-left:15px !important;
+ }
