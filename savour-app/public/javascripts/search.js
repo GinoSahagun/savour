@@ -3,11 +3,11 @@
 //Document Ready Function
 //function load for span tags
 $(function () {
-
     $(".admin-drop").click(function () {
-        alert("The paragraph was clicked.");
+        console.log("clicked");
+        console.log($(this));
     });
-   
+
     // Assign handlers immediately after making the request,
     // and remember the jqxhr object for this request
     // Get Json from Search Data get Function 
@@ -36,25 +36,23 @@ $(function () {
         console.log("second complete");
 
         //reload json stuff here
-
         console.log("res: " , res); //check to see if object was working
 
         var tbl = $("#dashboard-list"); //table id from html selector
-        var tr = "<tr>"; //table row html 
-        var td = "<td>"; //table data cell html tag
-        var viewButton = "<td> <button id='create-review-button admin-drop' class='btn btn-primary btn-right admin-drop'> View </button> </td>";
   
         for (d of res) {
             var row = CreateRow(d);
             tbl.append(row);
         }
+    });
+});
 
-
-        function CreateRow(data) {
-            var row = "<tr><td><a><div class='cell-fill'>";
-            row += data.name + "<td>" + data.address + "<td>" + data.rating + viewButton + "</div ></a ></td ></td></td></tr> ";
+  function CreateRow(data) {
+            var row = "<tr>";
+            row +="<td><a><div class=\"cell-fill\">" + data.name + "</div></a></td>";
+            row += "<td>" + data.address + "</td>";
+            row += "td>" + data.rating + "</td>";
+            row += "<td><button class=\"btn btn-primary btn-right admin-drop\">View</button></td>";
+            row += "</tr>";
             return row;
         }
-    });
-       
-});
