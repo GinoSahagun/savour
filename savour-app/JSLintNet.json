@@ -3,6 +3,7 @@
   "ignore": [
     "\\public\\javascripts\\bootstrap.min.js",
     "\\public\\javascripts\\jQuery.min.js",
+    "\\typings\\",
     "\\bin\\",
     "\\misc\\"
   ],

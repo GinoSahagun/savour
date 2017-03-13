@@ -1,8 +1,10 @@
 ﻿var map;
 var infoWindow;
 var userMarker;
+var filters = [];
 
 function initMap() {
+    filters.push("food", "coffee", "tea");
     var omh = { lat:47.651395, lng:-122.361466};
 
     var marks = [omh,
@@ -85,3 +87,21 @@ function AddMarker(pos) {
         map: map
     });
 }
+
+function AddBubble(str) {
+    if (!filters.includes(str)) {
+        filters.push(str);
+        $("#bubble-bar").append("<div class='actionBox'>" + str + "</div>");
+    }
+}
+
+$(function () {
+    $("#filter-button").click(function () {
+        if (filters.length != 0) {
+            $("#bubble-bar").toggle();
+        }
+    });
+    $("#search-button").click(function () {
+        // TODO: Brandon put code her plz
+    });
+});
