@@ -103,5 +103,10 @@ $(function () {
     });
     $("#search-button").click(function () {
         // TODO: Brandon put code her plz
+        var val = $("#filter-search").val();
+        if (val != "") {
+            AddBubble(val);
+            $("#filter-search").val("");
+        }
     });
 });

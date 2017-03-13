@@ -1,5 +1,6 @@
 ﻿{
   "version": "2.3.0",
+  "output": "Warning",
   "ignore": [
     "\\public\\javascripts\\bootstrap.min.js",
     "\\public\\javascripts\\jQuery.min.js",

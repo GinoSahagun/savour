@@ -22,9 +22,6 @@ $(document).ready(function () {
                 console.log("complete");
             });
 
-
-        // Perform other work here ...
-
         // Set another completion function for the request above
         jqxhr.done(function (parsedResponse, statusText, jqXhr) {
             var res;
@@ -32,7 +29,7 @@ $(document).ready(function () {
             if (typeof parsedResponse === 'string')
                 res = parsedResponse;
             else {
-                res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operaton as its already a json object response
+                res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operation as its already a json object response
             }
             console.log("second complete");
 
@@ -41,8 +38,8 @@ $(document).ready(function () {
             console.log("res: " ,res); //check to see if object was working
 
             var tbl = $("#dashboard-list"); //table id from html selector
-            var tr = '<tr>'; //table row html 
-            var td = '<td>'; //table data cell html tag
+            var tr = "<tr>"; //table row html 
+            var td = "<td>"; //table data cell html tag
 
             for (d of res) {
                 var row = CreateRow(d);
@@ -52,14 +49,10 @@ $(document).ready(function () {
 
             function CreateRow(data) {
                 var row = "<tr><td><a><div class='cell-fill'>";
-                row += data.name + '<td>' + data.address + '<td>' + data.rating + "</div ></a ></td ></td></td></tr > ";
+                row += data.name + "<td>" + data.address + "<td>" + data.rating + "</div ></a ></td ></td></td></tr > ";
                 return row;
             }
-
-            
-
         });
-
        
     });
 
