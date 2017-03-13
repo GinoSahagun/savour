@@ -1,93 +1,110 @@
-﻿<body>
-    <div class="container-fluid">
-        <div class="text-center">   
+﻿
+    <div class="row centercolumn">
+        
             <!--Restaurant Border Row-->
-                 <div class="container-fluid" style="padding-top:2em;  ">
-                        <div class="row" style="padding:2em;">
-                            <!--Restaurant Name Row-->
-                            <div class="row">
-                                <img id="restImage" src="http://placehold.it/200x200" style="height:auto; max-width:350px;" class="img-circle" alt="">
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h1>
-                                        <span id="restName">Restaurant Name</span>
-                                    </h1>
-                                </div>
-                            </div>
-                            <!--Rating Stars-->
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="ratings">
-                                        <h4>
-                                            Rate: <span id="restStars">Integer</span>
-                                        </h4>
-
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="ratings">
-                                            <h4>
-                                                Hours: <span id="startHour">Start</span>-<span id="endHour">End</span>
-                                            </h4>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                            <!--Description Food-->
-                            <div class="row">
-
-                                <div class="col-sm-12">
-                                    <p> <span id="bio"> Small Bio of Restaruant  </span></p>
-                                </div>
-
-                            </div>
-
-                            <!--Social Icons -->
-                            <!--<div class="container-fluid">
-                                <div class="col-sm-6 col-md-4">
-                                    <a href="#">
-                                        <img class="img-circle" src="http://placehold.it/200x200" width="100" height="100" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <a href="#">
-                                        <img class="img-circle" src="http://placehold.it/200x200" width="100" height="100" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <a href="#">
-                                        <img class="img-circle" src="http://placehold.it/200x200" width="100" height="100" alt="">
-                                    </a>
-                                </div>
-                            </div>-->
+            <div class="container-fluid">
+                <div class="row">
+                    <!--Restaurant Name Row-->
+                    <div class="row">
+                        <div class="col-sm-2"> </div>
+                        <div class="col-sm-8">
+                            <!-- Start Body -->
+                            <img id="restImage" src="http://placehold.it/200x200" class="img img-rounded" alt="">
                         </div>
+                        <div class="col-sm-2"> </div>
+                        </div>
+                    <div class="row">
+                        <div class="col-sm-2"> </div>
+                        <div class="col-sm-8">
+                            <h1 class="text-center">
+                                <span id="restName">Restaurant Name</span>
+                            </h1>
+                        </div>
+                        <div class="col-sm-2"> </div>
                     </div>
-            <!--Extra Reviews and Descriptions and yada-->
-        </div>        
-            <div class="divider"></div>        
-        <div class="text-center">
-            <div style="padding-right:4em"  class="row">
+                    <!--Rating Stars-->
+                    <div class="row">
+                        <div class="col-sm-2"> </div>
+                        <div class="col-sm-8">
+                           
+                                
+                            <div id="restStars" style="margin:auto;"></div>
+                                
+                            
+                          
+                        </div>
+                        <div class="col-sm-2"> </div>
+                        <div class="row">
+                            <div class="col-sm-2"> </div>
+                            <div class="col-sm-8">
+                                <div class="ratings">
+                                    <h4 class="text-center">
+                                        Hours: <span id="startHour">Start</span>-<span id="endHour">End</span>
+                                    </h4>
 
-                <h1 style="padding-left:4em">Reviews
-                <small>
-                    <button style="float:right; position:relative" type="button" class="btn btn-default">
-                        Write One
-                    </button>
-                </small>
-                </h1>                
-            </div>      
-        </div>
-            <div class="divider"></div>
-        <div class="text-center">
-            <div class="row">
-                <h1>Sections Reviews</h1>
+                                </div>
+                            </div>
+                            <div class="col-sm-2"> </div>
+
+                        </div>
+
+                    </div>
+                    <!--Description Food-->
+                    <div class="row">
+
+                        <div class="col-sm-2"> </div>
+                        <div class="col-sm-8">
+                            <p class="text-center"> <span id="bio"> Small Bio of Restaruant  </span></p>
+                        </div>
+                        <div class="col-sm-2"> </div>
+
+                    </div>
+
+                    
+                </div>
             </div>
-        </div>
-            <div class="divider"></div>
-        </div>
-</body>
+            <!--Extra Reviews and Descriptions and yada-->
+
+        <div class="divider"></div>
+        
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <h1 class="text-center">
+                        Reviews
+                    </h1>
+                   
+
+                </div>
+                <div class="col-sm-2 text-center" >
+                 
+                        <button id="create-review-button" type="button" class="btn btn-primary btn-right"> Write One</button>
+                 
+                </div>
+              </div>
+        <!-- Review Form -->
+        <form id="review-form">
+            <div class="form-group">
+                <label for="rating">Rating: </label>
+                <div id="review-rating" class="rating" data-rate-value=5></div>
+            </div>
+            <div class="form-group">
+                <label for="comment">Comment:</label>
+                <textarea class="form-control" rows="5" id="comment"></textarea>
+            </div>
+            <div>
+                <button id="submit-button" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+           
+        </form>
+        <div class="divider"></div>
+     
+            <div class="row">
+                <h1 class="text-center">Sections Reviews</h1>
+            </div>
+        
+        
+
+        <div class="divider"></div>
+    </div>
+<div id="status-message"></div>

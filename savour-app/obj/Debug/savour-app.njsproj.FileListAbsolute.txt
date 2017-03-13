@@ -1,6 +1,5 @@
 D:\savour-dev\Visual Studio Project\savour-app\bin\Microsoft.NodejsTools.WebRole.dll
 D:\savour-dev\savour-app\bin\Microsoft.NodejsTools.WebRole.dll
-C:\Users\CAR\Documents\Savour\savour-app\obj\Debug\savour-app.njsprojResolveAssemblyReference.cache
 C:\Users\CAR\Documents\Savour\savour-app\bin\Microsoft.NodejsTools.WebRole.dll
 C:\Users\Brandon\Desktop\Savour\savour-app\obj\Debug\savour-app.njsprojResolveAssemblyReference.cache
 C:\Users\Brandon\Desktop\Savour\savour-app\bin\Microsoft.NodejsTools.WebRole.dll

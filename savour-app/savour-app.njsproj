@@ -40,8 +40,11 @@
     <Compile Include="public\javascripts\list.js" />
     <Compile Include="public\javascripts\maps.js" />
     <Compile Include="public\javascripts\neighborhood.js" />
+    <Compile Include="public\javascripts\rater.min.js" />
     <Compile Include="public\javascripts\restaurant.js" />
+    <Compile Include="public\javascripts\search.js" />
     <Compile Include="restaurant.model.js" />
+    <Compile Include="review.model.js" />
     <Compile Include="routes.js" />
     <Compile Include="bin\www" />
     <None Include="Matt Desktop.pubxml" />
@@ -68,8 +71,6 @@
     <Content Include="public\stylesheets\header.css" />
     <Content Include="public\stylesheets\list.css" />
     <Content Include="public\stylesheets\maps.css" />
-    <Content Include="public\stylesheets\metro-bootstrap.min.css" />
-    <Content Include="public\stylesheets\metroStyle.css" />
     <Content Include="public\stylesheets\round-about.css" />
     <Content Include="public\stylesheets\style.css" />
     <Content Include="public\stylesheets\theme.css" />
@@ -118,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="views\restaurant.jade" />
+    <Content Include="views\search.html" />
     <Content Include="views\search.jade" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config" />
