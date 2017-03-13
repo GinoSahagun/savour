@@ -48,6 +48,7 @@
     <Compile Include="routes.js" />
     <Compile Include="bin\www" />
     <None Include="Matt Desktop.pubxml" />
+    <Content Include="JSLintNet.json" />
     <Content Include="Matt Desktop.pubxml.user" />
     <None Include="Matt Laptop.pubxml" />
     <Content Include="Matt Laptop.pubxml.user" />

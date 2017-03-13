@@ -8,7 +8,6 @@
     var toggler = '.navbar-toggle';
     var pagewrapper = '#page-content';
     var navigationwrapper = '.navbar-header';
-    var menuwidth = '100%'; // the menu inside the slide menu itself
     var slidewidth = '250px';
     var menuneg = '-100%';
     var slideneg = '-250px';

@@ -1,0 +1,17 @@
+﻿{
+  "version": "2.3.0",
+  "ignore": [
+    "\\public\\javascripts\\bootstrap.min.js",
+    "\\public\\javascripts\\jQuery.min.js",
+    "\\bin\\",
+    "\\misc\\"
+  ],
+  "options": {
+    "node": true
+  },
+  "globalVariables": [
+    "$"
+  ],
+  "runOnSave": true,
+  "runOnBuild": true
+}
