@@ -1,6 +1,5 @@
 ﻿//var ObjectId = require('mongodb').ObjectId; //create instance of Object ID
 //Document Ready Function
-   //function load for span tags
 $(function () {
 
     // Assign handlers immediately after making the request,
@@ -16,9 +15,9 @@ $(function () {
 
             $.getJSON("neighborhood-data", { location: userPos })
                 .fail(function () {
-                    // if we dont find the id then "not found page". Right now I'll make Curbside default page
+                    //Default to Queen Anne
                     //Neighborhood name
-                    $('#neighborhoodName').text("Queen Anne");
+                    $('#neighborhoodName').text("No neighborhood found, so here's Queen Anne!");
                     //Neighborhood bio
                     $("#neighborhoodBio").text("Queen Anne Hill is an affluent neighborhood and geographic feature in Seattle, northwest of downtown. The neighborhood sits on the highest named hill in the city, with a maximum elevation of 456 feet (139 m). It covers an area of 7.3 square kilometers (2.8 sq mi), and has a population of about 28,000. Queen Anne is bordered by Belltown to the south, Lake Union to the east, the Lake Washington Ship Canal to the north and Interbay to the west.");
                     //Neighborhood image
@@ -28,34 +27,32 @@ $(function () {
                     //Neighborhood location
                     $('#neighborhoodLocation').text("47.637165, -122.356931");
                     window.alert("Could not get neighborhood.");
-                    console.log("error");
+                    console.log("Error - Could not retrieve neighborhood");
                 })
                 .always(function () {
-                    console.log("complete");
+                    console.log("Complete");
                 }).done(function (parsedResponse, statusText, jqXhr) {
                     var res;
-                    //Recievd Response Text as JSON hopefully
-                    if (typeof parsedResponse === 'string') {
+                    //Recievd Response Text as JSON
+                    if (typeof parsedResponse === Object) {
                         res = parsedResponse;
                     }
                     else {
                         res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operaton as its already a json object response
                     }
-                    console.log("second complete");
+                    console.log("Second complete");
 
                     //reload json stuff here
-                    console.log("res: ", res.desc); //check to see if object was working
-
                     //Neighborhood name
-                    $('#neighborhoodName').text(name);
+                    $('#neighborhoodName').text(res.name);
                     //Neighborhood bio
-                    $("#neighborhoodBio").text(description);
-                    //Neighborhood image
-                    $('#neighborhoodImg').attr('src', image);
-                    //Neighborhood radius
-                    $('#neighborhoodRadius').text(radius);
-                    //Neighborhood location
-                    $('#neighborhoodLocation').text(location);
+                    $("#neighborhoodBio").text(res.desc);
+                    //Neighborhood image, we will do this in the Spring
+                    //$('#neighborhoodImg').attr('src', image);
+                    //Neighborhood radius, do we need this here?
+                    $('#neighborhoodRadius').text(res.radius);
+                    //Neighborhood location, do we need this here?
+                    $('#neighborhoodLocation').text(res.location);
                 });
         });
     }

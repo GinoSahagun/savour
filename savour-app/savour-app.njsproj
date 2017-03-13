@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="filter.model.js" />
     <Compile Include="neighborhood.model.js" />
     <Compile Include="public\javascripts\add.js" />
     <Compile Include="public\javascripts\bootstrap.min.js" />

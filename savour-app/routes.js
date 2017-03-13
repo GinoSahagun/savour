@@ -5,6 +5,7 @@ var express = require('express');
 var restaurant = require('./restaurant.model');
 var neighborhood = require('./neighborhood.model');
 var review = require('./review.model');
+var filter = require('./filter.model');
 var router = express.Router();
 var mongoose = require('mongoose');
 var app = express();
@@ -28,6 +29,63 @@ router.get('/about', function (req, res) {
 router.get('/neighborhood', function (req, res) {
     res.render('neighborhood', { title: 'Neighborhood' });
 });
+
+//Using load Neighborhood Data Function get Json request
+router.get('/neighborhood-data', function (req, res) {
+    console.log('Getting Neighborhood...');
+
+    var neighborhoodStr;
+    var userLocation = req.query.location;
+    if (userLocation != "" && userLocation != null) {
+        console.log("User Location: ", userLocation.lat, userLocation.lng); //Check to see if we got user location
+        var o_id = mongoose.Types.ObjectId(userLocation.id); //convert into Object ID
+
+        //Default neighborhood for now - Queen Anne rom database
+        o_id = "58c0d26473beb886d72bbcf3"
+        console.log("obj: ", o_id); //Object ID check
+
+        //then we query the database for the specifc Object ID
+        neighborhood.findById(o_id, function (err, doc) {
+            if (err) {
+                console.log("Error Occured");
+                res.send(err + '\nError Has Occurred') //respond with error occured
+            }
+            else {
+                neighborhoodStr = JSON.parse(JSON.stringify(doc)); //JsonParse Queried Data                
+                res.send(neighborhoodStr); //send response back
+            }
+        });
+
+    }
+    else {
+        res.send(err + '\nError Has Occurred') //respond with error occured
+    }
+
+});
+
+//Add new filters to database
+router.post('/addFilter', function (req, res) {
+    //Insert filter into database
+    var newFilter = req.body;
+    console.log(filterName.id + "  -  " + newFilter.name);
+
+    try {
+        var tempFilter = new filter({
+            name: newFilter.name,
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+
+    tempRest.save(function (err, tempRest) {
+        if (err != null) return console.error(err);
+        console.log("Filter added");
+        res.sendStatus(200);
+    });
+
+});
+
 
 //Get add restaurant page
 router.get('/add', function (req, res) {
@@ -108,7 +166,6 @@ router.get('/restaurant-data', function (req, res) {
     if (args != "" || args!= null) {
         console.log("id: ", args.id);
         var o_id = mongoose.Types.ObjectId(args); //convert into Object ID
-
         console.log("obj: ", o_id); //Object Id check
       
         //then we query the database for the specifc Object ID
@@ -149,33 +206,4 @@ router.get('/search-data', function (req, res) {
 
 });
 
-//Using load Neighborhood Data Function get Json request
-router.get('/neighborhood-data', function (req, res) {
-    console.log('Getting Neighborhood...');
-    var neighborhoodStr;
-    var urlArgs = req.query.location;
-    if (urlArgs != "" && urlArgs != null) {
-        console.log("id: ", urlArgs.id);
-        var o_id = mongoose.Types.ObjectId(urlArgs.id); //convert into Object ID
-
-        console.log("obj: ", o_id); //Object Id check
-
-        //then we query the database for the specifc Object ID
-        neighborhood.findById(o_id, function (err, doc) {
-            if (err) {
-                console.log("Error Occured");
-                res.send(err + '\nError Has Occurred') //respond with error occured
-            }
-            else {
-                neighborhoodStr = JSON.parse(JSON.stringify(doc)); //JsonParse Queried Data                
-                res.send(neighborhoodStr); //send response back
-            }
-        });
-
-    }
-    else {
-        res.send(err + '\nError Has Occurred') //respond with error occured
-    }
-
-});
 module.exports = router;

@@ -12,7 +12,7 @@
      
 
      var urlID = getUrlParameter('id');
-     console.log(urlID);
+     console.log("URL-id", urlID);
      if (urlID) {
          $.getJSON("restaurant-data", { id: urlID })
              .done(function (parsedResponse) {
