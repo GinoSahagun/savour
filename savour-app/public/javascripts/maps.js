@@ -2,17 +2,11 @@
 var infoWindow;
 var userMarker;
 var filters = [];
+var marks = [];
 
 function initMap() {
     filters.push("food", "coffee", "tea");
     var omh = { lat:47.651395, lng:-122.361466};
-
-    var marks = [omh,
-        { lat: omh.lat + .004, lng: omh.lng + .008 },
-        { lat: omh.lat - .008, lng: omh.lng - .0075 },
-        { lat: omh.lat + .009, lng: omh.lng - .0073 },
-        { lat: omh.lat + .0085, lng: omh.lng + .0041 },
-    ];
 
     if (navigator.geolocation) {
         navigator.geolocation.watchPosition(function (position) {
@@ -26,14 +20,14 @@ function initMap() {
                     position: userPos,
                     map: map,
                     icon: blueMarker,
-                    title: 'You are here'
+                    title: "You are here"
                 });
                 map.setCenter(userPos);
             } else {
                 userMarker.setPosition(userPos);
             }
         });
-    }  
+    }
 
     var mapStyle = [
         {
@@ -67,21 +61,31 @@ function initMap() {
         zoom: 15,
         center: omh,
         disableDefaultUI: true,
-        mapTypeId: 'mapStyle'
+        mapTypeId: "mapStyle"
     });
-    map.mapTypes.set('mapStyle', new google.maps.StyledMapType(mapStyle, { name: 'Map Style' }));
-    google.maps.event.addListener(map, 'click', function () {
+    map.mapTypes.set("mapStyle", new google.maps.StyledMapType(mapStyle, { name: "Map Style" }));
+    google.maps.event.addListener(map, "click", function () {
         if (infoWindow != null) {
             infoWindow.close();
         }
     });
+}
 
-    for (mark of marks) {
-        AddMarker(mark);
+// Converts the JSON object we're using in mongodb to a google latlng
+function GooglePOS(jsonPos) {
+    try {
+        var pos = new google.maps.LatLng(jsonPos.LAT, jsonPos.LON);
+        return pos;
+    }
+    catch (err) {
+        console.error(err);
+        return new google.maps.LatLng();
     }
 }
 
 function AddMarker(pos) {
+    // TODO validation
+
     new google.maps.Marker({
         position: pos,
         map: map

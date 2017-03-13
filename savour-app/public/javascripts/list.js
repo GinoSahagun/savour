@@ -52,6 +52,7 @@ $(function ()
         console.log("res: ", res);
 
         for (d of res) {
+            AddMarker(GooglePOS(d.location));
             var row = CreateRow(d);
             tbl.append(row);
         }
