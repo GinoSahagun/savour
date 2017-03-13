@@ -1,6 +1,8 @@
 ﻿.navbar-fixed-bottom{
     width: 100%;    
     background-color: #ffffff;
+    height: 165px;
+    overflow:scroll;
 }
 
 #dashboard-list {
