@@ -51,7 +51,7 @@ $(function () {
             var row = "<tr>";
             row +="<td><a><div class=\"cell-fill\">" + data.name + "</div></a></td>";
             row += "<td>" + data.address + "</td>";
-            row += "td>" + data.rating + "</td>";
+            row += "<td>" + data.rating + "</td>";
             row += "<td><button class=\"btn btn-primary btn-right admin-drop\">View</button></td>";
             row += "</tr>";
             return row;
