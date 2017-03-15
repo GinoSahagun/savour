@@ -170,8 +170,8 @@ function getRestaurantData(urlID) {
             console.log("second complete");
 
             //reload json stuff here
-            console.log("res: ", res); //check to see if object was working
-            console.log(dayValue);
+            //console.log("res: ", res); //check to see if object was working
+            //console.log(dayValue);
             //console.log("res: ", res.desc); //check to see if object was working
             //console.log("res: ", res.rating); //check to see if object was working
             $('#restImage').attr('src', 'images/curbside.jpg');
@@ -188,21 +188,29 @@ function getRestaurantData(urlID) {
             }
             $("#restStars").rate(settings);
             var result = [];
-            //convert JSON into array
+            //convert JSON hours into array
             for (var i in res.hours)
                 result.push([i, res.hours[i]]);
 
-            console.log(result); //check conversion 
-           //look through all of the keys in hours
+            //console.log(result); //check conversion for hours
+           
+            
+
+            var temp = result[dayValue][1].split("-");
+           
+            if (parseInt(temp[1]) >= 12)
+            temp[1] = (parseInt(temp[1]) - 12).toString();
+           
+
+
+            //$('#Day > span').text(result[dayValue][1]); //Not Sure why this isnt working
+          
+            //look through all of the keys in hours
             Object.keys(res.hours).forEach(function (k) {
-                console.log(k);
                 if (k === day) {
-                    $("#Day").text(day);
-                    
-                    
+                    $("#Day").text(day + " " + temp[0] + "-" + temp[1]);
                 }
             });
-            $("#Hora").text(result[dayValue][1]); //Not Sure why this isnt working
             //Bio for restaurants
             $("#bio").text(res.desc + "👍");
             $("#address").text(res.address);
