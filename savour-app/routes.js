@@ -124,6 +124,7 @@ router.post('/add', function (req, res) {
     tempRest.save(function (err, tempRest) {
         if (err != null) return console.error(err);
         console.log("Restaurant added");
+        
         res.sendStatus(200);
     });
     
@@ -144,7 +145,8 @@ router.post('/restaurant', function (req, res) {
         var tempReview = new review({
             id: deets.id,
             rating: parseFloat(deets.rating),
-            review: deets.comment 
+            review: deets.comment,
+            name: deets.name 
         });
     }
     catch (err) {
@@ -182,7 +184,28 @@ router.get('/restaurant-data', function (req, res) {
     }
     
 });
+//Using load Restaurant Data Function get Json request
+router.get('/review-data', function (req, res) {
+    console.log('Getting Reviews...');
+    var args = req.query.id;
+    var resStr;
+    if (args != "" || args != null) {
+        
+         
+        //then we query the database for the specifc Object ID
+        review.find({ 'id': { $in: args } } ,function (err, doc) {
+            if (err) {
+                console.log("Error Occured");
+                res.send(err + '\nError Has Occurred') //respond with error occured
+            }
+            else {
+                resStr = JSON.parse(JSON.stringify(doc)); //JsonParse Queried Data                
+                res.send(resStr); //send response back
+            }
+        });
+    }
 
+});
 
 
 //Retrieve collections from database

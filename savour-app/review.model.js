@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 //Define Restaurant schema
 var reviewSchema = new Schema({
+    name: String,
     id: String,
     rating: Number,
     review: String
