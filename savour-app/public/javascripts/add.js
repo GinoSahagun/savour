@@ -28,8 +28,8 @@ function RestaurantClass() {
     this.name = $("#name").val();
     this.phone = $("#phone").val();
     this.hours = GetHours();
-    this.pricing = $("#pricing").val();
-    this.rating = $("#rating").val();
+    this.pricing = $("#priceRating").rate("getValue");
+    this.rating = $("#starRating").rate("getValue");
     this.address = $("#address").val();
     this.location = GetLatLon();
     this.desc = $("#desc").val();
@@ -60,6 +60,18 @@ function submitform() {
 }
 
 $(function () {
+
+    //set up for price rating
+    var options = {
+        max_value: 5,
+        step_size: 1,
+    }
+    $("#priceRating").rate(options);
+
+    //set up for rating stars
+    $("#starRating").rate(options);
+
+
     $("#submitButton").click(function () {
         submitform();
     });

@@ -16,7 +16,7 @@ function CreateRow(data) {
     if (data._id == null) 
         data._id = "";
     var row = "<tr><td><a href=./restaurant?id=" + data._id + "><div class='col-md-10'>";
-    row += data.name + "</div ></td ><td><div class='col-md-2'>" + data.rating + "</div></td></a></tr>";
+    row += data.name + "</div ></td ><td><div class='col-md-2'>" + "<div class = 'rating'></div> "+ "</div></td></a></tr>";
     row += "<tr><td colspan = '2'><div class='col-md-12'>";
     row += data.desc + "</div ></td> </tr"; 
     return row;
@@ -55,6 +55,7 @@ $(function ()
             AddMarker(GooglePOS(d.location));
             var row = CreateRow(d);
             tbl.append(row);
+            $('.rating').rate({ readonly: true, initial_value: d.rating, change_once: true }); //needed for each appended rating
         }
     });
 
