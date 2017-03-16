@@ -19,6 +19,16 @@ width: 100%;
   right:25px;
 }
 #bubble-bar {
+  z-index: 80;
+}
+#hot-bar {
+  position: absolute;
+  top: 95px;
+  right:5px;
+  width:200px;
+  display: none;
+}
+#hot-bar {
   z-index: 100;
 }
 /*SEARCH FORM*/
@@ -43,3 +53,15 @@ width: 100%;
   margin: 1px;
   border-radius: 5px;
 }
+  .hotBox{
+  display:inline-block;
+  padding: 5px;
+  background-color: #146734;
+  color:#ffffff;
+  margin: 1px;
+  border-radius: 5px;
+  float:right;
+}
+  .inactive{
+      background-color: #808080;
+  }

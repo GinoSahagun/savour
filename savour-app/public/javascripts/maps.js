@@ -96,13 +96,19 @@ function AddBubble(str) {
     if (!filters.includes(str)) {
         filters.push(str);
         $("#bubble-bar").append("<div class='actionBox'>" + str + "</div>");
+
+        $(".actionBox").click(function () {
+            // TODO: Brandon put code her plz
+            filters.splice(filters.indexOf(str), 1);
+            this.remove();
+        });
     }
 }
 
 $(function () {
     $("#filter-button").click(function () {
         if (filters.length != 0) {
-            $("#bubble-bar").toggle();
+            $("#hot-bar").toggle();
         }
     });
     $("#search-button").click(function () {
@@ -111,6 +117,15 @@ $(function () {
         if (val != "") {
             AddBubble(val);
             $("#filter-search").val("");
+        }
+    });
+    $(".hotBox").click(function () {
+        // TODO: Brandon put code her plz
+        if (this.classList.contains("inactive")) {
+            this.classList.remove("inactive")
+        }
+        else{
+            this.classList.add("inactive")
         }
     });
 });
