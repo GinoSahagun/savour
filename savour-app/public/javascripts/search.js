@@ -52,7 +52,7 @@ $(document).ready(function () {
                 row += "<h5>Address: " + data.address + "</h5>";
                 row += "<h5>Hours: " + data.hours.FRI + "</h5>";
                 row += "<h5>Location: " + data.location.LAT + ", " + data.location.LON + "</h5>";
-                row += "<button class=\"delete\"> Delete </button></figcaption></figure > ";
+                row += "<button class=\"delete\"> Delete </button> <button> Edit </button></figcaption></figure > ";
                 return row;
             }
         });
