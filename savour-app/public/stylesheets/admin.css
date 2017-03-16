@@ -18,7 +18,7 @@ figcaption {
 
 .show {
     height: auto;
-    max-height: 60px;
+    max-height: 200px;
 }
 
 .toggle-more-less {

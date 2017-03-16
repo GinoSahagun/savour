@@ -39,6 +39,7 @@
     <Compile Include="public\javascripts\header.js" />
     <Compile Include="public\javascripts\jQuery.min.js" />
     <Compile Include="public\javascripts\list.js" />
+    <Compile Include="public\javascripts\login.js" />
     <Compile Include="public\javascripts\maps.js" />
     <Compile Include="public\javascripts\neighborhood.js" />
     <Compile Include="public\javascripts\rater.min.js" />
@@ -83,6 +84,8 @@
     <Content Include="views\add.jade" />
     <Content Include="views\about.jade" />
     <Content Include="views\list.html" />
+    <Content Include="views\login.html" />
+    <Content Include="views\login.jade" />
     <Content Include="views\neighborhood.html" />
     <Content Include="views\neighborhood.jade" />
     <Content Include="views\restaurant.html" />

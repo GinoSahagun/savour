@@ -25,6 +25,12 @@ router.get('/about', function (req, res) {
     //res.res('about', { title: 'Express' });
 });
 
+/* GET login page. */
+router.get('/login', function (req, res) {
+    res.render('login', { title: 'Login' });
+    //res.res('about', { title: 'Express' });
+});
+
 /* GET neighborhood page. */
 router.get('/neighborhood', function (req, res) {
     res.render('neighborhood', { title: 'Neighborhood' });

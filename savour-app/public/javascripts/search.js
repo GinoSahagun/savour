@@ -1,10 +1,9 @@
-﻿
-//var ObjectId = require('mongodb').ObjectId; //create instance of Object ID
-//Document Ready Function
+﻿//Document Ready Function
 $(document).ready(function () {
 
     //function load for span tags
     $(function () {
+
         // Assign handlers immediately after making the request,
         // and remember the jqxhr object for this request
         // Get Json from Search Data get Function
@@ -36,10 +35,6 @@ $(document).ready(function () {
             //reload json stuff here
             console.log("res: ", res); //check to see if object was working
 
-            var tbl = $("#dashboard-list"); //table id from html selector
-            var tr = "<tr>"; //table row html
-            var td = "<td>"; //table data cell html tag
-
             for (d of res) {
                 var newRow = CreateRow(d);
                 $(".list").append(newRow);
@@ -50,7 +45,13 @@ $(document).ready(function () {
             });
 
             function CreateRow(data) {
-                var row = "<figure><button class=\"toggle-more-less\">" + data.name + "</button><figcaption><h5>" + data.desc + "</h5>";
+                var row = "<figure><button class=\"toggle-more-less\">" + data.name + "</button><figcaption>";
+                row += "<h5>Description: " + data.desc + "</h5>";
+                row += "<h5>Rating: " + data.rating + "</h5>";
+                row += "<h5>Price: " + data.pricing + "</h5>";
+                row += "<h5>Address: " + data.address + "</h5>";
+                row += "<h5>Hours: " + data.hours.FRI + "</h5>";
+                row += "<h5>Location: " + data.location.LAT + ", " + data.location.LON + "</h5>";
                 row += "<button class=\"delete\"> Delete </button></figcaption></figure > ";
                 return row;
             }
