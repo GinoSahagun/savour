@@ -7,7 +7,7 @@ $(document).ready(function () {
     $(function () {
         // Assign handlers immediately after making the request,
         // and remember the jqxhr object for this request
-        // Get Json from Search Data get Function 
+        // Get Json from Search Data get Function
         var jqxhr = $.getJSON("search-data", function () {
             console.log("success");
         })
@@ -37,12 +37,12 @@ $(document).ready(function () {
             console.log("res: ", res); //check to see if object was working
 
             var tbl = $("#dashboard-list"); //table id from html selector
-            var tr = "<tr>"; //table row html 
+            var tr = "<tr>"; //table row html
             var td = "<td>"; //table data cell html tag
 
             for (d of res) {
                 var newRow = CreateRow(d);
-                $('.list').append(newRow);
+                $(".list").append(newRow);
             }
 
             $(".toggle-more-less").click(function () {
@@ -55,10 +55,6 @@ $(document).ready(function () {
                 return row;
             }
         });
-
     });
-
-
-
 });
 
