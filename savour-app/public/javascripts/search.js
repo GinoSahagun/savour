@@ -4,12 +4,7 @@
 $(document).ready(function () {
 
     //function load for span tags
-    $(function () {     
-
-        $(".toggle-more-less").click(function () {
-            $(this).closest('figure').find("figcaption").toggleClass("show"); //toggle the restaurant's details
-        });
-      
+    $(function () {
         // Assign handlers immediately after making the request,
         // and remember the jqxhr object for this request
         // Get Json from Search Data get Function 
@@ -30,25 +25,29 @@ $(document).ready(function () {
         jqxhr.done(function (parsedResponse, statusText, jqXhr) {
             var res;
             //Recievd Response Text as JSON hopefully
-            if (typeof parsedResponse === 'string')
+            if (typeof parsedResponse === "string") {
                 res = parsedResponse;
+            }
             else {
                 res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operation as its already a json object response
             }
             console.log("second complete");
 
             //reload json stuff here
-
-            console.log("res: " ,res); //check to see if object was working
+            console.log("res: ", res); //check to see if object was working
 
             var tbl = $("#dashboard-list"); //table id from html selector
             var tr = "<tr>"; //table row html 
             var td = "<td>"; //table data cell html tag
 
             for (d of res) {
-               var newRow = CreateRow(d);
-               $('.list').append(newRow);
+                var newRow = CreateRow(d);
+                $('.list').append(newRow);
             }
+
+            $(".toggle-more-less").click(function () {
+                $(this).closest("figure").find("figcaption").toggleClass("show"); //toggle the restaurant's details
+            });
 
             function CreateRow(data) {
                 var row = "<figure><button class=\"toggle-more-less\">" + data.name + "</button><figcaption><h5>" + data.desc + "</h5>";
@@ -56,7 +55,7 @@ $(document).ready(function () {
                 return row;
             }
         });
-       
+
     });
 
 
