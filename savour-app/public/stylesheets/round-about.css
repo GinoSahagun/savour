@@ -9,6 +9,33 @@
 
 
 }
+#review-list {
+    margin-bottom: 0px;
+}
+
+.cell-fill{
+    width: 100%;
+    height: 100%;
+}
+
+.dashTable {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+ .dashTable td,
+ .dashTable tr {
+    background-color: #ffffff !important;
+    font-size: 20px;
+    color: #146734;
+ }
+
+.dashTable tr:nth-of-type(2n) td {
+    border-bottom: 2px solid black;
+    font-size: 16px;
+    color: grey;
+}
 
 
 #statusmessage{
