@@ -4,8 +4,12 @@
 $(document).ready(function () {
 
     //function load for span tags
-    $(function () {
+    $(function () {     
 
+        $(".toggle-more-less").click(function () {
+            $(this).closest('figure').find("figcaption").toggleClass("show"); //toggle the restaurant's details
+        });
+      
         // Assign handlers immediately after making the request,
         // and remember the jqxhr object for this request
         // Get Json from Search Data get Function 
@@ -42,14 +46,13 @@ $(document).ready(function () {
             var td = "<td>"; //table data cell html tag
 
             for (d of res) {
-                var row = CreateRow(d);
-                tbl.append(row);
+               var newRow = CreateRow(d);
+               $('.list').append(newRow);
             }
 
-
             function CreateRow(data) {
-                var row = "<tr><td><a><div class='cell-fill'>";
-                row += data.name + "<td>" + data.address + "<td>" + data.rating + "</div ></a ></td ></td></td></tr > ";
+                var row = "<figure><button class=\"toggle-more-less\">" + data.name + "</button><figcaption><h5>" + data.desc + "</h5>";
+                row += "<button class=\"delete\"> Delete </button></figcaption></figure > ";
                 return row;
             }
         });
@@ -59,3 +62,4 @@ $(document).ready(function () {
 
 
 });
+
