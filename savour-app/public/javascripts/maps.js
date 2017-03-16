@@ -58,7 +58,7 @@ function initMap() {
     ];
 
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 15,
+        zoom: 13,
         center: omh,
         disableDefaultUI: true,
         mapTypeId: "mapStyle"
