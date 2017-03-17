@@ -1,4 +1,5 @@
-﻿var map;
+﻿
+var map;
 var infoWindow;
 var userMarker;
 var filters = [];
@@ -112,12 +113,23 @@ $(function () {
         }
     });
     $("#search-button").click(function () {
-        // TODO: Brandon put code her plz
+
         var val = $("#filter-search").val();
-        if (val != "") {
-            AddBubble(val);
-            $("#filter-search").val("");
-        }
+
+        //Check to see if filter is in database, apply if found
+        $.getJSON("filter-data", { name: val })
+            .fail(function () {
+                window.alert("Could not find filter, please try a different one.");
+            })
+            .always(function () {
+                console.log("Complete");
+            })
+            .done(function () {
+                //Found filter, add to applied filters
+                AddBubble(val);
+                $("#filter-search").val("");
+            });
+ 
     });
     $(".hotBox").click(function () {
         // TODO: Brandon put code her plz

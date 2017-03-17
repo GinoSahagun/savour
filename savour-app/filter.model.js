@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var filterSchema = new Schema({
     id: String,
     name: String
-}, { collection: 'filter' });
+}, { collection: 'filters' });
 
 //Create Model and export it
 module.exports = mongoose.model('filter', filterSchema);

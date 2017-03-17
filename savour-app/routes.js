@@ -136,6 +136,26 @@ router.post('/add', function (req, res) {
     
 });
 
+//Get filter data
+router.get('/filter-data', function (req, res) {
+    console.log('Checking filter...');
+
+    var filterName = req.query.name;
+    //Query database for filter name
+    filter.findOne({ 'name' : filterName }, function (err, filter) {
+        if (err) {
+            res.send(err);
+            return handleError(err);
+        }
+        else {
+            res.send(filter);   //Found filter! Return it
+            console.log('Filter: ', filterName)
+        }
+    })
+    
+
+});
+
 // Get restaurant page
 router.get('/restaurant', function (req, res) {
     res.render('restaurant', { title: 'Restaurant' });
