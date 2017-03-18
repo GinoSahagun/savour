@@ -1,4 +1,6 @@
 ﻿// JS File for adding a new Restaurant etc. to the database.
+var filters = [];
+
 function GetDayJSON(day) {
     var response = "\"" + day + "\": \"";
     response += $("#" + day.toLowerCase() + "-open").val() + "-";
@@ -76,3 +78,37 @@ $(function () {
         submitform();
     });
 });
+
+$(function () {
+    $("#filter-button").click(function () {
+
+        var val = $("#filter-add").val();
+        //Add filter to database if it doesn't exist, 
+        //and create new document in matches table that ties it to this restaurant
+        AddBubble(val);
+        $("#filter-search").val("");
+
+    });
+    $(".hotBox").click(function () {
+        // TODO: Brandon put code her plz
+        if (this.classList.contains("inactive")) {
+            this.classList.remove("inactive")
+        }
+        else {
+            this.classList.add("inactive")
+        }
+    });
+});
+
+function AddBubble(str) {
+    if (!filters.includes(str)) {
+        filters.push(str);
+        $("#bubble-bar").append("<div class='actionBox'>" + str + "</div>");
+
+        $(".actionBox").click(function () {
+            // TODO: Brandon put code her plz
+            filters.splice(filters.indexOf(str), 1);
+            this.remove();
+        });
+    }
+}

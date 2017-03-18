@@ -1,5 +1,4 @@
-﻿
-var map;
+﻿var map;
 var infoWindow;
 var userMarker;
 var filters = [];
