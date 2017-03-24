@@ -10,7 +10,10 @@
 
 }
 #review-list {
-    margin-bottom: 0px;
+   margin-bottom: 0px;
+    width: 100%;
+    background-color: #ffffff;
+    overflow:scroll;
 }
 
 .cell-fill{
@@ -28,6 +31,8 @@
  .dashTable tr {
     background-color: #ffffff !important;
     font-size: 20px;
+    width:100%;
+    text-align:left;
     color: #146734;
  }
 

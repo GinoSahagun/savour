@@ -90,9 +90,6 @@ $(function () {
         if ($(".table-responsive").css('display') == 'none') {
             document.getElementById("times").style.display = "none";
         }
-        else {
-            document.getElementById("times").style.display = "block";
-        }
         $(".table-responsive").toggle();
     });
 
@@ -177,11 +174,6 @@ function createItem(data) {
    return item;
 }
 
-function toggleTable() {
-
-}
-
-
 //Get the Restaurant Data through a JSON Call
 function getRestaurantData(urlID) {
     $.getJSON("restaurant-data", { id: urlID })
@@ -197,7 +189,7 @@ function getRestaurantData(urlID) {
             console.log("second complete");
 
             //Restaurant Image
-            $('#restImage').attr('src', 'images/curbside.jpg');
+            $('#restImage').attr('src', 'https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg');
             //Restaurant Name
             $("#restName").text(res.name);
             //Restuaran Rating Stars
@@ -268,6 +260,8 @@ function getReviewData(urlID) {
             var len = res.length;
             var tbl = $("#review-list");
             $("#review-list tr").remove();
+            if (len != 0)
+            tbl.append("<div class='divider'></div>");
             //Create Table of Review List
             if (len <= 10) {
                 for (var i = len - 1; i >= 0; i--) {
