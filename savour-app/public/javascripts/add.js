@@ -61,11 +61,25 @@ function submitform() {
 
 $(function () {
 
+    //set up Hour pickers
+    $('.timepicker').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 30,
+        minTime: '12am',
+        maxTime: '11:59pm',
+        defaultTime: '10',
+        startTime: '10:00',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+    });
+    
     //set up for price rating
     var options = {
         max_value: 5,
         step_size: 1,
     }
+    //set up for price rating
     $("#priceRating").rate(options);
 
     //set up for rating stars

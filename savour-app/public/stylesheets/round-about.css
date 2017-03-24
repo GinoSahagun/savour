@@ -37,6 +37,18 @@
     color: grey;
 }
 
+#expanded-times{
+  border-spacing: 0;
+  width: 100%;
+  text-align:center;
+  border:none;
+}
+
+#expanded-times td{
+  background-color: #ffffff !important;
+    font-size: 20px;
+    color: #146734;
+}
 
 #statusmessage{
     position:fixed;
