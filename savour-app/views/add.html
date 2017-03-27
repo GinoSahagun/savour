@@ -506,49 +506,33 @@
             <label for="menu">Menu Link</label>
             <input type="text" class="form-control" id="menu" placeholder="example-restaurant.com/menu">
         </div>
-
-        <h3>TODO: Filter Support</h3>
-        <div class="form-check">
-            <label class="form-check-label">
-                <input id="green" type="checkbox" class="form-check-input" disabled>
-                &nbsp;&nbsp;Environmentally Conscious
-            </label>
-            <br/>
-            <label class="form-check-label">
-                <input id="local" type="checkbox" class="form-check-input" disabled>
-                &nbsp;&nbsp;Locally Sourced
-            </label>
-            <br />
-            <label class="form-check-label">
-                <input id="ownership" type="checkbox" class="form-check-input" disabled>
-                &nbsp;&nbsp;Non-Minority Owned
-            </label>
-            <br />
-            <label class="form-check-label">
-                <input id="vegan" type="checkbox" class="form-check-input" disabled>
-                &nbsp;&nbsp;Vegan Friendly
-            </label>
-            <br />
-            <label class="form-check-label">
-                <input id="ada" type="checkbox" class="form-check-input" disabled>
-                &nbsp;&nbsp;Disability Friendly
-            </label>
-        </div>
         <br/>
-    <div>
+    <div id="filter-bar">
         <div class="input-group">
-            <input id="filter-add" type="text" class="form-control filter-form" placeholder="Filters">
+            <input id="filter-search" type="text" class="form-control search-form" placeholder="Search">
             <span class="input-group-btn">
-                <button id="filter-button" class="btn btn-primary search-btn">
-                    <img src="../images/filter.png" width="18" />
+                <button id="search-button" class="btn btn-primary search-btn">
+                    <img src="../images/search.png" width="18" />
+                </button>
+                <button id="addFilter" class="btn btn-primary filter-btn">
+                    <img id="filter-button" src="../images/filter.png" width="18" />
                 </button>
             </span>
         </div>
-        <div id="bubble-bar"></div>
-        <br />
-        <br />
-
     </div>
+    <div id="bubble-bar"></div>
+    <div id="hot-bar">
+        <div class="hotBox">Locally Owned</div>
+        <div class="hotBox">Minority Owned</div>
+        <div class="hotBox">Environmentally Friendly</div>
+        <div class="hotBox">Locally Sourced</div>
+        <div class="hotBox">Vegan Friendly</div>
+        <div class="hotBox">Disability Friendly</div>
+    </div>
+    <br/>
+    <br />
+    <br />
+    <br />
         <button class="btn btn-primary" id="submitButton">Submit</button>
     </div><!-- End Body -->
     <div class="col-sm-2"> </div>

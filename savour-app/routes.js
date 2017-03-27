@@ -3,6 +3,7 @@
 var bodyParser = require("body-parser");
 var express = require('express');
 var restaurant = require('./restaurant.model');
+var match = require('./match.model');
 var neighborhood = require('./neighborhood.model');
 var review = require('./review.model');
 var filter = require('./filter.model');
@@ -73,22 +74,7 @@ router.get('/neighborhood-data', function (req, res) {
 router.post('/addFilter', function (req, res) {
     //Insert filter into database
     var newFilter = req.body;
-    console.log(filterName.id + "  -  " + newFilter.name);
-
-    try {
-        var tempFilter = new filter({
-            name: newFilter.name,
-        });
-    }
-    catch (err) {
-        console.log(err);
-    }
-
-    tempRest.save(function (err, tempRest) {
-        if (err != null) return console.error(err);
-        console.log("Filter added");
-        res.sendStatus(200);
-    });
+    addFilter(newFilter.name);
 
 });
 
@@ -100,7 +86,7 @@ router.get('/add', function (req, res) {
 
 //Get add restaurant page
 router.post('/add', function (req, res) {
-    //Insert data into database test
+    //Insert data into database
     var deets = req.body;
     console.log(deets.id + "  -  " + deets.name);
 
@@ -122,6 +108,7 @@ router.post('/add', function (req, res) {
             menu: deets.menu,
             owner: deets.owner
         });
+
     }
     catch (err) {
         console.log(err);
@@ -130,10 +117,9 @@ router.post('/add', function (req, res) {
     tempRest.save(function (err, tempRest) {
         if (err != null) return console.error(err);
         console.log("Restaurant added");
-        
         res.sendStatus(200);
     });
-    
+
 });
 
 //Get filter data
@@ -153,8 +139,104 @@ router.get('/filter-data', function (req, res) {
         }
     })
     
+});
+
+//Post filters
+router.post('/filters-add', function (req, res) {
+    var restName = req.body["rest[name]"];
+    var restAddress = req.body["rest[address]"];
+    var filterStr = req.body.filter;
+
+    restaurant.findOne({ "name": restName, "address": restAddress }, function (err, restaurant) {
+        if (err) return handleError(err);
+        else {
+            console.log(restaurant._id)
+            restID = restaurant._id;
+        }
+    })
+
+    var filterList = filterStr.split(",");
+    for (i = 0; i < filterList.length; i++) {
+        console.log(filterList[i]);
+        //Check to see if filter exists
+        filter.findOne({"name": filterList[i]}, function (err, filter) {
+            if (err) {
+                console.log("Error");   //Error in query for some reason
+            }
+            if (filter) {
+                //Filter exists, put new match into database using restID and filterID
+                console.log("Found filter! - " + filter._id);
+                try {
+                    var tempMatch = new match({
+                        restID: restID,
+                        filterID: filter._id
+                    });
+                }
+                catch (err) {
+                    console.log(err);
+                }
+
+                tempMatch.save(function (err, tempMatch) {
+                    if (err != null) return console.error(err);
+                    console.log("Match added!");
+                });
+
+            }
+            else {
+                console.log("Uh oh...no filter of that name exists, adding filter to db...");
+                //Add filter to database then try again
+                addFilter(filterList[i]);
+
+                //Query newly added filter, get ID and create new match
+                filter.findOne({ "name": filterList[i] }, function (err, filter) {
+                    if (err) {
+                        console.log("Error");   //Error in query for some reason
+                    }
+                    if (filter) {
+                        //Add new match
+                        try {
+                            var tempMatch = new match({
+                                restID: restID,
+                                filterID: newFilter
+                            });
+                        }
+                        catch (err) {
+                            console.log(err);
+                        }
+
+                        tempMatch.save(function (err, tempMatch) {
+                            if (err != null) return console.error(err);
+                            console.log("Match added!");
+                        });
+                    }
+                });
+            }
+        })
+    }
 
 });
+
+function addFilter(filterName) {
+    //Insert filter into database
+    var newFilter = req.body;
+    console.log(filterName.id + "  -  " + newFilter.name);
+
+    try {
+        var tempFilter = new filter({
+            name: newFilter.name,
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+
+    tempFilter.save(function (err, tempFilter) {
+        if (err != null) return console.error(err);
+        console.log("Filter added");
+        res.sendStatus(200);
+    });
+
+}
 
 // Get restaurant page
 router.get('/restaurant', function (req, res) {
@@ -172,7 +254,7 @@ router.post('/restaurant', function (req, res) {
             id: deets.id,
             rating: parseFloat(deets.rating),
             review: deets.comment,
-            name: deets.name 
+            name: deets.name
         });
     }
     catch (err) {

@@ -46,6 +46,7 @@ function RestaurantClass() {
 
 function submitform() {
     var rest = new RestaurantClass();
+    var filterStr = filters.toString();
     console.log(rest);
 
     $.ajax({
@@ -55,10 +56,23 @@ function submitform() {
         error: function (jqXHR, textStatus, errorThrown) {
             console.log("could not post data");
             window.alert("Could not add Restaurant");
+        },
+        success: function () {
+            $.ajax({
+                url: "./filters-add",
+                type: "POST",
+                data: { rest: JSON.parse(JSON.stringify(rest)), filter: filterStr},
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("could not post filter data");
+                    window.alert("Could not add filters");
+                },
+            }).done(function () {
+                window.location = "./..";
+            });
         }
     }).done(function () {
-        window.location = "./..";
-    });
+        //window.location = "./..";
+        });
 }
 
 $(function () {
@@ -95,16 +109,18 @@ $(function () {
 
 $(function () {
     $("#filter-button").click(function () {
+        if (filters.length != 0) {
+            $("#hot-bar").toggle();
+        }
+    });
+    $("#search-button").click(function () {
 
-        var val = $("#filter-add").val();
-        //Add filter to database if it doesn't exist, 
-        //and create new document in matches table that ties it to this restaurant
+        var val = $("#filter-search").val();
         AddBubble(val);
         $("#filter-search").val("");
 
     });
     $(".hotBox").click(function () {
-        // TODO: Brandon put code her plz
         if (this.classList.contains("inactive")) {
             this.classList.remove("inactive")
         }
@@ -120,7 +136,6 @@ function AddBubble(str) {
         $("#bubble-bar").append("<div class='actionBox'>" + str + "</div>");
 
         $(".actionBox").click(function () {
-            // TODO: Brandon put code her plz
             filters.splice(filters.indexOf(str), 1);
             this.remove();
         });

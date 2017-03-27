@@ -98,7 +98,6 @@ function AddBubble(str) {
         $("#bubble-bar").append("<div class='actionBox'>" + str + "</div>");
 
         $(".actionBox").click(function () {
-            // TODO: Brandon put code her plz
             filters.splice(filters.indexOf(str), 1);
             this.remove();
         });
@@ -131,7 +130,6 @@ $(function () {
  
     });
     $(".hotBox").click(function () {
-        // TODO: Brandon put code her plz
         if (this.classList.contains("inactive")) {
             this.classList.remove("inactive")
         }
