@@ -38,6 +38,7 @@
     <Compile Include="public\javascripts\bootstrap.min.js" />
     <Compile Include="public\javascripts\header.js" />
     <Compile Include="public\javascripts\jQuery.min.js" />
+    <Compile Include="public\javascripts\jquery.timepicker.min.js" />
     <Compile Include="public\javascripts\list.js" />
     <Compile Include="public\javascripts\login.js" />
     <Compile Include="public\javascripts\maps.js" />
@@ -45,6 +46,7 @@
     <Compile Include="public\javascripts\rater.min.js" />
     <Compile Include="public\javascripts\restaurant.js" />
     <Compile Include="public\javascripts\search.js" />
+    <Compile Include="public\javascripts\toastr.min.js" />
     <Compile Include="restaurant.model.js" />
     <Compile Include="review.model.js" />
     <Compile Include="routes.js" />
@@ -73,11 +75,13 @@
     <Content Include="public\stylesheets\add.css" />
     <Content Include="public\stylesheets\header-color.css" />
     <Content Include="public\stylesheets\header.css" />
+    <Content Include="public\stylesheets\jquery.timepicker.min.css" />
     <Content Include="public\stylesheets\list.css" />
     <Content Include="public\stylesheets\maps.css" />
     <Content Include="public\stylesheets\round-about.css" />
     <Content Include="public\stylesheets\style.css" />
     <Content Include="public\stylesheets\theme.css" />
+    <Content Include="public\stylesheets\toastr.min.css" />
     <Content Include="README.md" />
     <Content Include="typings.json" />
     <Content Include="views\add.html" />
@@ -120,6 +124,7 @@
     <Folder Include="typings\globals\serve-favicon\" />
     <Folder Include="typings\globals\serve-static\" />
     <Folder Include="typings\globals\stylus\" />
+    <Folder Include="typings\globals\toastr\" />
     <Folder Include="typings\misc\" />
     <Folder Include="views\" />
   </ItemGroup>
@@ -150,6 +155,7 @@
     <TypeScriptCompile Include="typings\globals\serve-favicon\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\serve-static\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\stylus\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\toastr\index.d.ts" />
     <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
