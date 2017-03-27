@@ -71,11 +71,10 @@ router.get('/neighborhood-data', function (req, res) {
 });
 
 //Add new filters to database
-router.post('/addFilter', function (req, res) {
-    //Insert filter into database
-    var newFilter = req.body;
-    addFilter(newFilter.name);
 
+router.post('/addFilter', function (req) {
+    //Insert filter into database
+    addFilter(req.body.filter);
 });
 
 
@@ -138,104 +137,91 @@ router.get('/filter-data', function (req, res) {
             console.log('Filter: ', filterName)
         }
     })
-    
 });
 
 //Post filters
-router.post('/filters-add', function (req, res) {
+router.post("/filters-add", function (req, res) {
     var restName = req.body["rest[name]"];
     var restAddress = req.body["rest[address]"];
     var filterStr = req.body.filter;
+    var restId;
 
     restaurant.findOne({ "name": restName, "address": restAddress }, function (err, restaurant) {
         if (err) return handleError(err);
         else {
             console.log(restaurant._id)
-            restID = restaurant._id;
+            restId = restaurant._id;
+        }
+
+        var filterList = filterStr.split(",");
+
+        //for (i = 0; i < filterList.length; i++) {
+        for (thefilter of filterList) {
+            console.log(thefilter);
+
+            //Check to see if filter exists
+            filter.findOne({ "name": thefilter }, function (err, filter) {
+                if (err) {
+                    console.log("Error");   //Error in query for some reason
+                    return;
+                }
+                if (filter) {
+                   addMatch(restId, filter._id);
+                }
+                else {
+                    console.log("Filter does not exist");
+                }
+            })
         }
     })
-
-    var filterList = filterStr.split(",");
-    for (i = 0; i < filterList.length; i++) {
-        console.log(filterList[i]);
-        //Check to see if filter exists
-        filter.findOne({"name": filterList[i]}, function (err, filter) {
-            if (err) {
-                console.log("Error");   //Error in query for some reason
-            }
-            if (filter) {
-                //Filter exists, put new match into database using restID and filterID
-                console.log("Found filter! - " + filter._id);
-                try {
-                    var tempMatch = new match({
-                        restID: restID,
-                        filterID: filter._id
-                    });
-                }
-                catch (err) {
-                    console.log(err);
-                }
-
-                tempMatch.save(function (err, tempMatch) {
-                    if (err != null) return console.error(err);
-                    console.log("Match added!");
-                });
-
-            }
-            else {
-                console.log("Uh oh...no filter of that name exists, adding filter to db...");
-                //Add filter to database then try again
-                addFilter(filterList[i]);
-
-                //Query newly added filter, get ID and create new match
-                filter.findOne({ "name": filterList[i] }, function (err, filter) {
-                    if (err) {
-                        console.log("Error");   //Error in query for some reason
-                    }
-                    if (filter) {
-                        //Add new match
-                        try {
-                            var tempMatch = new match({
-                                restID: restID,
-                                filterID: newFilter
-                            });
-                        }
-                        catch (err) {
-                            console.log(err);
-                        }
-
-                        tempMatch.save(function (err, tempMatch) {
-                            if (err != null) return console.error(err);
-                            console.log("Match added!");
-                        });
-                    }
-                });
-            }
-        })
-    }
-
 });
 
-function addFilter(filterName) {
-    //Insert filter into database
-    var newFilter = req.body;
-    console.log(filterName.id + "  -  " + newFilter.name);
-
+function addMatch(rest, filt) {
     try {
-        var tempFilter = new filter({
-            name: newFilter.name,
+        var tempMatch = new match({
+            restID: rest,
+            filterID: filt
+        });
+
+        tempMatch.save(function (err, tempMatch) {
+            if (err != null) return console.error(err);
+            console.log("Match added!");
+            return 0;
         });
     }
     catch (err) {
         console.log(err);
+        return err;
     }
+}
 
-    tempFilter.save(function (err, tempFilter) {
-        if (err != null) return console.error(err);
-        console.log("Filter added");
-        res.sendStatus(200);
+function addFilter(filterName) {
+    //Insert filter into database    
+    filterName = filterName.toLowerCase();
+    var tempFilter = new filter({
+        name: filterName,
     });
-
+    filter.findOne({ "name": filterName }, function (err, filter) {
+        if (err) {
+            console.log("Error");   //Error in query for some reason
+            return;
+        }
+        if (filter) {
+            console.log("Filter already exists");
+        }
+        else {
+            console.log("Creating Filter '" + filterName + "'");
+            try {
+                tempFilter.save(function (err, tempFilter) {
+                    if (err != null) return console.error(err);
+                    console.log("Filter added");
+                });
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+    });
 }
 
 // Get restaurant page

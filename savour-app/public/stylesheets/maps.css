@@ -28,6 +28,14 @@ width: 100%;
   width:200px;
   display: none;
 }
+#hot-bar-add {
+  position: absolute;
+  bottom: 105px;
+  right:5px;
+  width:200px;
+  display: none;
+  z-index: 100;
+}
 #hot-bar {
   z-index: 100;
 }
