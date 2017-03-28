@@ -52,10 +52,32 @@ $(document).ready(function () {
                 row += "<h5>Address: " + data.address + "</h5>";
                 row += "<h5>Hours: " + data.hours.FRI + "</h5>";
                 row += "<h5>Location: " + data.location.LAT + ", " + data.location.LON + "</h5>";
-                row += "<button class=\"delete\"> Delete </button> <button> Edit </button></figcaption></figure > ";
+                row += "<h6 class = \"id\">Object ID: " + data._id + "</h5>";
+                row += "<button id=\"delete\" class=\"delete\"> Delete </button> <button> Edit </button></figcaption></figure > ";
                 return row;
             }
+
+            $(".delete").click(function () {
+                var choice = confirm("Are you sure you want to delete this restaurant?");
+                if (choice == true) {
+                    //Get closest restaurant ID
+                    var id = document.querySelector("h6").closest("h6");
+                    id = id.innerHTML.substr(11); //extract id
+                    //Call ajax method to delete restaurant
+                    $.ajax({
+                        url: "./delete-restaurant",
+                        type: "POST",
+                        data: { rest: id }
+                    }).done(function () {
+                        console.log("Filters Added");
+                        location.reload();
+                    });
+                }
+            });
         });
     });
+
+ 
 });
+
 

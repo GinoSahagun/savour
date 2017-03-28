@@ -26,6 +26,23 @@ router.get('/about', function (req, res) {
     //res.res('about', { title: 'Express' });
 });
 
+//Delete restaurant from admin page
+router.post('/delete-restaurant', function (req, res) {
+    var restId = req.body.rest;
+
+    //Try to delete the restaurant with this id
+    restaurant.findByIdAndRemove(restId, function (err) {
+        if (err)
+            res.send(err);
+        else {
+            console.log("Restaurant deleted");
+            res.sendStatus(200);
+        }
+
+    });
+    return;
+});
+
 /* GET login page. */
 router.get('/login', function (req, res) {
     res.render('login', { title: 'Login' });
