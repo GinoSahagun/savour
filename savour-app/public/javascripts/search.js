@@ -46,14 +46,15 @@ $(document).ready(function () {
 
             function CreateRow(data) {
                 var row = "<figure><button class=\"toggle-more-less\">" + data.name + "</button><figcaption>";
-                row += "<h5>Description: " + data.desc + "</h5>";
-                row += "<h5>Rating: " + data.rating + "</h5>";
-                row += "<h5>Price: " + data.pricing + "</h5>";
-                row += "<h5>Address: " + data.address + "</h5>";
-                row += "<h5>Hours: " + data.hours.FRI + "</h5>";
-                row += "<h5>Location: " + data.location.LAT + ", " + data.location.LON + "</h5>";
+                row += "Description: <input type=\"text\" id=\"description\" value=\"" + data.desc +"\"disabled><br>";
+                row += "Rating: <span><input type=\"text\" id=\"rating\" value=\"" + data.rating + "\"disabled><br>";
+                row += "Price: <span><input type=\"text\" id=\"pricing\" value=\"" + data.pricing + "\"disabled><br>";
+                row += "Address: <input type=\"text\" id=\"address\" value=\"" + data.address + "\"disabled><br>";
+                row += "Hours: <input type=\"text\" id=\"hours\" value=\"" + data.hours.FRI + "\"disabled><br>";  //Need to display all hours!!!
+                row += "Location: <input type=\"text\" id=\"location\" value=\"" + data.location.LAT + ", " + data.location.LON + "\"disabled><br>";
                 row += "<h6 class = \"id\">Object ID: " + data._id + "</h5>";
-                row += "<button id=\"delete\" class=\"delete\"> Delete </button> <button> Edit </button></figcaption></figure > ";
+                row += "<button id=\"delete\" class=\"delete\"> Delete </button> <button class=\"edit\"> Edit </button>";
+                row += "<button class=\"save\"> Save </button> </figcaption ></figure > ";
                 return row;
             }
 
@@ -61,8 +62,8 @@ $(document).ready(function () {
                 var choice = confirm("Are you sure you want to delete this restaurant?");
                 if (choice == true) {
                     //Get closest restaurant ID
-                    var id = document.querySelector("h6").closest("h6");
-                    id = id.innerHTML.substr(11); //extract id
+                    var id = $(this).prev("h6")["0"].innerHTML;
+                    id = id.substr(11); //extract id
                     //Call ajax method to delete restaurant
                     $.ajax({
                         url: "./delete-restaurant",
@@ -74,10 +75,33 @@ $(document).ready(function () {
                     });
                 }
             });
+
+            $(".edit").click(function () {
+                $("input").prop('disabled', false);
+            });
+
+            $(".save").click(function () {
+                $("input").prop('disabled', true);
+
+                //Get closest restaurant ID
+                var id = $(this).prev("h6")["0"].innerHTML;
+                id = id.substr(11); //extract id
+
+                //Get updated info
+                //var desc = document.querySelector("input").closest("#description");
+
+                //Call ajax method to update restaurant
+                /* $.ajax({
+                     url: "./update-restaurant",
+                     type: "POST",
+                     data: { rest: id }
+                 }).done(function () {
+                     console.log("Restaurant Updated");
+                 });*/
+            });
+
         });
     });
 
  
 });
-
-
