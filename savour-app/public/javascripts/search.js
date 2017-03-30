@@ -46,15 +46,20 @@ $(document).ready(function () {
 
             function CreateRow(data) {
                 var row = "<figure><button class=\"toggle-more-less\">" + data.name + "</button><figcaption>";
-                row += "Description: <input type=\"text\" id=\"description\" value=\"" + data.desc +"\"disabled><br>";
-                row += "Rating: <span><input type=\"text\" id=\"rating\" value=\"" + data.rating + "\"disabled><br>";
-                row += "Price: <span><input type=\"text\" id=\"pricing\" value=\"" + data.pricing + "\"disabled><br>";
-                row += "Address: <input type=\"text\" id=\"address\" value=\"" + data.address + "\"disabled><br>";
-                row += "Hours: <input type=\"text\" id=\"hours\" value=\"" + data.hours.FRI + "\"disabled><br>";  //Need to display all hours!!!
-                row += "Location: <input type=\"text\" id=\"location\" value=\"" + data.location.LAT + ", " + data.location.LON + "\"disabled><br>";
-                row += "<h6 class = \"id\">Object ID: " + data._id + "</h5>";
+                row += "Name: <input type=\"text\" class=\"name\" value=\"" + data.name + "\"disabled><br>";
+                row += "Description: <input type=\"text\" class=\"description\" value=\"" + data.desc +"\"disabled><br>";
+                row += "Rating: <span><input type=\"text\" class=\"rating\" value=\"" + data.rating + "\"disabled><br>";
+                row += "Price: <span><input type=\"text\" class=\"pricing\" value=\"" + data.pricing + "\"disabled><br>";
+                row += "Address: <input type=\"text\" class=\"address\" value=\"" + data.address + "\"disabled><br>";
+                row += "Hours: <input type=\"text\" class=\"hours\" value=\"" + data.hours.FRI + "\"disabled><br>";  //Need to display all hours!!!
+                row += "Location: <input type=\"text\" class=\"location\" value=\"" + data.location.LAT + ", " + data.location.LON + "\"disabled><br>";
+                row += "Phone: <input type=\"text\" class=\"phone\" value=\"" + data.phone + "\"disabled><br>";
+                row += "Website: <input type=\"text\" class=\"website\" value=\"" + data.website + "\"disabled><br>";
+                row += "Menu: <input type=\"text\" class=\"menu\" value=\"" + data.menu + "\"disabled><br>";
+                row += "Image: <br>";
+                row += "<h6 class = \"id\">Restaurant ID: " + data._id + "</h6>";
                 row += "<button id=\"delete\" class=\"delete\"> Delete </button> <button class=\"edit\"> Edit </button>";
-                row += "<button class=\"save\"> Save </button> </figcaption ></figure > ";
+                row += "<button class=\"save\" disabled> Save </button> </figcaption ></figure > ";
                 return row;
             }
 
@@ -77,18 +82,15 @@ $(document).ready(function () {
             });
 
             $(".edit").click(function () {
-                $("input").prop('disabled', false);
+                $("input").prop("disabled", false);
+                $(".save").prop("disabled", false);
             });
 
             $(".save").click(function () {
-                $("input").prop('disabled', true);
+                $("input").prop("disabled", true);
 
-                //Get closest restaurant ID
-                var id = $(this).prev("h6")["0"].innerHTML;
-                id = id.substr(11); //extract id
-
-                //Get updated info
-                //var desc = document.querySelector("input").closest("#description");
+                //Get updated restaurant information 
+                var updatedRest = new RestaurantClass()
 
                 //Call ajax method to update restaurant
                 /* $.ajax({
@@ -105,3 +107,18 @@ $(document).ready(function () {
 
  
 });
+
+function RestaurantClass() {
+    this.id = $("button.save").closest('.show').find('.id')["0"].innerHTML.substr(15);
+    this.name = $("button.save").closest('.show').find('.name')["0"].value;
+    this.phone = $("button.save").closest('.show').find('.phone')["0"].value;
+    //this.hours = GetHours();
+    this.pricing = $("button.save").closest('.show').find('.pricing')["0"].value;
+    this.rating = $("button.save").closest('.show').find('.rating')["0"].value;
+    this.address = $("button.save").closest('.show').find('.address')["0"].value;
+    //this.location = GetLatLon();
+    this.desc = $("button.save").closest('.show').find('.description')["0"].value;
+    this.website = $("button.save").closest('.show').find('.website')["0"].value;
+    this.menu = $("button.save").closest('.show').find('.menu')["0"].value;
+    //this.image = "";
+}
