@@ -46,7 +46,7 @@ $(function () {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
-    toastr.options.onHidden = function () { window.location.href = "/"; }
+   
     if (urlID) {
 
         getRestaurantData(urlID);
@@ -56,8 +56,8 @@ $(function () {
     else {
         //Pop Up a status message
         //redirect to home page if no ID was passed
-        toastr.info("Restaurant Not Found");
-
+        
+        window.location.href = "/";
     }
     // Perform other work here ...
     //Testing Review Rating for Submition
@@ -189,7 +189,7 @@ function getRestaurantData(urlID) {
             console.log("second complete");
 
             //Restaurant Image
-            $('#restImage').attr('src', 'https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg');
+            $('#restImage').attr('src', res.image);
             //Restaurant Name
             $("#restName").text(res.name);
             //Restuaran Rating Stars

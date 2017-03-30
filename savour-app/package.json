@@ -10,7 +10,9 @@
     "name": "MattG"
   },
   "dependencies": {
+    "blueimp-file-upload": "^9.18.0",
     "body-parser": "^1.16.1",
+    "cloudinary-jquery-file-upload": "^2.3.0",
     "cookie-parser": "^1.4.3",
     "debug": "^2.6.1",
     "express": "^4.14.1",

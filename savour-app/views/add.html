@@ -111,7 +111,7 @@
         </div>
         <div class="form-group">
             <label for="address">Address</label>
-            <textarea class="form-control" id="address" rows="2"></textarea>
+            <textarea class="form-control" id="address"  rows="2"></textarea>
         </div>
         <button class="btn btn-primary" id="addressButton">Check Address</button>
         <br />
@@ -136,6 +136,27 @@
         <div class="form-group">
             <label for="menu">Menu Link</label>
             <input type="text" class="form-control" id="menu" placeholder="example-restaurant.com/menu">
+        </div>
+        <div class="form-group">
+            <form id="imageForm" action="" method="post" enctype="multipart/form-data" onsubmit="AJAXSubmit(this); return false;">
+                <fieldset>
+                    <p>
+                        <label style="display:none;" for="upload_preset">Unsigned upload Preset: <input id="upload-preset" type="text" name="upload_preset" value="abssk3w2">(set it <a href="https://cloudinary.com/console/settings/upload#upload_presets">here</a>)</label>
+                    </p>
+                        
+                    <p>
+                        <label>
+                            Select your photo:
+                            <input id="upload-file" type="file" name="file">
+                        </label>
+                    </p>
+                    <p>
+                        <input class="btn btn-primary" type="submit" value="Upload to Cloud" />
+                    </p>
+                    <img class="img-thumbnail" style="width:175px;height:175px;" id="uploaded">
+                    <div id="results"></div>
+                </fieldset>
+            </form>
         </div>
         <br/>
     <label for="filters">Filters</label>
@@ -165,4 +186,12 @@
     </div><!-- End Body -->
     <div class="col-sm-2"> </div>
 </div><!-- End Row-->
+
+<!-- Gino has the APU Key -->
+<script async defer>
+    //$.cloudinary.config({ "api_key": "738137753563181", "cloud_name": "savoursip" });
+</script>
+    
+
+<!-- /add.html -->
 

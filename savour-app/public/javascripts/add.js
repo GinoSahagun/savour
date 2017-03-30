@@ -38,51 +38,87 @@ function RestaurantClass() {
     this.desc = $("#desc").val();
     this.website = $("#website").val();
     this.menu = $("#menu").val();
+    this.image = "";
 }
+//currently global variable need to figuresomething else out
+var flag;
 
 function calcLoc() {
     var address = $("#address").val();
-    geocoder.geocode({ "address": address, componentRestrictions: {administrativeArea: "WA", country: "US"}}, function (results, status) {
-        if (status == "OK") {
-            console.log("LAT LON calculated");
-            $("#address").val(results[0].formatted_address);
-            $("#lat").val(results[0].geometry.location.lat());
-            $("#lon").val(results[0].geometry.location.lng());
-            $("#location-div").show();
-            $("#addressButton").text("Update Location");
-        } else {
-            alert("Geocode was not successful for the following reason: " + status);
-        }
+    //empty address box is no bueno
+    if (address == "") {
+        return false;
+    }
+
+        geocoder.geocode({ "address": address, componentRestrictions: { administrativeArea: "WA", country: "US" } }, function (results, status) {
+            if (status == "OK") {
+                console.log(results.length);
+                //validate by if the user finds more queries return false if its only one and not Washington then its a true address
+                if (results[0].formatted_address == "Washington, USA" || results.length > 1) {
+                    flag = false;
+                    return false;
+                }
+
+                console.log(results);
+                console.log("LAT LON calculated");
+                $("#address").val(results[0].formatted_address);
+                $("#lat").val(results[0].geometry.location.lat());
+                $("#lon").val(results[0].geometry.location.lng());
+                $("#location-div").show();
+                $("#addressButton").text("Update Location");
+                flag = true;
+                return true;
+
+            }
+            else {
+                alert("Geocode was not successful for the following reason: " + status);
+            }
     });
+        return true;
 }
 
 function submitform() {
     var rest = new RestaurantClass();
     var filterStr = filters.toString();
-    console.log(rest);
+    
     calcLoc();
-
-    $.ajax({
-        url: "./add",
-        type: "POST",
-        data: JSON.parse(JSON.stringify(rest)),
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log("could not post data");
-            window.alert("Could not add Restaurant");
-        },
-        success: function () {
-            $.ajax({
-                url: "./filters-add",
-                type: "POST",
-                data: { rest: JSON.parse(JSON.stringify(rest)), filter: filterStr}
-            }).done(function () {
-                console.log("Filters Added");
+    if (flag) {
+    
+    //Image Upload + rest.image link
+    if ($("#uploaded").attr('src') != "")
+       rest.image = $("#uploaded").attr('src');
+    console.log(rest);
+    //Add Restaurant Data
+        $.ajax({
+            url: "./add",
+            type: "POST",
+            data: JSON.parse(JSON.stringify(rest)),
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("could not post data");
+                window.alert("Could not add Restaurant");
+            },
+            success: function () {
+                $.ajax({
+                    url: "./filters-add",
+                    type: "POST",
+                    data: { rest: JSON.parse(JSON.stringify(rest)), filter: filterStr }
+                }).done(function () {
+                  toastr.success("Filters Added", function () {
+                    console.log("Filters Added");
+                    window.location = "./..";
+                  });
+                });
+            }
+        }).done(function () {
+            toastr.success("Restaurant Added", function () {
                 window.location = "./..";
             });
-        }
-    }).done(function () {
-        window.location = "./..";
-    });
+
+        });
+    }
+    else {
+        toastr.error("Restaurant Not Added Please Verify Address");
+    }
 }
 
 $(function () {
@@ -98,7 +134,39 @@ $(function () {
         dropdown: true,
         scrollbar: true
     });
+    //image stuff
+     //$('#imageForm').append($.cloudinary.unsigned_upload_tag("abssk3w2",
+     //   { cloud_name: 'savoursip' }));
+     //var formdata = $('#imageForm');
 
+    // Configure Cloudinary
+    // with credentials available on
+    // your Cloudinary account dashboard
+    $.cloudinary.config({
+        cloud_name: 'savoursip', api_key: '738137753563181'
+    });
+    
+    $("#upload-file").change(function () {
+        readURL(this);
+    });
+    //Set up Toast
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-bottom-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "500",
+        "timeOut": "2000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
     // Setup geocoder
     geocoder = new google.maps.Geocoder();
 
@@ -117,7 +185,7 @@ $(function () {
         submitform();
     });
     $("#addressButton").click(function () {
-        calcLoc();
+     calcLoc();
     });
 });
 
@@ -161,5 +229,43 @@ function AddBubble(str) {
             filters.splice(filters.indexOf(str), 1);
             this.remove();
         });
+    }
+}
+//Image Upload Functions 
+window.ajaxSuccess = function () {
+    response = JSON.parse(this.responseText);
+    console.log("ajaxSuccess", typeof this.responseText);
+    document.getElementById('uploaded').setAttribute("src", response["secure_url"]);
+    document.getElementById('uploaded').setAttribute("src", response["secure_url"]);
+    document.getElementById('results').innerText = "Image Preview";
+    console.log(response.secure_url);
+    toastr.success("Image Uploaded to Cloud");
+
+}
+window.AJAXSubmit = function (formElement) {
+    console.log("starting AJAXSubmit");
+    if (!formElement.action) { return; }
+    // Initiate upload to cloudairy account
+    var form = $("#imageForm");
+    var formData = form[0];
+    console.log("starting AJAXSubmit");
+    var xhr = new XMLHttpRequest();
+    xhr.onload = ajaxSuccess;
+    xhr.open("post", "https://api.cloudinary.com/v1_1/savoursip/image/upload");
+    xhr.send(new FormData(formData));
+
+}
+
+
+//Prview Image
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#uploaded').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
     }
 }

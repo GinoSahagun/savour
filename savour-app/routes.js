@@ -122,6 +122,7 @@ router.post('/add', function (req, res) {
             desc: deets.desc,
             website: deets.website,
             menu: deets.menu,
+            image: deets.image,
             owner: deets.owner
         });
 

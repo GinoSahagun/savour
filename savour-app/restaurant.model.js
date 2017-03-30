@@ -15,6 +15,7 @@ var restaurantSchema = new Schema({
     desc: String,
     website: String,
     menu: String,
+    image: String,
     owner: String
 }, { collection: 'rest' });
 

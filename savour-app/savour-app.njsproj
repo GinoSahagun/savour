@@ -37,9 +37,13 @@
     <Compile Include="neighborhood.model.js" />
     <Compile Include="public\javascripts\add.js" />
     <Compile Include="public\javascripts\bootstrap.min.js" />
+    <Compile Include="public\javascripts\cloudinary-jquery-file-upload.js" />
     <Compile Include="public\javascripts\header.js" />
+    <Compile Include="public\javascripts\jquery.fileupload.js" />
+    <Compile Include="public\javascripts\jquery.iframe-transport.js" />
     <Compile Include="public\javascripts\jQuery.min.js" />
     <Compile Include="public\javascripts\jquery.timepicker.min.js" />
+    <Compile Include="public\javascripts\jquery.ui.widget.js" />
     <Compile Include="public\javascripts\list.js" />
     <Compile Include="public\javascripts\login.js" />
     <Compile Include="public\javascripts\maps.js" />
