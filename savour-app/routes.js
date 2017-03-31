@@ -35,12 +35,11 @@ router.post('/delete-restaurant', function (req, res) {
         if (err)
             res.send(err);
         else {
-            console.log("Restaurant deleted");
             res.sendStatus(200);
         }
 
     });
-    return;
+
 });
 
 /* GET login page. */
@@ -333,7 +332,7 @@ router.get('/search-data', function (req, res) {
             console.log('Getting Restaurants...');
             res.send(err + '\nError Has Occurred')
         } else {
-            console.log(results);
+            //console.log(results);
             resultsStr = JSON.parse(JSON.stringify(results))
             res.send(resultsStr);  
         }

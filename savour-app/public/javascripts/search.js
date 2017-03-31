@@ -30,10 +30,6 @@ $(document).ready(function () {
             else {
                 res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operation as its already a json object response
             }
-            console.log("second complete");
-
-            //reload json stuff here
-            console.log("res: ", res); //check to see if object was working
 
             for (d of res) {
                 var newRow = CreateRow(d);
@@ -70,14 +66,14 @@ $(document).ready(function () {
                 if (choice == true) {
                     //Get closest restaurant ID
                     var id = $(this).prev("h6")["0"].innerHTML;
-                    id = id.substr(11); //extract id
+                    id = id.substr(15); //extract id
                     //Call ajax method to delete restaurant
                     $.ajax({
                         url: "./delete-restaurant",
                         type: "POST",
                         data: { rest: id }
                     }).done(function () {
-                        console.log("Filters Added");
+                        console.log("Restaurant Deleted");
                         location.reload();
                     });
                 }
