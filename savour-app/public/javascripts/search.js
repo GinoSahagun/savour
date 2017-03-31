@@ -51,12 +51,14 @@ $(document).ready(function () {
                 row += "Rating: <span><input type=\"text\" class=\"rating\" value=\"" + data.rating + "\"disabled><br>";
                 row += "Price: <span><input type=\"text\" class=\"pricing\" value=\"" + data.pricing + "\"disabled><br>";
                 row += "Address: <input type=\"text\" class=\"address\" value=\"" + data.address + "\"disabled><br>";
-                row += "Hours: <input type=\"text\" class=\"hours\" value=\"" + data.hours.FRI + "\"disabled><br>";  //Need to display all hours!!!
+                var hours = JSON.stringify(data.hours);
+                hours = hours.replace(/\"/g, "'");
+                row += "Hours: <input type=\"text\" class=\"hours\" value=\"" + hours + "\"disabled><br>";  //Need to display all hours!!!
                 row += "Location: <input type=\"text\" class=\"location\" value=\"" + data.location.LAT + ", " + data.location.LON + "\"disabled><br>";
                 row += "Phone: <input type=\"text\" class=\"phone\" value=\"" + data.phone + "\"disabled><br>";
                 row += "Website: <input type=\"text\" class=\"website\" value=\"" + data.website + "\"disabled><br>";
                 row += "Menu: <input type=\"text\" class=\"menu\" value=\"" + data.menu + "\"disabled><br>";
-                row += "Image: <br>";
+                row += "Image: <input type=\"text\" class=\"image\" value=\"" + data.image + "\"disabled><br>";
                 row += "<h6 class = \"id\">Restaurant ID: " + data._id + "</h6>";
                 row += "<button id=\"delete\" class=\"delete\"> Delete </button> <button class=\"edit\"> Edit </button>";
                 row += "<button class=\"save\" disabled> Save </button> </figcaption ></figure > ";
@@ -88,18 +90,20 @@ $(document).ready(function () {
 
             $(".save").click(function () {
                 $("input").prop("disabled", true);
+                $(".save").prop("disabled", true);
 
                 //Get updated restaurant information 
                 var updatedRest = new RestaurantClass()
 
                 //Call ajax method to update restaurant
-                /* $.ajax({
+                 $.ajax({
                      url: "./update-restaurant",
                      type: "POST",
-                     data: { rest: id }
+                     data: updatedRest,
                  }).done(function () {
                      console.log("Restaurant Updated");
-                 });*/
+                     toastr.success("Restaurant Updated!");
+                 });
             });
 
         });
@@ -112,13 +116,13 @@ function RestaurantClass() {
     this.id = $("button.save").closest('.show').find('.id')["0"].innerHTML.substr(15);
     this.name = $("button.save").closest('.show').find('.name')["0"].value;
     this.phone = $("button.save").closest('.show').find('.phone')["0"].value;
-    //this.hours = GetHours();
+    this.hours = $("button.save").closest('.show').find('.hours')["0"].value;
     this.pricing = $("button.save").closest('.show').find('.pricing')["0"].value;
     this.rating = $("button.save").closest('.show').find('.rating')["0"].value;
     this.address = $("button.save").closest('.show').find('.address')["0"].value;
-    //this.location = GetLatLon();
+    this.location = $("button.save").closest('.show').find('.location')["0"].value;
     this.desc = $("button.save").closest('.show').find('.description')["0"].value;
     this.website = $("button.save").closest('.show').find('.website')["0"].value;
     this.menu = $("button.save").closest('.show').find('.menu')["0"].value;
-    //this.image = "";
+    this.image = $("button.save").closest('.show').find('.image')["0"].value;
 }

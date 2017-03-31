@@ -1,5 +1,5 @@
 ﻿// JS File for adding a new Restaurant etc. to the database.
-var filters = ["locally-owned", "minority-owned", "environmentally-friendly", "locally-sources", "vegan-friendly", "disability-friendly"];
+var filters = ["locally-owned", "minority-owned", "environmentally-friendly", "locally-sourced", "vegan-friendly", "disability-friendly"];
 var geocoder;
 
 function GetDayJSON(day) {
