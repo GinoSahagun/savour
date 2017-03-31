@@ -30,15 +30,44 @@ router.get('/about', function (req, res) {
 router.post('/delete-restaurant', function (req, res) {
     var restId = req.body.rest;
 
-    //Try to delete the restaurant with this id
+    //Delete the restaurant with this id
     restaurant.findByIdAndRemove(restId, function (err) {
         if (err)
             res.send(err);
         else {
-            res.sendStatus(200);
+            console.log("Restaurant deleted");
         }
 
     });
+
+    //Query matches that have this rest id
+    const stream = match.find({ restID: restId }).stream();
+
+    stream.on('data', doc => {
+        //Find each match and delete it
+        match.findByIdAndRemove(doc._id, function (err) {
+            if (err)
+                res.send(err);
+            else {
+                console.log("Match deleted");
+            }
+        });
+    });
+
+    //Query reviews and delete those with this rest id
+    const reviews = review.find({ id: restId }).stream();
+    reviews.on('data', doc => {
+        //Find each review and delete it
+        review.findByIdAndRemove(doc._id, function (err) {
+            if (err)
+                res.send(err);
+            else {
+                console.log("Review deleted");
+            }
+        });
+    });
+
+    res.sendStatus(200);    //Send the good news
 
 });
 
