@@ -69,7 +69,14 @@ $(function () {
         step_size: 0.5,
     }
     $("#review-rating").rate(stuff);
-
+    //Test Example of Rating Stars using standard rate
+    var settings = {
+        max_value: 5,
+        initial_value: 2,
+        readonly: true,
+        step_size: 0.5,
+    }
+    $("#restStars").rate(settings);
     //Create Div Here from Review Write One Button Slide Down and Slide Up
     $("#create-review-button").click(function () {
         if ($("#review-form").is(":hidden")) {
@@ -167,7 +174,7 @@ function CreateRow(data) {
 
 //create table body for hours
 function createItem(data) {
-    console.log(data);
+    //console.log(data);
     var item = "<tr><td> " + data[0] + "</td><td>" + " " + data[1] + "</td></tr>";
 
 
@@ -178,7 +185,7 @@ function createItem(data) {
 function getRestaurantData(urlID) {
     $.getJSON("restaurant-data", { id: urlID })
         .done(function (parsedResponse) {
-            console.log("second success");
+            
             var res;
             //Recievd Response Text as JSON hopefully
             if (typeof parsedResponse === 'string')
@@ -186,7 +193,7 @@ function getRestaurantData(urlID) {
             else {
                 res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operaton as its already a json object response
             }
-            console.log("second complete");
+           
 
             //Restaurant Image
             $('#restImage').attr('src', res.image);
@@ -194,14 +201,12 @@ function getRestaurantData(urlID) {
             $("#restName").text(res.name);
             //Restuaran Rating Stars
 
-            //Test Example of Rating Stars using standard rate
-            var settings = {
-                max_value: 5,
-                initial_value: res.rating,
-                readonly: true,
-                step_size: 0.5,
-            }
-            $("#restStars").rate(settings);
+            
+            $("#restStars").rate("setValue",res.rating);
+            //<a href="#serious">serious</A>
+            $("#rest-link").append("<a href="+res.website+">Website</a>");
+            $("#menu-link").append("<a href="+res.menu+">Menu</a>");
+
             var result = [];
             //convert JSON hours into array
             for (var i in res.hours)
@@ -219,7 +224,7 @@ function getRestaurantData(urlID) {
                 }
                 else {
                     var item = createItem(result[count]);
-                    console.log(item);
+                    //console.log(item);
                     $("#expanded-times").append(item);
                     count++;
                 }
@@ -247,7 +252,10 @@ function getReviewData(urlID) {
     //Test using 58c64e8b90ffbe4bcc94080e
     $.getJSON("review-data", { id: urlID })
         .done(function (parsedResponse) {
-            console.log("second success");
+          
+            var ratings = 0;
+            var sum = 0;
+            var avg = 0;
             var res;
             //Recievd Response Text as JSON hopefully
             if (typeof parsedResponse === 'string')
@@ -255,29 +263,27 @@ function getReviewData(urlID) {
             else {
                 res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operaton as its already a json object response
             }
-            console.log("second complete");
+            
             //reload json stuff here
             var len = res.length;
             var tbl = $("#review-list");
             $("#review-list tr").remove();
-            if (len != 0)
-            tbl.append("<div class='divider'></div>");
+            
             //Create Table of Review List
-            if (len <= 10) {
-                for (var i = len - 1; i >= 0; i--) {
-                    var row = CreateRow(res[i]);
-                    tbl.append(row);
-                    $(".rating").rate({ readonly: true, initial_value: res[i].rating, change_once: true }); //needed for each appended rating
-                }
+            for (var data of res) {
+                ratings++;
+                var row = CreateRow(data);
+                tbl.append(row);
+                sum += data.rating;
+                $(".rating").rate({ readonly: true, initial_value: data.rating, change_once: true }); //needed for each appended rating
             }
-            else {
-                for (var i = 10; i >= 0; i--) {
-                    var row = CreateRow(res[i]);
-                    tbl.append(row);
-                }
+            if (ratings != 0)
+                avg = sum / ratings;
 
-            }
-         
+            $("#restStars").rate({ readonly: false });
+            $("#restStars").rate("setValue", avg);
+            $("#restStars").rate({ readonly: true});
+
         })
         .fail(function () {
             console.log("error");

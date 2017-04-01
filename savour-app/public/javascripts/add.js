@@ -80,10 +80,13 @@ function calcLoc() {
 function submitform() {
     var rest = new RestaurantClass();
     var filterStr = filters.toString();
-    
+    if (!(validatePhone())) {
+        toastr.error("Verify Phone Number");
+        $("#phone").focus();
+        return false;
+    }
     calcLoc();
     if (flag) {
-    
     //Image Upload + rest.image link
     if ($("#uploaded").attr('src') != "")
        rest.image = $("#uploaded").attr('src');
@@ -118,10 +121,31 @@ function submitform() {
     }
     else {
         toastr.error("Restaurant Not Added Please Verify Address");
+        $("#address").focus();
     }
+}
+function validatePhone() {
+
+    var reg = "^\\((\\d{3})\\)\\s(\\d{3})-(\\d{4})$";
+    var regex = new RegExp(reg, "gm");
+    var temp = $("#phone").val()
+    return regex.test(temp);
 }
 
 $(function () {
+
+    //Loading GIF
+    $body = $("body");
+
+    $(window).ajaxStart(function () {
+        $body.addClass("loading");
+    });
+    $(window).ajaxStop(function () {
+        $body.removeClass("loading");
+    });
+        
+        
+   
     //set up Hour pickers
     $(".timepicker").timepicker({
         timeFormat: "h:mm p",
@@ -134,11 +158,14 @@ $(function () {
         dropdown: true,
         scrollbar: true
     });
-    //image stuff
-     //$('#imageForm').append($.cloudinary.unsigned_upload_tag("abssk3w2",
-     //   { cloud_name: 'savoursip' }));
-     //var formdata = $('#imageForm');
-
+    //re-format
+    $("#phone").focusout(function () {
+        var temp = $(this).val();
+        if ($("#phone").val().length == 10) {
+            temp = temp.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+            $("#phone").val(temp);
+        }
+    });
     // Configure Cloudinary
     // with credentials available on
     // your Cloudinary account dashboard
@@ -149,6 +176,9 @@ $(function () {
     $("#upload-file").change(function () {
         readURL(this);
     });
+
+    
+
     //Set up Toast
     toastr.options = {
         "closeButton": true,
@@ -233,6 +263,7 @@ function AddBubble(str) {
 }
 //Image Upload Functions 
 window.ajaxSuccess = function () {
+    var $body = $("body");
     response = JSON.parse(this.responseText);
     console.log("ajaxSuccess", typeof this.responseText);
     document.getElementById('uploaded').setAttribute("src", response["secure_url"]);
@@ -240,10 +271,12 @@ window.ajaxSuccess = function () {
     document.getElementById('results').innerText = "Image Preview";
     console.log(response.secure_url);
     toastr.success("Image Uploaded to Cloud");
+    $body.removeClass("loading");
 
 }
 window.AJAXSubmit = function (formElement) {
     console.log("starting AJAXSubmit");
+    var $body = $("body");
     if (!formElement.action) { return; }
     // Initiate upload to cloudairy account
     var form = $("#imageForm");
@@ -253,7 +286,7 @@ window.AJAXSubmit = function (formElement) {
     xhr.onload = ajaxSuccess;
     xhr.open("post", "https://api.cloudinary.com/v1_1/savoursip/image/upload");
     xhr.send(new FormData(formData));
-
+    $body.addClass("loading");
 }
 
 

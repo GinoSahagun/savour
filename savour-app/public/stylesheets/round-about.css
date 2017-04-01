@@ -54,7 +54,9 @@
     font-size: 20px;
     color: #146734;
 }
-
+#restStars{
+    color: #146734;
+}
 #statusmessage{
     position:fixed;
     bottom:0;
@@ -69,26 +71,26 @@
 .centercolumn{
     margin-left: 5px;
     margin-right: 5px;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 .img-center {
 	margin: 0 auto;
 }
 
 
-footer {
-    margin: 50px 0;
-}
-
 .divider {
   height: 1px;
   width:100%;
   display:block; /* for use on default inline elements like span */
-  margin: 9px 0;
+  margin-top: 9px;
   overflow: hidden;
   background-color: #e5e5e5;
 }
-
+.img {
+    width: 100%;
+    height:auto;
+    display:block;
+} 
 /* For mobile phones: */
 [class*="col-"] {
     width: 100%;
@@ -133,9 +135,7 @@ footer {
 /* screw writing imports, just stick it in max width since these classes are not shared between sizes */
 @media (max-width:767px) { 
 	.img {
-    max-width: 100%;
-    height: auto;
-    margin: auto;
+    width: 100%;
     } 
     #create-review-button{
     margin-top: -47px;
