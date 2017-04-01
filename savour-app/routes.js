@@ -37,7 +37,6 @@ router.post('/delete-restaurant', function (req, res) {
         else {
             console.log("Restaurant deleted");
         }
-
     });
 
     //Query matches that have this rest id
@@ -117,9 +116,10 @@ router.get('/neighborhood-data', function (req, res) {
 
 //Add new filters to database
 
-router.post('/addFilter', function (req) {
+router.post('/addFilter', function (req, res) {
     //Insert filter into database
     addFilter(req.body.filter);
+    res.sendStatus(200); //Send the good news
 });
 
 
@@ -215,7 +215,7 @@ router.post("/filters-add", function (req, res) {
                    addMatch(restId, filter._id);
                 }
                 else {
-                    console.log("Filter does not exist");
+                    console.log("Filter does not exist: " + thefilter);
                 }
             })
         }
