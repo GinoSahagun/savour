@@ -163,8 +163,8 @@ function CreateRow(data) {
     if (data.id == null)
         data.id = "";
 
-    var row = "<tr><td><a href=./restaurant?id=" + data.id + "><div style='white-space: nowrap'; class='col-md-10'>";
-    row += data.name + "</div></td><td><div class='col-md-2'></a><div class='rating'></div></div></td></tr>";
+    var row = "<tr><td><a href=./restaurant?id=" + data.id + "><div class='col-md-10'>";
+    row += data.name + "</div ></td><td><div class='col-md-2'></a><div class='rating'></div></div></td></tr>";
     row += "<tr><td colspan = '2'><div class='col-md-12'>";
     row += data.review + "</div ></td> </tr";
     //adjust the rate of it when created nvm wont work
