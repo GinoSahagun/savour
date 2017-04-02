@@ -120,7 +120,7 @@ function submitform() {
         });
     }
     else {
-        toastr.error("Restaurant Not Added Please Verify Address");
+        toastr.error("Please Verify Address");
         $("#address").focus();
     }
 }
@@ -277,7 +277,16 @@ window.ajaxSuccess = function () {
 window.AJAXSubmit = function (formElement) {
     console.log("starting AJAXSubmit");
     var $body = $("body");
-    if (!formElement.action) { return; }
+    var input = $("#upload-file")
+    console.log(input[0].files);
+    if (!(formElement.action)) {
+        toastr.error("Please Select an Image");
+        return;
+    }
+    if (input[0].files.length == 0) {
+        toastr.error("Please Select an Image");
+        return;
+    }
     // Initiate upload to cloudairy account
     var form = $("#imageForm");
     var formData = form[0];

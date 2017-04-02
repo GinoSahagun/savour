@@ -86,7 +86,8 @@
   overflow: hidden;
   background-color: #e5e5e5;
 }
-.img {
+
+#restImage {
     width: 100%;
     height:auto;
     display:block;
