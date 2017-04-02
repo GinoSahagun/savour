@@ -4,6 +4,7 @@ var userMarker;
 var filters = [];
 var marks = [];
 
+
 function initMap() {
     filters.push("food", "coffee", "tea");
     var omh = { lat:47.651395, lng:-122.361466};
@@ -69,6 +70,7 @@ function initMap() {
             infoWindow.close();
         }
     });
+
 }
 
 // Converts the JSON object we're using in mongodb to a google latlng
@@ -83,13 +85,40 @@ function GooglePOS(jsonPos) {
     }
 }
 
-function AddMarker(pos) {
+function AddMarker(pos, rest) {
+    
     // TODO validation
+    //I would need to do an ajax call for each marker then create the actual html stuff like google did in this example
+    var contentString = '<div id="content">' +
+        '<div id="siteNotice">' +
+        '</div>' +
+        '<h5 id="firstHeading" style="white-space: nowrap;" class="firstHeading"><a href=./restaurant?id=' + rest._id + '>' + rest.name +'<a/> </h5>' +
+        '<div id="bodyContent">' +
+        '<p>' + rest.address + '</p>' +
+        '<p><a href='+rest.website+'>'+ rest.name + 's Website'+ '</a>' + '</p>' +
+        '</div class="row" >' +
+        "<img style='width:100px; height: 100px; id='popWin' src="+ rest.image + ">" +
+        '</div>';
 
-    new google.maps.Marker({
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+    var marker = new google.maps.Marker({
         position: pos,
         map: map
+    }); 
+    google.maps.event.addListener(marker, 'click', (function (marker) {
+        return function () {
+            infowindow.open(map, marker);
+        }
+    })(marker));
+
+    
+
+    var listener = google.maps.event.addListener(map, "idle", function () {
+        google.maps.event.removeListener(listener);
     });
+
 }
 
 function AddBubble(str) {

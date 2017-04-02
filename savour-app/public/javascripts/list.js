@@ -15,7 +15,7 @@ var tbl;
 function CreateRow(data) {
     if (data._id == null) 
         data._id = "";
-    var row = "<tr><td><a href=./restaurant?id=" + data._id + "><div class='col-md-10'>";
+    var row = "<tr><td><a href=./restaurant?id=" + data._id + "><div style='white-space: nowrap;'  class='col-md-10'>";
     row += data.name + "</div ></td ><td><div class='col-md-2'>" + "<div class = 'rating'></div> "+ "</div></td></a></tr>";
     row += "<tr><td colspan = '2'><div class='col-md-12'>";
     row += data.desc + "</div ></td> </tr"; 
@@ -51,8 +51,11 @@ $(function ()
         console.log("second complete");        
         console.log("res: ", res);
 
+        var bounds = new google.maps.LatLngBounds();
         for (d of res) {
-            AddMarker(GooglePOS(d.location));
+            AddMarker(GooglePOS(d.location), d);
+            bounds.extend(GooglePOS(d.location));
+            map.fitBounds(bounds);
             var row = CreateRow(d);
             tbl.append(row);
             $('.rating').rate({ readonly: true, initial_value: d.rating, change_once: true }); //needed for each appended rating
