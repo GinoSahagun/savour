@@ -50,8 +50,10 @@ $(function ()
         }
         console.log("second complete");        
         console.log("res: ", res);
-
+        //create bounds for each marker for right now
         var bounds = new google.maps.LatLngBounds();
+        //var geometry = new google.maps.geometry;
+        //console.log(geometry);
         for (d of res) {
             AddMarker(GooglePOS(d.location), d);
             bounds.extend(GooglePOS(d.location));

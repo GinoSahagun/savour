@@ -8,7 +8,13 @@ function GetDayJSON(day) {
     response += $("#" + day.toLowerCase() + "-close").val() + "\"";
     return response;
 }
+function firstTimeSelection(day, hrs) {
 
+     $("#" + day.toLowerCase() + "-open").val(hrs + " AM");
+     $("#" + day.toLowerCase() + "-close").val(hrs + " PM");
+
+
+}
 function GetHours() {
     var hrs = "{";
     hrs += GetDayJSON("SUN") + ",";
@@ -143,21 +149,35 @@ $(function () {
     $(window).ajaxStop(function () {
         $body.removeClass("loading");
     });
-        
-        
-   
+
     //set up Hour pickers
     $(".timepicker").timepicker({
         timeFormat: "h:mm p",
         interval: 30,
         minTime: "12am",
         maxTime: "11:59pm",
-        defaultTime: "10",
+        defaultTime: "7",
         startTime: "12am",
-        dynamic: false,
+        dynamic: true,
         dropdown: true,
-        scrollbar: true
+        scrollbar: true,
     });
+    
+
+    $("#sun-open").timepicker('option', 'change', function (time) {
+        // update startTime option in all time pickers
+        var hrs = $(this).val().split(" ");
+        console.log(hrs);
+        firstTimeSelection("SUN", hrs[0]);
+        firstTimeSelection("MON", hrs[0]);
+        firstTimeSelection("TUE", hrs[0]);
+        firstTimeSelection("WED", hrs[0]);
+        firstTimeSelection("THU", hrs[0]);
+        firstTimeSelection("FRI", hrs[0]);
+        firstTimeSelection("SAT", hrs[0]);
+    });
+          
+
     //re-format
     $("#phone").focusout(function () {
         var temp = $(this).val();

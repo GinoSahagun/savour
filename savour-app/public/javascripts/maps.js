@@ -88,7 +88,7 @@ function GooglePOS(jsonPos) {
 function AddMarker(pos, rest) {
     
     // TODO validation
-    //I would need to do an ajax call for each marker then create the actual html stuff like google did in this example
+    //Create Html Part of Info Windows
     var contentString = '<div id="content">' +
         '<div id="siteNotice">' +
         '</div>' +
