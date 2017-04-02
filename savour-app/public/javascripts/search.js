@@ -88,8 +88,8 @@ $(document).ready(function () {
                 $("input").prop("disabled", true);
                 $(".save").prop("disabled", true);
 
-                //Get updated restaurant information 
-                var updatedRest = new RestaurantClass()
+                //Get updated restaurant information
+                var updatedRest = new RestaurantClass();
 
                 //Call ajax method to update restaurant
                  $.ajax({
@@ -108,15 +108,25 @@ $(document).ready(function () {
  
 });
 
+function LatLon(str) {
+    var response = "{ \"LAT\": \"" + str.substring(0, str.indexOf(",")) + "\", \"LON\": \"" + str.substring(str.indexOf(",") + 2) + "\"}";
+    return JSON.parse(response);
+}
+
+function Hrs(str) {
+    var response = str.replace(new RegExp('\'', 'g'), '\"');
+    return JSON.parse(response);
+}
+
 function RestaurantClass() {
     this.id = $("button.save").closest('.show').find('.id')["0"].innerHTML.substr(15);
     this.name = $("button.save").closest('.show').find('.name')["0"].value;
     this.phone = $("button.save").closest('.show').find('.phone')["0"].value;
-    this.hours = $("button.save").closest('.show').find('.hours')["0"].value;
+    this.hours = Hrs($("button.save").closest('.show').find('.hours')["0"].value);
     this.pricing = $("button.save").closest('.show').find('.pricing')["0"].value;
     this.rating = $("button.save").closest('.show').find('.rating')["0"].value;
     this.address = $("button.save").closest('.show').find('.address')["0"].value;
-    this.location = $("button.save").closest('.show').find('.location')["0"].value;
+    this.location = LatLon($("button.save").closest('.show').find('.location')["0"].value);
     this.desc = $("button.save").closest('.show').find('.description')["0"].value;
     this.website = $("button.save").closest('.show').find('.website')["0"].value;
     this.menu = $("button.save").closest('.show').find('.menu')["0"].value;

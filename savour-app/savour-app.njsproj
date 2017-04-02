@@ -61,8 +61,6 @@
     <Content Include="Matt Desktop.pubxml.user" />
     <None Include="Matt Laptop.pubxml" />
     <Content Include="Matt Laptop.pubxml.user" />
-    <Content Include="misc\Matt Desktop.pubxml.user" />
-    <None Include="misc\Matt Laptop.pubxml" />
     <Content Include="misc\Matt Laptop.pubxml.user" />
     <Content Include="package.json" />
     <Content Include="public\images\blue-marker.png" />
