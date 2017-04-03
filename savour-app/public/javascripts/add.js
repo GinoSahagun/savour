@@ -162,19 +162,37 @@ $(function () {
         dropdown: true,
         scrollbar: true,
     });
-    
+    //Automation of Timers
+   
 
     $("#sun-open").timepicker('option', 'change', function (time) {
         // update startTime option in all time pickers
-        var hrs = $(this).val().split(" ");
-        console.log(hrs);
-        firstTimeSelection("SUN", hrs[0]);
-        firstTimeSelection("MON", hrs[0]);
-        firstTimeSelection("TUE", hrs[0]);
-        firstTimeSelection("WED", hrs[0]);
-        firstTimeSelection("THU", hrs[0]);
-        firstTimeSelection("FRI", hrs[0]);
-        firstTimeSelection("SAT", hrs[0]);
+        
+        $.confirm({
+            title: 'Copy Hours?',
+            backgroundDismiss: false,
+            type: 'green',
+            backgroundDismissAnimation: 'glow',
+            content: 'Copy Hours Into Other Time Inputs?',
+            buttons: {
+                confirm: function () {
+                    var hrs = $("#sun-open").val().split(" ");
+                    console.log(hrs);
+                    firstTimeSelection("SUN", hrs[0]);
+                    firstTimeSelection("MON", hrs[0]);
+                    firstTimeSelection("TUE", hrs[0]);
+                    firstTimeSelection("WED", hrs[0]);
+                    firstTimeSelection("THU", hrs[0]);
+                    firstTimeSelection("FRI", hrs[0]);
+                    firstTimeSelection("SAT", hrs[0]);
+                },
+                cancel: function () {
+                    
+                }
+                
+            }
+        });
+        
     });
           
 

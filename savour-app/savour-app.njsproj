@@ -39,6 +39,7 @@
     <Compile Include="public\javascripts\bootstrap.min.js" />
     <Compile Include="public\javascripts\cloudinary-jquery-file-upload.js" />
     <Compile Include="public\javascripts\header.js" />
+    <Compile Include="public\javascripts\jquery-confirm.min.js" />
     <Compile Include="public\javascripts\jquery.fileupload.js" />
     <Compile Include="public\javascripts\jquery.iframe-transport.js" />
     <Compile Include="public\javascripts\jQuery.min.js" />
@@ -78,6 +79,7 @@
     <Content Include="public\stylesheets\add.css" />
     <Content Include="public\stylesheets\header-color.css" />
     <Content Include="public\stylesheets\header.css" />
+    <Content Include="public\stylesheets\jquery-confirm.min.css" />
     <Content Include="public\stylesheets\jquery.timepicker.min.css" />
     <Content Include="public\stylesheets\list.css" />
     <Content Include="public\stylesheets\maps.css" />
