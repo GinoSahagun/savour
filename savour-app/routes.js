@@ -384,9 +384,10 @@ router.get('/review-data', function (req, res) {
 
 
 //Retrieve collections from database
-router.get('/search', function (req, res) {
-    res.render('search', { title: 'Search'});
+router.get('/admin', function (req, res) {
+    res.render('admin', { title: 'Administrator'});
 });
+
 //Retrieve collections from database
 router.get('/search-data', function (req, res) {
     console.log('Getting Restaurants...');
