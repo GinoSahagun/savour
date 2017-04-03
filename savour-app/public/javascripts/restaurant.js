@@ -21,6 +21,7 @@ var now = new Date();
 var day = now.getDayName();
 var month = now.getMonthName();
 var dayValue = now.getDayNum();
+var filterArray = [];
 
 //Document Ready Function
 $(function () {
@@ -51,6 +52,7 @@ $(function () {
 
         getRestaurantData(urlID);
         getReviewData(urlID);
+        getFilterData(urlID);
 
     }
     else {
@@ -293,3 +295,22 @@ function getReviewData(urlID) {
         });
 }
 
+//Get the Filter Data through a JSON Call
+function getFilterData(urlID) {    
+    $.getJSON("filters-get", { id: urlID })
+        .done(function (data) {
+            console.log(data);
+   
+            //For each filter, retrieve the name
+            for (var i = 0; i < data.length; i++)
+            {
+                $.getJSON("filter-name-get", { filterID : data[i] })
+                    .always(function (name) {
+                        console.log(name.responseText);
+                        filterArray.push(name.responseText);
+                    });
+            }
+           
+        });
+
+}

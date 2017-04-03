@@ -168,19 +168,19 @@ router.post('/add', function (req, res) {
 });
 
 //Get filter data
-router.get('/filter-data', function (req, res) {
-    console.log('Checking filter...');
+router.get("/filter-data", function (req, res) {
+    console.log("Checking filter...");
 
     var filterName = req.query.name;
     //Query database for filter name
-    filter.findOne({ 'name' : filterName }, function (err, filter) {
+    filter.findOne({ "name" : filterName }, function (err, filter) {
         if (err) {
             res.send(err);
             return handleError(err);
         }
         else {
             res.send(filter);   //Found filter! Return it
-            console.log('Filter: ', filterName)
+            console.log("Filter: ", filterName)
         }
     })
 });
@@ -270,7 +270,42 @@ function addFilter(filterName) {
     });
 }
 
-// Get restaurant page
+//Get filter ids from matches
+router.get('/filters-get', function (req, res) {
+    console.log('Getting filters for restaurant...');
+    var restId = req.query.id;
+    var filters = [];
+
+    match.find({ "restID": restId }).stream()
+        .on('data', function (doc) {
+            filters.push(doc.filterID);
+        })
+        .on('error', function (err) {
+            // handle error
+        })
+        .on('end', function () {
+            res.send(filters);
+        });
+
+});
+
+//Get filter name and return it
+router.get('/filter-name-get', function (req, res) {
+    var filterId = req.query.filterID;
+
+    filter.find({ "_id": filterId }, function (err, filter) {
+        if (err) {
+            console.log("Error");   //Error in query for some reason
+            return;
+        }
+        if (filter) {
+            res.send(filter[0].name);
+        }
+    });
+
+});
+
+//Get restaurant page
 router.get('/restaurant', function (req, res) {
     res.render('restaurant', { title: 'Restaurant' });
 });
