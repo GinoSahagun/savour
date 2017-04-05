@@ -1,13 +1,12 @@
 ﻿var map;
 var infoWindow;
 var userMarker;
-var filters = [];
 var marks = [];
-
+var filters = [];
 
 function initMap() {
-    filters.push("food", "coffee", "tea");
     var omh = { lat:47.651395, lng:-122.361466};
+    filters = ["locally-owned", "minority-owned", "environmentally-friendly", "locally-sourced", "vegan-friendly", "disability-friendly"];
 
     if (navigator.geolocation) {
         navigator.geolocation.watchPosition(function (position) {
@@ -125,8 +124,11 @@ function AddBubble(str) {
         $("#bubble-bar").append("<div class='actionBox'>" + str + "</div>");
 
         $(".actionBox").click(function () {
-            filters.splice(filters.indexOf(str), 1);
-            this.remove();
+            var index = filters.indexOf(this.innerText);
+            if (index >= 0) {
+                filters.splice(index, 1);
+                this.remove();
+            }
         });
     }
 }

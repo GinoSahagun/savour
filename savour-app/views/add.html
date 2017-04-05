@@ -159,16 +159,23 @@
             </form>
         </div>
         <br/>
-    <label for="filters">Filters</label>
+    <label for="type">Restaurant Type</label>
+    <select id="restType" class="form-control">
+        <option value="restaurant">restaurant</option>
+        <option value="cafe">cafe</option>
+        <option value="bar">bar</option>
+    </select>
+    <br />
+    <label for="filter-bar">Filters and Tags</label><br />
     <div id="filter-bar">
         <div class="input-group">
-            <input id="filter-search" type="text" class="form-control search-form" placeholder="Search">
+            <input id="filter-search" type="text" class="form-control search-form" placeholder="tag name">
             <span class="input-group-btn">
                 <button id="search-button" class="btn btn-primary search-btn">
                     <img src="../images/search.png" width="18" />
                 </button>
                 <button id="addFilter" class="btn btn-primary filter-btn">
-                    <img id="filter-button" src="../images/filter.png" width="18" />
+                    <span>filters</span>
                 </button>
             </span>
         </div>

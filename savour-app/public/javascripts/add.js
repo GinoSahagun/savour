@@ -79,7 +79,6 @@ function calcLoc() {
 
 function submitform() {
     var rest = new RestaurantClass();
-    var filterStr = filters.toString();
     if (!(validatePhone())) {
         toastr.error("Verify Phone Number");
         $("#phone").focus();
@@ -88,8 +87,11 @@ function submitform() {
     calcLoc();
     if (flag) {
     //Image Upload + rest.image link
-    if ($("#uploaded").attr('src') != "")
-       rest.image = $("#uploaded").attr('src');
+    if ($("#uploaded").attr('src') != "") {
+        rest.image = $("#uploaded").attr('src');
+        }
+    filters.push($("#restType option:selected").text());
+    var filterStr = filters.toString();
     console.log(rest);
     //Add Restaurant Data
         $.ajax({
@@ -242,23 +244,27 @@ $(function () {
     });
 });
 
+function Search() {
+    var val = $("#filter-search").val();
+    AddBubble(val);
+    $("#filter-search").val("");
+
+    $.ajax({
+        url: "./addFilter",
+        type: "POST",
+        data: { filter: val }
+    }).done(function () {
+        console.log(val + " added to database");
+    });
+}
+
 // On Page Load
 $(function () {
-    $("#filter-button").click(function () {
+    $("#addFilter").click(function () {
         $("#hot-bar-add").toggle();
     });
     $("#search-button").click(function () {
-        var val = $("#filter-search").val();
-        AddBubble(val);
-        $("#filter-search").val("");
-
-        $.ajax({
-            url: "./addFilter",
-            type: "POST",
-            data: { filter: val }
-        }).done(function () {
-            console.log(val + " added to database");
-        });
+        Search();
     });
 
     $(".hotBox").click(function () {
@@ -272,6 +278,11 @@ $(function () {
             filters.splice(filters.indexOf(filt), 1);
         }
     });
+    $("#filter-search").on('keyup', function (e) {
+        if (e.keyCode == 13) {
+            Search();
+        }
+    });
 });
 
 function AddBubble(str) {
@@ -280,8 +291,11 @@ function AddBubble(str) {
         $("#bubble-bar").append("<div class='actionBox'>" + str + "</div>");
 
         $(".actionBox").click(function () {
-            filters.splice(filters.indexOf(str), 1);
-            this.remove();
+            var index = filters.indexOf(this.innerText);
+            if (index >= 0) {
+                filters.splice(index, 1);
+                this.remove();
+            }
         });
     }
 }
