@@ -9,11 +9,8 @@ function GetDayJSON(day) {
     return response;
 }
 function firstTimeSelection(day, hrs) {
-
      $("#" + day.toLowerCase() + "-open").val(hrs + " AM");
      $("#" + day.toLowerCase() + "-close").val(hrs + " PM");
-
-
 }
 function GetHours() {
     var hrs = "{";
@@ -46,7 +43,7 @@ function RestaurantClass() {
     this.menu = $("#menu").val();
     this.image = "";
 }
-//currently global variable need to figuresomething else out
+//currently global variable need to figure something else out
 var flag;
 
 function calcLoc() {
@@ -64,7 +61,6 @@ function calcLoc() {
                     flag = false;
                     return false;
                 }
-
                 console.log(results);
                 console.log("LAT LON calculated");
                 $("#address").val(results[0].formatted_address);
@@ -73,14 +69,12 @@ function calcLoc() {
                 $("#location-div").show();
                 $("#addressButton").text("Update Location");
                 flag = true;
-                return true;
-
-            }
+                return true;            }
             else {
                 alert("Geocode was not successful for the following reason: " + status);
             }
     });
-        return true;
+    return true;
 }
 
 function submitform() {
@@ -131,7 +125,6 @@ function submitform() {
     }
 }
 function validatePhone() {
-
     var reg = "^\\((\\d{3})\\)\\s(\\d{3})-(\\d{4})$";
     var regex = new RegExp(reg, "gm");
     var temp = $("#phone").val()
@@ -139,7 +132,6 @@ function validatePhone() {
 }
 
 $(function () {
-
     //Loading GIF
     $body = $("body");
 
@@ -162,9 +154,8 @@ $(function () {
         dropdown: true,
         scrollbar: true,
     });
-    //Automation of Timers
-   
 
+    //Automation of Timers
     $("#sun-open").timepicker('option', 'change', function (time) {
         // update startTime option in all time pickers
         
@@ -186,15 +177,10 @@ $(function () {
                     firstTimeSelection("FRI", hrs[0]);
                     firstTimeSelection("SAT", hrs[0]);
                 },
-                cancel: function () {
-                    
-                }
-                
+                cancel: function () {}
             }
         });
-        
     });
-          
 
     //re-format
     $("#phone").focusout(function () {
@@ -204,18 +190,17 @@ $(function () {
             $("#phone").val(temp);
         }
     });
+
     // Configure Cloudinary
     // with credentials available on
     // your Cloudinary account dashboard
     $.cloudinary.config({
         cloud_name: 'savoursip', api_key: '738137753563181'
     });
-    
+
     $("#upload-file").change(function () {
         readURL(this);
     });
-
-    
 
     //Set up Toast
     toastr.options = {
@@ -257,6 +242,7 @@ $(function () {
     });
 });
 
+// On Page Load
 $(function () {
     $("#filter-button").click(function () {
         $("#hot-bar-add").toggle();
@@ -269,7 +255,7 @@ $(function () {
         $.ajax({
             url: "./addFilter",
             type: "POST",
-            data: { filter: val }            
+            data: { filter: val }
         }).done(function () {
             console.log(val + " added to database");
         });
@@ -282,7 +268,7 @@ $(function () {
             filters.push(filt);
         }
         else {
-            this.classList.add("inactive");            
+            this.classList.add("inactive");
             filters.splice(filters.indexOf(filt), 1);
         }
     });

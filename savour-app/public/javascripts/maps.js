@@ -86,7 +86,6 @@ function GooglePOS(jsonPos) {
 }
 
 function AddMarker(pos, rest) {
-    
     // TODO validation
     //Create Html Part of Info Windows
     var contentString = '<div id="content">' +
@@ -106,14 +105,13 @@ function AddMarker(pos, rest) {
     var marker = new google.maps.Marker({
         position: pos,
         map: map
-    }); 
+    });
     google.maps.event.addListener(marker, 'click', (function (marker) {
         return function () {
             infowindow.open(map, marker);
         }
     })(marker));
 
-    
 
     var listener = google.maps.event.addListener(map, "idle", function () {
         google.maps.event.removeListener(listener);
@@ -133,31 +131,38 @@ function AddBubble(str) {
     }
 }
 
+function Search() {
+    var val = $("#filter-search").val();
+
+    //Check to see if filter is in database, apply if found
+    $.getJSON("filter-data", { name: val })
+        .fail(function () {
+            window.alert("Could not find filter, please try a different one.");
+        })
+        .always(function () {
+            console.log("Complete");
+        })
+        .done(function () {
+            //Found filter, add to applied filters
+            AddBubble(val);
+            $("#filter-search").val("");
+        });
+}
+
 $(function () {
-    $("#filter-button").click(function () {
-        if (filters.length != 0) {
-            $("#hot-bar").toggle();
+    $("#addFilter").click(function () {
+        $("#hot-bar").toggle();
+    });
+
+    $("#filter-search").on('keyup', function (e) {
+        if (e.keyCode == 13) {
+            Search();
         }
     });
     $("#search-button").click(function () {
-
-        var val = $("#filter-search").val();
-
-        //Check to see if filter is in database, apply if found
-        $.getJSON("filter-data", { name: val })
-            .fail(function () {
-                window.alert("Could not find filter, please try a different one.");
-            })
-            .always(function () {
-                console.log("Complete");
-            })
-            .done(function () {
-                //Found filter, add to applied filters
-                AddBubble(val);
-                $("#filter-search").val("");
-            });
- 
+        Search();
     });
+
     $(".hotBox").click(function () {
         if (this.classList.contains("inactive")) {
             this.classList.remove("inactive")
