@@ -139,7 +139,7 @@ function Search() {
     //Check to see if filter is in database, apply if found
     $.getJSON("filter-data", { name: val })
         .fail(function () {
-            window.alert("Could not find filter, please try a different one.");
+            toastr.error("Filter does not exist, please try another one.");
         })
         .always(function () {
             console.log("Complete");
