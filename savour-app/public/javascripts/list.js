@@ -1,16 +1,6 @@
-﻿/*
-$(function () {
-    var tbl = $("#dashboard-list");
-
-    var data = [JSON.parse('{"name":"Curbside", "rating": "****", "desc": "Fairly quick, super cheap, and very very delicious. Staff is very friendly! Definitely a new lunch spot!","id":"58be70523ef171a24f518ab0"}'), JSON.parse('{"name":"El Camion", "rating": "****", "desc": "Fairly quick, super cheap, and very very delicious. Staff is very friendly! Definitely a new lunch spot!", "id":"58b9c9a4bd72fa71b8ba1dad"}'), JSON.parse('{"name":"McDonalds", "rating": "****", "desc": "Fairly quick, super cheap, and very very delicious. Staff is very friendly! Definitely a new lunch spot!"}')];
-
-    for (d of data) {
-        var row = CreateRow(d);
-        tbl.append(row);
-    }
-});*/
-
+﻿
 var tbl;
+var filters = [];
 
 function CreateRow(data) {
     if (data._id == null) 
@@ -25,9 +15,76 @@ function CreateRow(data) {
 
 $(function () 
 {
+    retrieveRestaurants();
+});
+
+function AddBubble(str) {
+    if (!filters.includes(str)) {
+        filters.push(str);
+        clearDash();
+        retrieveRestaurants();
+        $("#bubble-bar").append("<div class='actionBox'>" + str + "</div>");
+
+        $(".actionBox").click(function () {
+            var index = filters.indexOf(this.innerText);
+            if (index >= 0) {
+                filters.splice(index, 1);
+                this.remove();
+                clearDash();
+                retrieveRestaurants();
+            }
+        });
+    }
+}
+
+function Search() {
+    var val = $("#filter-search").val();
+
+    //Check to see if filter is in database, apply if found
+    $.getJSON("filter-data", { name: val })
+        .fail(function () {
+            window.alert("Could not find filter, please try a different one.");
+        })
+        .always(function () {
+            console.log("Complete");
+        })
+        .done(function () {
+            //Found filter, add to applied filters
+            AddBubble(val);
+            $("#filter-search").val("");
+        });
+}
+
+$(function () {
+    $("#addFilter").click(function () {
+        $("#hot-bar").toggle();
+    });
+
+    $("#filter-search").on('keyup', function (e) {
+        if (e.keyCode == 13) {
+            Search();
+        }
+    });
+    $("#search-button").click(function () {
+        Search();
+    });
+
+    $(".hotBox").click(function () {
+        if (this.classList.contains("inactive")) {
+            this.classList.remove("inactive")
+        }
+        else {
+            this.classList.add("inactive")
+        }
+    });
+});
+
+function retrieveRestaurants() {
+
+    filters = ["locally-owned", "minority-owned", "environmentally-friendly", "locally-sourced", "vegan-friendly", "disability-friendly"];
     tbl = $("#dashboard-list");
     // Get search data from server
-    var jqxhr = $.getJSON("search-data", function () {
+    var jqxhr = $.getJSON("search-data", { filters: filters }, function () {
         console.log("success");
     })
         .done(function () {
@@ -48,7 +105,7 @@ $(function ()
         else {
             res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operation as its already a json object response
         }
-        console.log("second complete");        
+        console.log("second complete");
         console.log("res: ", res);
         //create bounds for each marker for right now
         var bounds = new google.maps.LatLngBounds();
@@ -64,6 +121,9 @@ $(function ()
         }
     });
 
-});
 
+}
 
+function clearDash() {
+    $("#dashboard-list tr").remove();
+}

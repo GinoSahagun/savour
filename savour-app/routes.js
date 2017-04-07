@@ -391,17 +391,59 @@ router.get('/admin', function (req, res) {
 //Retrieve collections from database
 router.get('/search-data', function (req, res) {
     console.log('Getting Restaurants...');
-    var resultsStr = [];
-    restaurant.find(function (err, results) {
-        if (err) {
-            console.log('Getting Restaurants...');
-            res.send(err + '\nError Has Occurred')
-        } else {
-            //console.log(results);
-            resultsStr = JSON.parse(JSON.stringify(results))
-            res.send(resultsStr);  
-        }
-    });
+    var activeFilters = req.query.filters;
+    var filterIDs = [];
+    var restaurants = [];
+
+    if (activeFilters == undefined) {
+        restaurant.find(function (err, results) {
+            if (err) {
+                res.send(err + '\nError Has Occurred')
+            } else {
+                //console.log(results);
+                resultsStr = JSON.parse(JSON.stringify(results))
+                res.send(resultsStr);
+            }
+        });
+    }
+    else {
+        //Get filterIDs first
+        filter.find({ name: { $in: activeFilters } }, function (err, doc) {
+            if (err) {
+                console.log("Error has occurred.");
+                res.send(err);
+            }
+            if (doc) {
+                for (var i = 0; i < doc.length; i++) {
+                    filterIDs[i] = doc[i]._id;
+                }
+                //Now search for matches
+                match.find({ filterID: { $in: filterIDs } }, function (err, doc2) {
+                    if (err) {
+                        console.log("Error has occurred.");
+                    }
+                    if (doc2) {
+                        for (var i = 0; i < doc2.length; i++) {
+                            restaurants[i] = doc2[i].restID;
+                        }
+
+                        //Now search for restaurants
+                        restaurant.find({ _id: { $in: restaurants } }, function (err, doc3) {
+                            if (err) {
+                                console.log("Error has occured.");
+                            }
+                            if (doc3) {
+                                console.log("Found restaurants for these filters!");
+                                resultsStr = JSON.parse(JSON.stringify(doc3))
+                                res.send(resultsStr);
+                            }
+                        });
+                    }
+
+                });
+            }
+        });
+    }
 
 });
 

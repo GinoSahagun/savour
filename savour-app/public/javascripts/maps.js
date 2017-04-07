@@ -2,11 +2,9 @@
 var infoWindow;
 var userMarker;
 var marks = [];
-var filters = [];
 
 function initMap() {
     var omh = { lat:47.651395, lng:-122.361466};
-    filters = ["locally-owned", "minority-owned", "environmentally-friendly", "locally-sourced", "vegan-friendly", "disability-friendly"];
 
     if (navigator.geolocation) {
         navigator.geolocation.watchPosition(function (position) {
@@ -117,6 +115,7 @@ function AddMarker(pos, rest) {
     });
 
 }
+<<<<<<< Updated upstream
 
 function AddBubble(str) {
     if (!filters.includes(str)) {
@@ -174,3 +173,5 @@ $(function () {
         }
     });
 });
+=======
+>>>>>>> Stashed changes
