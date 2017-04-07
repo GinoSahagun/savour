@@ -15,14 +15,15 @@ function CreateRow(data) {
 
 $(function () 
 {
+    //Call initial retrieval of restaurants on page load
     retrieveRestaurants();
 });
 
 function AddBubble(str) {
     if (!filters.includes(str)) {
         filters.push(str);
-        clearDash();
-        retrieveRestaurants();
+        clearDash();    //clear restaurant list
+        retrieveRestaurants();  //get new restaurants with applied filters
         $("#bubble-bar").append("<div class='actionBox'>" + str + "</div>");
 
         $(".actionBox").click(function () {
@@ -30,8 +31,8 @@ function AddBubble(str) {
             if (index >= 0) {
                 filters.splice(index, 1);
                 this.remove();
-                clearDash();
-                retrieveRestaurants();
+                clearDash();    //clear restaurant list
+                retrieveRestaurants();  //get new restaurants with applied filters
             }
         });
     }
