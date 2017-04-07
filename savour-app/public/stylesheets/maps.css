@@ -89,7 +89,7 @@ position: static;
       padding: 3px;
   }
   .r-third img{
-      width:80%;
+      height: 25%;
       display: block;
       margin: 0 auto;
     }
@@ -97,23 +97,26 @@ position: static;
       border-style:solid;
       border-width:2px;
       border-color:#cccccc;
-      margin: 0px 15px 0px 15px;
+      margin: 0px 15px 5px 15px;
   }
   .main-filters{
       margin: 0px 15px 0px 15px;
+      padding-left: 25px;
   }
   .mf-icon{
-      width:10%;
+      width:20%;
       display:inline-block;
       float: left;
       text-align: center;
       padding: 3px;
   }
   .mf-icon img{
-      width:35px;
+      height: 25px;
+      display: block;
+      margin: auto;
   }
   .mf-name{
-      width:90%;
+      width:80%;
       display:inline-block;
       float: left;
       text-align: left;
