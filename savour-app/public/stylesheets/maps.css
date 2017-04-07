@@ -77,7 +77,7 @@ position: static;
 
     /* Filter Menu*/
     #filter-menu{
-    /*display:none;*/
+    display:none;
     height: 300px;
     margin-top: 80px;
     }
