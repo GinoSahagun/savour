@@ -11,7 +11,7 @@ $(function () {
 });*/
 
 var tbl;
-
+var bounds;
 function CreateRow(data) {
     if (data._id == null) 
         data._id = "";
@@ -23,7 +23,7 @@ function CreateRow(data) {
 }
 
 
-$(function () 
+$(function ()
 {
     tbl = $("#dashboard-list");
     // Get search data from server
@@ -51,7 +51,7 @@ $(function ()
         console.log("second complete");        
         console.log("res: ", res);
         //create bounds for each marker for right now
-        var bounds = new google.maps.LatLngBounds();
+        bounds = new google.maps.LatLngBounds();
         //var geometry = new google.maps.geometry;
         //console.log(geometry);
         for (d of res) {

@@ -33,7 +33,7 @@
     font-size: 20px;
     width:100%;
     text-align:left;
-    color: #146734;
+    color: #ef6c00;
  }
 
 .dashTable tr:nth-of-type(2n) td {
@@ -52,22 +52,12 @@
 #expanded-times td{
   background-color: #ffffff !important;
     font-size: 20px;
-    color: #146734;
+    color: #ef6c00;
 }
 #restStars{
-    color: #146734;
+    color: #ef6c00;
 }
-#statusmessage{
-    position:fixed;
-    bottom:0;
-    padding:0 5px;
-    line-height:25px;
-    background-color:#eeee99;
-    margin-bottom:-25px;
-    font-weight:bold;
-    left:0;
-    right:0;
-}
+
 .centercolumn{
     margin-left: 5px;
     margin-right: 5px;

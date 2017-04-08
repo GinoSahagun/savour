@@ -63,12 +63,12 @@ $(function () {
     }
     // Perform other work here ...
     //Testing Review Rating for Submition
-    $("#review-rating").rate();
+    
 
     //options example
     var stuff = {
-        max_value: 6,
-        step_size: 0.5,
+        max_value: 5,
+        step_size: 1,
     }
     $("#review-rating").rate(stuff);
     //Test Example of Rating Stars using standard rate
@@ -236,7 +236,7 @@ function getRestaurantData(urlID) {
 
 
             //Bio for restaurants
-            $("#bio").text(res.desc + "👍");
+            $("#bio").text(res.desc);
             $("#address").text(res.address);
 
         })
@@ -277,14 +277,13 @@ function getReviewData(urlID) {
                 var row = CreateRow(data);
                 tbl.append(row);
                 sum += data.rating;
-                $(".rating").rate({ readonly: true, initial_value: data.rating, change_once: true }); //needed for each appended rating
+                $(".rating").rate({ step_size: 1, readonly: true, initial_value: data.rating, change_once: true }); //needed for each appended rating
             }
             if (ratings != 0)
                 avg = sum / ratings;
 
-            $("#restStars").rate({ readonly: false });
             $("#restStars").rate("setValue", avg);
-            $("#restStars").rate({ readonly: true});
+            
 
         })
         .fail(function () {

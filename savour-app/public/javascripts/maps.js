@@ -23,8 +23,12 @@ function initMap() {
                     title: "You are here"
                 });
                 map.setCenter(userPos);
+                bounds.extend(userPos);
+                map.fitBounds(bounds);
             } else {
                 userMarker.setPosition(userPos);
+                bounds.extend(userPos);
+                map.fitBounds(bounds);
             }
         });
     }
@@ -90,13 +94,11 @@ function AddMarker(pos, rest) {
     var contentString = '<div id="content">' +
         '<div id="siteNotice">' +
         '</div>' +
-        '<h5 id="firstHeading" style="white-space: nowrap;" class="firstHeading"><a href=./restaurant?id=' + rest._id + '>' + rest.name +'<a/> </h5>' +
-        '<div id="bodyContent">' +
-        '<p>' + rest.address + '</p>' +
-        '<p><a href='+rest.website+'>'+ rest.name + 's Website'+ '</a>' + '</p>' +
-        '</div class="row" >' +
-        "<img style='width:100px; height: 100px; id='popWin' src="+ rest.image + ">" +
-        '</div>';
+        '<h5 id="firstHeading" style="white-space: nowrap;" class="firstHeading"><a href=./restaurant?id=' + rest._id + '>' + rest.name + '<a/> </h5>' +
+        '<div id="bodyContent" style="text-align:left;">' +
+        "<p>" + rest.phone + "</p>" +
+        '<p>' + rest.address + '</p>';
+        
 
     var infowindow = new google.maps.InfoWindow({
         content: contentString
@@ -110,6 +112,8 @@ function AddMarker(pos, rest) {
             infowindow.open(map, marker);
         }
     })(marker));
+
+
 
 
     var listener = google.maps.event.addListener(map, "idle", function () {
