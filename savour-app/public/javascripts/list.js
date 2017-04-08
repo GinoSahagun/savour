@@ -1,6 +1,7 @@
 ﻿
 var tbl;
-var filters = [];
+var tags = [];
+var mainFilters = ["locally-owned", "minority-owned", "environmentally-friendly", "locally-sourced", "vegan-friendly", "disability-friendly"];
 
 function CreateRow(data) {
     if (data._id == null) 
@@ -20,19 +21,21 @@ $(function ()
 });
 
 function AddBubble(str) {
-    if (!filters.includes(str)) {
-        filters.push(str);
+    var taggg = str.replace(" ", "-").toLowerCase();
+    if (!tags.includes(taggg)) {
+        tags.push(taggg);
         clearDash();    //clear restaurant list
-        retrieveRestaurants();  //get new restaurants with applied filters
+        retrieveRestaurants();  //get new restaurants with applied tags
         $("#bubble-bar").append("<div class='actionBox'>" + str + "</div>");
 
+        // Remove tag
         $(".actionBox").click(function () {
-            var index = filters.indexOf(this.innerText);
+            var index = tags.indexOf(this.innerText.replace(" ","-").toLowerCase());
             if (index >= 0) {
-                filters.splice(index, 1);
+                tags.splice(index, 1);
                 this.remove();
                 clearDash();    //clear restaurant list
-                retrieveRestaurants();  //get new restaurants with applied filters
+                retrieveRestaurants();  //get new restaurants with applied tags
             }
         });
     }
@@ -71,21 +74,25 @@ $(function () {
     });
 
     $(".hotBox").click(function () {
-        if (this.classList.contains("inactive")) {
-            this.classList.remove("inactive")
+        if (this.classList.contains("inactive")) {            
+            this.classList.remove("inactive");
+            mainFilters.push(this.innerText);
         }
         else {
-            this.classList.add("inactive")
+            this.classList.add("inactive");
+            var index = mainFilters.indexOf(this.innerText.replace(" ", "-").toLowerCase());
+            if (index >= 0) {
+                mainFilters.splice(index, 1);
+                retrieveRestaurants();  //get new restaurants with applied tags
+            }
         }
     });
 });
 
 function retrieveRestaurants() {
-
-    filters = ["locally-owned", "minority-owned", "environmentally-friendly", "locally-sourced", "vegan-friendly", "disability-friendly"];
     tbl = $("#dashboard-list");
     // Get search data from server
-    var jqxhr = $.getJSON("search-data", { filters: filters }, function () {
+    var jqxhr = $.getJSON("search-data", { filters: mainFilters, tags: tags }, function () {
         console.log("success");
     })
         .done(function () {
