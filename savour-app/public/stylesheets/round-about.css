@@ -9,6 +9,9 @@
 
 
 }
+.centercolumn{
+    color: #146734;
+}
 #review-list {
    margin-bottom: 0px;
     width: 100%;
@@ -52,12 +55,14 @@
 #expanded-times td{
   background-color: #ffffff !important;
     font-size: 20px;
-    color: #ef6c00;
+    color: #146734;
 }
 #restStars{
     color: #ef6c00;
 }
-
+.rating{
+    color: #ef6c00;
+}
 .centercolumn{
     margin-left: 5px;
     margin-right: 5px;

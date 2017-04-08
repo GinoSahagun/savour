@@ -7,7 +7,7 @@
                     <!--Restaurant Image Row-->
                     <div class="row" style="overflow:hidden">
                         <div class="col-sm-2"> </div>
-                        <div class="col-sm-8" style="width:80%;height:auto; margin: 0 auto;">
+                        <div class="col-sm-8" style="width:75%;height:auto; margin: 0 auto;">
                             <!-- Start Body -->
                             <img id="restImage" src="http://placehold.it/200x200" class="img img-center img-circle" alt="">
                         </div>
@@ -42,8 +42,6 @@
                             <div id="restStars" style="margin:auto;"></div>
                         </div>
                         <div class="col-sm-2"> </div>
-                        
-
                     </div>
                     <!--Day and Times-->
                     <div class="row">
@@ -69,7 +67,16 @@
                         <div class="col-sm-2"> </div>
 
                     </div>
-                    
+                    <!--Filters-->
+                    <div class="row">
+
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8">
+                            <p class="text-center"> <span id="filters"></span></p>
+                        </div>
+                        <div class="col-sm-2"> </div>
+
+                    </div>
                     <!--Description-->
                     <div class="row">
 
@@ -129,6 +136,15 @@
            
         </form>
         <div class="divider"></div>
+
+        <div id="review-none" class="row" style="display:none;">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <h1 class="text-center">No Reviews Write The First One</h1>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
         <!--Creation of Review List -->
         <div id="review-list" class="dashTable"></div>
 

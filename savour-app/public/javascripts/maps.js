@@ -107,7 +107,7 @@ function AddMarker(pos, rest) {
         position: pos,
         map: map
     });
-    google.maps.event.addListener(marker, 'click', (function (marker) {
+    google.maps.event.addListener(marker, "click", (function (marker) {
         return function () {
             infowindow.open(map, marker);
         }

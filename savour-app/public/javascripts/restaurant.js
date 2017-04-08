@@ -238,6 +238,7 @@ function getRestaurantData(urlID) {
             //Bio for restaurants
             $("#bio").text(res.desc);
             $("#address").text(res.address);
+            $("#phone").text(res.phone);
 
         })
         .fail(function () {
@@ -279,6 +280,16 @@ function getReviewData(urlID) {
                 sum += data.rating;
                 $(".rating").rate({ step_size: 1, readonly: true, initial_value: data.rating, change_once: true }); //needed for each appended rating
             }
+
+            if (len == 0) {
+                if ($("#review-none").css("display") == "none") {
+                    document.getElementById("review-none").style.display = "block";
+                }
+            }
+            else {
+                document.getElementById("review-none").style.display = "none";
+            }
+
             if (ratings != 0)
                 avg = sum / ratings;
 
@@ -299,7 +310,8 @@ function getFilterData(urlID) {
     $.getJSON("filters-get", { id: urlID })
         .done(function (data) {
             console.log(data);
-   
+
+            var temp;
             //For each filter, retrieve the name
             for (var i = 0; i < data.length; i++)
             {
@@ -307,6 +319,7 @@ function getFilterData(urlID) {
                     .always(function (name) {
                         console.log(name.responseText);
                         filterArray.push(name.responseText);
+                        $("#filters").append(name.responseText + " ");
                     });
             }
            
