@@ -1,5 +1,4 @@
-﻿
-var attempt = 3; // Variable to count number of attempts.
+﻿var attempt = 3; // Variable to count number of attempts.
 // Below function Executes on click of login button.
 function validate() {
     var username = document.getElementById("username").value;
@@ -7,7 +6,8 @@ function validate() {
     if (true) {
         window.location = "admin"; // Redirecting to other page.
         return false;
-    } else {
+    }
+    else {
         //attempt--;// Decrementing by one.
         alert("You have left " + attempt + " attempt;");
         // Disabling fields after 3 attempts.

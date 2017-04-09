@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function() {
+﻿$(document).ready(function () {
     //stick in the fixed 100% height behind the navbar but don't wrap it
     $("#slide-nav.navbar-inverse").after($("<div class='inverse' id='navbar-height-col'></div>"));
 
@@ -13,7 +12,7 @@ $(document).ready(function() {
     var menuneg = "-100%";
     var slideneg = "-250px";
 
-    $("#slide-nav").on("click", toggler, function(e) {
+    $("#slide-nav").on("click", toggler, function (e) {
         var selected = $(this).hasClass("slide-active");
 
         $("#slidemenu").stop().animate({
@@ -41,11 +40,11 @@ $(document).ready(function() {
         $("#dashboard-list").toggleClass("invisible");
 
     });
-
+    
     var selected = "#slidemenu, #page-content, body, .navbar, .navbar-header";
 
 
-    $(window).on("resize", function() {
+    $(window).on("resize", function () {
 
         if ($(window).width() > 767 && $(".navbar-toggle").is(":hidden")) {
             $(selected).removeClass("slide-active");

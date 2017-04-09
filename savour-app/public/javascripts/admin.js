@@ -1,32 +1,33 @@
-﻿ //Document Ready Function
-$(document).ready(function() {
+﻿//Document Ready Function
+$(document).ready(function () {
 
     //function load for span tags
-    $(function() {
+    $(function () {
 
         // Assign handlers immediately after making the request,
         // and remember the jqxhr object for this request
         // Get Json from Search Data get Function
-        var jqxhr = $.getJSON("search-data", function() {
-                console.log("success");
-            })
-            .done(function() {
+        var jqxhr = $.getJSON("search-data", function () {
+            console.log("success");
+        })
+            .done(function () {
                 console.log("second success");
             })
-            .fail(function() {
+            .fail(function () {
                 console.log("error");
             })
-            .always(function() {
+            .always(function () {
                 console.log("complete");
             });
 
         // Set another completion function for the request above
-        jqxhr.done(function(parsedResponse, statusText, jqXhr) {
+        jqxhr.done(function (parsedResponse, statusText, jqXhr) {
             var res;
             //Recievd Response Text as JSON hopefully
             if (typeof parsedResponse === "string") {
                 res = parsedResponse;
-            } else {
+            }
+            else {
                 res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operation as its already a json object response
             }
 
@@ -35,20 +36,20 @@ $(document).ready(function() {
                 $(".list").append(newRow);
             }
 
-            $(".toggle-more-less").click(function() {
+            $(".toggle-more-less").click(function () {
                 $(this).closest("figure").find("figcaption").toggleClass("show"); //toggle the restaurant's details
             });
 
             function CreateRow(data) {
                 var row = "<figure><button class=\"toggle-more-less\">" + data.name + "</button><figcaption>";
                 row += "Name: <input type=\"text\" class=\"name\" value=\"" + data.name + "\"disabled><br>";
-                row += "Description: <input type=\"text\" class=\"description\" value=\"" + data.desc + "\"disabled><br>";
+                row += "Description: <input type=\"text\" class=\"description\" value=\"" + data.desc +"\"disabled><br>";
                 row += "Rating: <span><input type=\"text\" class=\"rating\" value=\"" + data.rating + "\"disabled><br>";
                 row += "Price: <span><input type=\"text\" class=\"pricing\" value=\"" + data.pricing + "\"disabled><br>";
                 row += "Address: <input type=\"text\" class=\"address\" value=\"" + data.address + "\"disabled><br>";
                 var hours = JSON.stringify(data.hours);
                 hours = hours.replace(/\"/g, "'");
-                row += "Hours: <input type=\"text\" class=\"hours\" value=\"" + hours + "\"disabled><br>"; //Need to display all hours!!!
+                row += "Hours: <input type=\"text\" class=\"hours\" value=\"" + hours + "\"disabled><br>";  //Need to display all hours!!!
                 row += "Location: <input type=\"text\" class=\"location\" value=\"" + data.location.LAT + ", " + data.location.LON + "\"disabled><br>";
                 row += "Phone: <input type=\"text\" class=\"phone\" value=\"" + data.phone + "\"disabled><br>";
                 row += "Website: <input type=\"text\" class=\"website\" value=\"" + data.website + "\"disabled><br>";
@@ -60,7 +61,7 @@ $(document).ready(function() {
                 return row;
             }
 
-            $(".delete").click(function() {
+            $(".delete").click(function () {
                 var choice = confirm("Are you sure you want to delete this restaurant?");
                 if (choice == true) {
                     //Get closest restaurant ID
@@ -70,22 +71,20 @@ $(document).ready(function() {
                     $.ajax({
                         url: "./delete-restaurant",
                         type: "POST",
-                        data: {
-                            rest: id
-                        }
-                    }).done(function() {
+                        data: { rest: id }
+                    }).done(function () {
                         console.log("Restaurant Deleted");
                         location.reload();
                     });
                 }
             });
 
-            $(".edit").click(function() {
+            $(".edit").click(function () {
                 $("input").prop("disabled", false);
                 $(".save").prop("disabled", false);
             });
 
-            $(".save").click(function() {
+            $(".save").click(function () {
                 $("input").prop("disabled", true);
                 $(".save").prop("disabled", true);
 
@@ -93,20 +92,20 @@ $(document).ready(function() {
                 var updatedRest = new RestaurantClass();
 
                 //Call ajax method to update restaurant
-                $.ajax({
-                    url: "./update-restaurant",
-                    type: "POST",
-                    data: updatedRest,
-                }).done(function() {
-                    console.log("Restaurant Updated");
-                    toastr.success("Restaurant Updated!");
-                });
+                 $.ajax({
+                     url: "./update-restaurant",
+                     type: "POST",
+                     data: updatedRest,
+                 }).done(function () {
+                     console.log("Restaurant Updated");
+                     toastr.success("Restaurant Updated!");
+                 });
             });
 
         });
     });
 
-
+ 
 });
 
 function LatLon(str) {

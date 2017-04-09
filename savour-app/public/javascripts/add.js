@@ -1,4 +1,4 @@
-﻿ // JS File for adding a new Restaurant etc. to the database.
+﻿// JS File for adding a new Restaurant etc. to the database.
 var filters = ["locally-owned", "minority-owned", "environmentally-friendly", "locally-sourced", "vegan-friendly", "disability-friendly"];
 var geocoder;
 
@@ -8,12 +8,10 @@ function GetDayJSON(day) {
     response += $("#" + day.toLowerCase() + "-close").val() + "\"";
     return response;
 }
-
 function firstTimeSelection(day, hrs) {
-    $("#" + day.toLowerCase() + "-open").val(hrs + " AM");
-    $("#" + day.toLowerCase() + "-close").val(hrs + " PM");
+     $("#" + day.toLowerCase() + "-open").val(hrs + " AM");
+     $("#" + day.toLowerCase() + "-close").val(hrs + " PM");
 }
-
 function GetHours() {
     var hrs = "{";
     hrs += GetDayJSON("SUN") + ",";
@@ -55,32 +53,26 @@ function calcLoc() {
         return false;
     }
 
-    geocoder.geocode({
-        "address": address,
-        componentRestrictions: {
-            administrativeArea: "WA",
-            country: "US"
-        }
-    }, function(results, status) {
-        if (status == "OK") {
-            console.log(results.length);
-            //validate by if the user finds more queries return false if its only one and not Washington then its a true address
-            if (results[0].formatted_address == "Washington, USA" || results.length > 1) {
-                flag = false;
-                return false;
+        geocoder.geocode({ "address": address, componentRestrictions: { administrativeArea: "WA", country: "US" } }, function (results, status) {
+            if (status == "OK") {
+                console.log(results.length);
+                //validate by if the user finds more queries return false if its only one and not Washington then its a true address
+                if (results[0].formatted_address == "Washington, USA" || results.length > 1) {
+                    flag = false;
+                    return false;
+                }
+                console.log(results);
+                console.log("LAT LON calculated");
+                $("#address").val(results[0].formatted_address);
+                $("#lat").val(results[0].geometry.location.lat());
+                $("#lon").val(results[0].geometry.location.lng());
+                $("#location-div").show();
+                $("#addressButton").text("Update Location");
+                flag = true;
+                return true;            }
+            else {
+                alert("Geocode was not successful for the following reason: " + status);
             }
-            console.log(results);
-            console.log("LAT LON calculated");
-            $("#address").val(results[0].formatted_address);
-            $("#lat").val(results[0].geometry.location.lat());
-            $("#lon").val(results[0].geometry.location.lng());
-            $("#location-div").show();
-            $("#addressButton").text("Update Location");
-            flag = true;
-            return true;
-        } else {
-            alert("Geocode was not successful for the following reason: " + status);
-        }
     });
     return true;
 }
@@ -94,49 +86,46 @@ function submitform() {
     }
     calcLoc();
     if (flag) {
-        //Image Upload + rest.image link
-        if ($("#uploaded").attr('src') != "") {
-            rest.image = $("#uploaded").attr('src');
+    //Image Upload + rest.image link
+    if ($("#uploaded").attr('src') != "") {
+        rest.image = $("#uploaded").attr('src');
         }
-        filters.push($("#restType option:selected").text());
-        var filterStr = filters.toString();
-        console.log(rest);
-        //Add Restaurant Data
+    filters.push($("#restType option:selected").text());
+    var filterStr = filters.toString();
+    console.log(rest);
+    //Add Restaurant Data
         $.ajax({
             url: "./add",
             type: "POST",
             data: JSON.parse(JSON.stringify(rest)),
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 console.log("could not post data");
                 window.alert("Could not add Restaurant");
             },
-            success: function() {
+            success: function () {
                 $.ajax({
                     url: "./filters-add",
                     type: "POST",
-                    data: {
-                        rest: JSON.parse(JSON.stringify(rest)),
-                        filter: filterStr
-                    }
-                }).done(function() {
-                    toastr.success("Filters Added", function() {
-                        console.log("Filters Added");
-                        window.location = "./..";
-                    });
+                    data: { rest: JSON.parse(JSON.stringify(rest)), filter: filterStr }
+                }).done(function () {
+                  toastr.success("Filters Added", function () {
+                    console.log("Filters Added");
+                    window.location = "./..";
+                  });
                 });
             }
-        }).done(function() {
-            toastr.success("Restaurant Added", function() {
+        }).done(function () {
+            toastr.success("Restaurant Added", function () {
                 window.location = "./..";
             });
 
         });
-    } else {
+    }
+    else {
         toastr.error("Please Verify Address");
         $("#address").focus();
     }
 }
-
 function validatePhone() {
     var reg = "^\\((\\d{3})\\)\\s(\\d{3})-(\\d{4})$";
     var regex = new RegExp(reg, "gm");
@@ -144,14 +133,14 @@ function validatePhone() {
     return regex.test(temp);
 }
 
-$(function() {
+$(function () {
     //Loading GIF
     $body = $("body");
 
-    $(window).ajaxStart(function() {
+    $(window).ajaxStart(function () {
         $body.addClass("loading");
     });
-    $(window).ajaxStop(function() {
+    $(window).ajaxStop(function () {
         $body.removeClass("loading");
     });
 
@@ -169,9 +158,9 @@ $(function() {
     });
 
     //Automation of Timers
-    $("#sun-open").timepicker('option', 'change', function(time) {
+    $("#sun-open").timepicker('option', 'change', function (time) {
         // update startTime option in all time pickers
-
+        
         $.confirm({
             title: 'Copy Hours?',
             backgroundDismiss: false,
@@ -179,7 +168,7 @@ $(function() {
             backgroundDismissAnimation: 'glow',
             content: 'Copy Hours Into Other Time Inputs?',
             buttons: {
-                confirm: function() {
+                confirm: function () {
                     var hrs = $("#sun-open").val().split(" ");
                     console.log(hrs);
                     firstTimeSelection("SUN", hrs[0]);
@@ -190,13 +179,13 @@ $(function() {
                     firstTimeSelection("FRI", hrs[0]);
                     firstTimeSelection("SAT", hrs[0]);
                 },
-                cancel: function() {}
+                cancel: function () {}
             }
         });
     });
 
     //re-format
-    $("#phone").focusout(function() {
+    $("#phone").focusout(function () {
         var temp = $(this).val();
         if ($("#phone").val().length == 10) {
             temp = temp.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
@@ -208,11 +197,10 @@ $(function() {
     // with credentials available on
     // your Cloudinary account dashboard
     $.cloudinary.config({
-        cloud_name: 'savoursip',
-        api_key: '738137753563181'
+        cloud_name: 'savoursip', api_key: '738137753563181'
     });
 
-    $("#upload-file").change(function() {
+    $("#upload-file").change(function () {
         readURL(this);
     });
 
@@ -248,11 +236,11 @@ $(function() {
     //set up for rating stars
     $("#starRating").rate(options);
 
-    $("#submitButton").click(function() {
+    $("#submitButton").click(function () {
         submitform();
     });
-    $("#addressButton").click(function() {
-        calcLoc();
+    $("#addressButton").click(function () {
+     calcLoc();
     });
 });
 
@@ -264,34 +252,33 @@ function Search() {
     $.ajax({
         url: "./addFilter",
         type: "POST",
-        data: {
-            filter: val
-        }
-    }).done(function() {
+        data: { filter: val }
+    }).done(function () {
         console.log(val + " added to database");
     });
 }
 
 // On Page Load
-$(function() {
-    $("#addFilter").click(function() {
+$(function () {
+    $("#addFilter").click(function () {
         $("#hot-bar-add").toggle();
     });
-    $("#search-button").click(function() {
+    $("#search-button").click(function () {
         Search();
     });
 
-    $(".hotBox").click(function() {
+    $(".hotBox").click(function () {
         var filt = this.innerHTML.toLowerCase().replace(" ", "-");
         if (this.classList.contains("inactive")) {
             this.classList.remove("inactive");
             filters.push(filt);
-        } else {
+        }
+        else {
             this.classList.add("inactive");
             filters.splice(filters.indexOf(filt), 1);
         }
     });
-    $("#filter-search").on('keyup', function(e) {
+    $("#filter-search").on('keyup', function (e) {
         if (e.keyCode == 13) {
             Search();
         }
@@ -303,7 +290,7 @@ function AddBubble(str) {
         filters.push(str);
         $("#bubble-bar").append("<div class='actionBox'>" + str + "</div>");
 
-        $(".actionBox").click(function() {
+        $(".actionBox").click(function () {
             var index = filters.indexOf(this.innerText);
             if (index >= 0) {
                 filters.splice(index, 1);
@@ -312,8 +299,8 @@ function AddBubble(str) {
         });
     }
 }
-//Image Upload Functions
-window.ajaxSuccess = function() {
+//Image Upload Functions 
+window.ajaxSuccess = function () {
     var $body = $("body");
     response = JSON.parse(this.responseText);
     console.log("ajaxSuccess", typeof this.responseText);
@@ -325,7 +312,7 @@ window.ajaxSuccess = function() {
     $body.removeClass("loading");
 
 }
-window.AJAXSubmit = function(formElement) {
+window.AJAXSubmit = function (formElement) {
     console.log("starting AJAXSubmit");
     var $body = $("body");
     var input = $("#upload-file")
@@ -355,7 +342,7 @@ function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             $('#uploaded').attr('src', e.target.result);
         }
 
