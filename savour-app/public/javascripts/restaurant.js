@@ -86,6 +86,17 @@ $(function () {
         step_size: 0.5,
     }
     $("#restStars").rate(settings);
+
+    //On Change Rest Stars
+    $("#restStars").on("change", function (ev, data) {
+        var arg = urlID;
+        console.log(arg);
+        console.log(data.from, data.to);
+
+        updateRating(arg, data.to);
+
+    });
+
     //Create Div Here from Review Write One Button Slide Down and Slide Up
     $("#create-review-button").click(function () {
         if ($("#review-form").is(":hidden")) {
@@ -192,6 +203,8 @@ function createItem(data) {
 
 //Get the Restaurant Data through a JSON Call
 function getRestaurantData(urlID) {
+
+   
     $.getJSON("restaurant-data", { id: urlID })
         .done(function (parsedResponse) {
             
@@ -211,7 +224,7 @@ function getRestaurantData(urlID) {
             //Restuaran Rating Stars
 
             
-            $("#restStars").rate("setValue",res.rating);
+            //$("#restStars").rate("setValue",res.rating);
             //<a href="#serious">serious</A>
             $("#rest-link").append("<a href="+res.website+">Website</a>");
             $("#menu-link").append("<a href="+res.menu+">Menu</a>");
@@ -332,4 +345,16 @@ function getFilterData(urlID) {
            
         });
 
+}
+
+function updateRating(urlID, rating) {
+    //Call ajax method to update restaurant
+    $.ajax({
+        url: "./update-rating",
+        type: "POST",
+        data: {id: urlID, rate: rating }
+    }).done(function () {
+        console.log("Rating Updated");
+        //toastr.success("Rating Updated!");
+    });
 }

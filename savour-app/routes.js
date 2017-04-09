@@ -465,5 +465,19 @@ router.post('/update-restaurant', function (req, res) {
     });
 
 });
+//Update restaurant
+router.post("/update-rating", function (req, res) {
+    var deets = req.body;
+    console.log(deets);
 
+    //Find rest by ID and update in the database
+    restaurant.findByIdAndUpdate(deets.id, { $set: { rating: deets.rate } }, { new: true }, function (err, restaurant) {
+        if (err) return handleError(err);
+        if (restaurant) {
+            console.log("Rating updated");
+            res.send(restaurant);
+        }
+    });
+
+});
 module.exports = router;
