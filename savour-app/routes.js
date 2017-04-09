@@ -146,6 +146,7 @@ router.post('/add', function (req, res) {
             hours: hours,
             pricing: deets.pricing,
             filters: deets.filters,
+            type: deets.type,
             rating: deets.rating,
             address: deets.address,
             category: deets.category,

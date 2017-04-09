@@ -1,28 +1,29 @@
-﻿<!-- maps.html -->
+
+<!-- maps.html -->
 <div id="filter-menu">
     <div class="container type-selector">
         <div class="row">
-            <div class="r-third">
-                <img src="images/assets-3x/cafe.png"/>
+            <div class="r-third cafe" onclick="ToggleType('cafe')">
+                <img src="images/assets-3x/cafe.png" />
             </div>
-            <div class="r-third">
+            <div class="r-third restaurant" onclick="ToggleType('restaurant')">
                 <img src="images/assets-3x/restaurant.png" />
             </div>
-            <div class="r-third">
+            <div class="r-third bar" onclick="ToggleType('bar')">
                 <img src="images/assets-3x/bar.png" />
             </div>
-        </div> 
+        </div>
         <div class="row">
-            <div class="r-third">
+            <div class="r-third cafe" onclick="ToggleType('cafe')">
                 cafes
             </div>
-            <div class="r-third">
+            <div class="r-third restaurant" onclick="ToggleType('restaurant')">
                 restaurants
             </div>
-            <div class="r-third">
+            <div class="r-third bar" onclick="ToggleType('bar')">
                 bars
             </div>
-        </div>       
+        </div>
     </div>
     <div class="sort-by row">
         <div class="r-third">
@@ -36,66 +37,66 @@
         </div>
     </div>
     <div class="main-filters">
-            <div class="row">
-                <div class="mf-icon">
-                    <img src="images/assets/house.png" />
-                </div>
-                <div class="mf-name">
-                    locally owned
-                </div>                
+        <div class="row">
+            <div class="mf-icon locally-owned" onclick="ToggleFilter('locally-owned')">
+                <img src="images/assets/house.png" />
             </div>
-            <div class="row">
-                <div class="mf-icon">
-                    <img src="images/assets/person.png" />
-                </div>
-                <div class="mf-name">
-                    women/POC owned
-                </div>
+            <div class="mf-name locally-owned" onclick="ToggleFilter('locally-owned')">
+                locally owned
             </div>
-            <div class="row">
-                <div class="mf-icon">
-                    <img src="images/assets/tree.png" />
-                </div>
-                <div class="mf-name">
-                    low environmental impact
-                </div>
+        </div>
+        <div class="row">
+            <div class="mf-icon minority-owned" onclick="ToggleFilter('minority-owned')">
+                <img src="images/assets/person.png" />
             </div>
-            <div class="row">
-                <div class="mf-icon">
-                    <img src="images/assets/flower.png" />
-                </div>
-                <div class="mf-name">
-                    locally sourced
-                </div>
+            <div class="mf-name minority-owned" onclick="ToggleFilter('minority-owned')">
+                women/POC owned
             </div>
-            <div class="row">
-                <div class="mf-icon">
-                    <img src="images/assets/carrot.png" />
-                </div>
-                <div class="mf-name">
-                    vegan friendly
-                </div>
+        </div>
+        <div class="row">
+            <div class="mf-icon environmentally-friendly" onclick="ToggleFilter('environmentally-friendly')">
+                <img src="images/assets/tree.png" />
             </div>
-            <div class="row">
-                <div class="mf-icon">
-                    <img src="images/assets/disability.png" />
-                </div>
-                <div class="mf-name">
-                    disability friendly
-                </div>
+            <div class="mf-name environmentally-friendly" onclick="ToggleFilter('environmentally-friendly')">
+                low environmental impact
             </div>
+        </div>
+        <div class="row">
+            <div class="mf-icon locally-sourced" onclick="ToggleFilter('locally-sourced')">
+                <img src="images/assets/flower.png" />
+            </div>
+            <div class="mf-name locally-sourced" onclick="ToggleFilter('locally-sourced')">
+                locally sourced
+            </div>
+        </div>
+        <div class="row">
+            <div class="mf-icon vegan-friendly" onclick="ToggleFilter('vegan-friendly')">
+                <img src="images/assets/carrot.png" />
+            </div>
+            <div class="mf-name vegan-friendly" onclick="ToggleFilter('vegan-friendly')">
+                vegan friendly
+            </div>
+        </div>
+        <div class="row">
+            <div class="mf-icon disability-friendly" onclick="ToggleFilter('disability-friendly')">
+                <img src="images/assets/disability.png" />
+            </div>
+            <div class="mf-name disability-friendly" onclick="ToggleFilter('disability-friendly')">
+                disability friendly
+            </div>
+        </div>
     </div>
 </div>
 <div id="map"></div>
 <div id="search-bar">
-        <div class="input-group">
-            <input id="filter-search" type="text" class="form-control search-form" placeholder="search">
-            <span class="input-group-btn">
+    <div class="input-group">
+        <input id="filter-search" type="text" class="form-control search-form" placeholder="search">
+        <span class="input-group-btn">
                 <button id="addFilter" class="btn btn-primary filter-btn">
                     <span>filter</span>
-                </button>
-            </span>
-        </div>        
+        </button>
+        </span>
+    </div>
 </div>
 <div id="bubble-bar"></div>
 <div id="hot-bar">
@@ -108,7 +109,6 @@
 </div>
 
 <!-- Matt has the API Key -->
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi-ncVIncoUwpSGqxxRpR2loOmNB2tp8Y&callback=initMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi-ncVIncoUwpSGqxxRpR2loOmNB2tp8Y&callback=initMap">
 </script>
 <!-- /maps.html -->

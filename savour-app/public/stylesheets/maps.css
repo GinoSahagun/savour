@@ -79,7 +79,7 @@ position: static;
     #filter-menu{
     display:none;
     height: 300px;
-    margin-top: 80px;
+    padding-top: 80px;
     }
   .r-third{
       display:inline-block;
@@ -87,6 +87,7 @@ position: static;
       float: left;
       text-align: center;
       padding: 3px;
+      color:#146734;
   }
   .r-third img{
       height: 25%;
@@ -98,6 +99,7 @@ position: static;
       border-width:2px;
       border-color:#cccccc;
       margin: 0px 15px 5px 15px;
+      color:#146734;
   }
   .main-filters{
       margin: 0px 15px 0px 15px;
@@ -122,5 +124,11 @@ position: static;
       text-align: left;
       vertical-align: middle;
       line-height: 40px;
+      color:#146734;
   }
+  .unselected{
+      color:#cccccc;
+  }
+
+  
   

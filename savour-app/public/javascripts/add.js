@@ -54,6 +54,7 @@ function RestaurantClass() {
     this.hours = GetHours();
     this.pricing = $("#priceRating").rate("getValue");
     this.filters = GetFilters();
+    this.type = $("#restType option:selected").text();
     this.rating = $("#starRating").rate("getValue");
     this.address = $("#address").val();
     this.location = GetLatLon();
@@ -110,7 +111,7 @@ function submitform() {
         if ($("#uploaded").attr('src') != "") {
             rest.image = $("#uploaded").attr('src');
         }
-        tags.push($("#restType option:selected").text());
+        //tags.push($("#restType option:selected").text());
         var tagsOut = tags.toString();
         console.log(rest);
         //Add Restaurant Data

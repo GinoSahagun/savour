@@ -1,5 +1,6 @@
 ﻿var tbl;
 var tags = [];
+var types = ["cafe","restaurant","bar"];
 var mainFilters = ["locally-owned", "minority-owned", "environmentally-friendly", "locally-sourced", "vegan-friendly", "disability-friendly"];
 
 function CreateRow(data) {
@@ -132,4 +133,25 @@ function retrieveRestaurants() {
 
 function clearDash() {
     $("#dashboard-list tr").remove();
+}
+
+function ToggleFilter(filter) {
+    filter = filter.replace(" ", "-").toLowerCase();
+    $("." + filter).toggleClass("unselected");
+    var index = mainFilters.indexOf(filter);
+    if (index >= 0) {
+        mainFilters.splice(index, 1);
+    } else {
+        mainFilters.push(filter);
+    }
+}
+
+function ToggleType(type) {
+    $("." + type).toggleClass("unselected");
+    var index = types.indexOf(type);
+    if (index >= 0) {
+        types.splice(index, 1);
+    } else {
+        types.push(type);
+    }
 }

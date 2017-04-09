@@ -10,6 +10,7 @@ var restaurantSchema = new Schema({
     hours: Object,
     pricing: Number,
     filters: Object,
+    type: String,
     rating: Number,
     address: String,
     category: String,
