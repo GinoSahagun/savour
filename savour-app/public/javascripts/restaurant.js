@@ -47,7 +47,14 @@ $(function () {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
-   
+    //Loading GIF
+    $body = $("body");
+    $(window).ajaxStart(function () {
+        $body.addClass("loading");
+    });
+    $(window).ajaxStop(function () {
+        $body.removeClass("loading");
+    });
     if (urlID) {
 
         getRestaurantData(urlID);
