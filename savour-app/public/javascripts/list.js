@@ -1,33 +1,96 @@
-﻿/*
-$(function () {
-    var tbl = $("#dashboard-list");
+﻿var tbl;
+var tags = [];
+var mainFilters = ["locally-owned", "minority-owned", "environmentally-friendly", "locally-sourced", "vegan-friendly", "disability-friendly"];
 
-    var data = [JSON.parse('{"name":"Curbside", "rating": "****", "desc": "Fairly quick, super cheap, and very very delicious. Staff is very friendly! Definitely a new lunch spot!","id":"58be70523ef171a24f518ab0"}'), JSON.parse('{"name":"El Camion", "rating": "****", "desc": "Fairly quick, super cheap, and very very delicious. Staff is very friendly! Definitely a new lunch spot!", "id":"58b9c9a4bd72fa71b8ba1dad"}'), JSON.parse('{"name":"McDonalds", "rating": "****", "desc": "Fairly quick, super cheap, and very very delicious. Staff is very friendly! Definitely a new lunch spot!"}')];
-
-    for (d of data) {
-        var row = CreateRow(d);
-        tbl.append(row);
-    }
-});*/
-
-var tbl;
-var bounds;
 function CreateRow(data) {
-    if (data._id == null) 
+    if (data._id == null)
         data._id = "";
     var row = "<tr><td><a href=./restaurant?id=" + data._id + "><div class='col-md-10'>";
-    row += data.name + "</div ></td ><td><div class='col-md-2'>" + "<div class = 'rating'></div> "+ "</div></td></a></tr>";
+    row += data.name + "</div ></td ><td><div class='col-md-2'>" + "<div class = 'rating'></div> " + "</div></td></a></tr>";
     row += "<tr><td colspan = '2'><div class='col-md-12'>";
-    row += data.desc + "</div ></td> </tr"; 
+    row += data.desc + "</div ></td> </tr";
     return row;
 }
 
 
-$(function ()
-{
+$(function () {
+    //Call initial retrieval of restaurants on page load
+    retrieveRestaurants();
+});
+
+function AddBubble(str) {
+    var taggg = str.replace(" ", "-").toLowerCase();
+    if (!tags.includes(taggg)) {
+        tags.push(taggg);
+        clearDash();    //clear restaurant list
+        retrieveRestaurants();  //get new restaurants with applied tags
+        $("#bubble-bar").append("<div class='actionBox'>" + str + "</div>");
+
+        // Remove tag
+        $(".actionBox").click(function () {
+            var index = tags.indexOf(this.innerText.replace(" ", "-").toLowerCase());
+            if (index >= 0) {
+                tags.splice(index, 1);
+                this.remove();
+                clearDash();    //clear restaurant list
+                retrieveRestaurants();  //get new restaurants with applied tags
+            }
+        });
+    }
+}
+
+function Search() {
+    var val = $("#filter-search").val();
+
+    //Check to see if filter is in database, apply if found
+    $.getJSON("filter-data", { name: val })
+        .fail(function () {
+            window.alert("Could not find filter, please try a different one.");
+        })
+        .always(function () {
+            console.log("Complete");
+        })
+        .done(function () {
+            //Found filter, add to applied filters
+            AddBubble(val);
+            $("#filter-search").val("");
+        });
+}
+
+$(function () {
+    $("#addFilter").click(function () {
+        $("#hot-bar").toggle();
+    });
+
+    $("#filter-search").on('keyup', function (e) {
+        if (e.keyCode == 13) {
+            Search();
+        }
+    });
+    $("#search-button").click(function () {
+        Search();
+    });
+
+    $(".hotBox").click(function () {
+        if (this.classList.contains("inactive")) {
+            this.classList.remove("inactive");
+            mainFilters.push(this.innerText);
+        }
+        else {
+            this.classList.add("inactive");
+            var index = mainFilters.indexOf(this.innerText.replace(" ", "-").toLowerCase());
+            if (index >= 0) {
+                mainFilters.splice(index, 1);
+                // TODO filtrrrr rests in dsaved from last daters query
+            }
+        }
+    });
+});
+
+function retrieveRestaurants() {
     tbl = $("#dashboard-list");
     // Get search data from server
-    var jqxhr = $.getJSON("search-data", function () {
+    var jqxhr = $.getJSON("search-data", { tags: tags }, function () {
         console.log("success");
     })
         .done(function () {
@@ -48,10 +111,10 @@ $(function ()
         else {
             res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operation as its already a json object response
         }
-        console.log("second complete");        
+        console.log("second complete");
         console.log("res: ", res);
         //create bounds for each marker for right now
-        bounds = new google.maps.LatLngBounds();
+        var bounds = new google.maps.LatLngBounds();
         //var geometry = new google.maps.geometry;
         //console.log(geometry);
         for (d of res) {
@@ -64,6 +127,9 @@ $(function ()
         }
     });
 
-});
 
+}
 
+function clearDash() {
+    $("#dashboard-list tr").remove();
+}

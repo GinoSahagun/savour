@@ -1,5 +1,6 @@
 ﻿// JS File for adding a new Restaurant etc. to the database.
 var filters = ["locally-owned", "minority-owned", "environmentally-friendly", "locally-sourced", "vegan-friendly", "disability-friendly"];
+var tags = [];
 var geocoder;
 
 function GetDayJSON(day) {
@@ -9,8 +10,8 @@ function GetDayJSON(day) {
     return response;
 }
 function firstTimeSelection(day, hrs) {
-     $("#" + day.toLowerCase() + "-open").val(hrs + " AM");
-     $("#" + day.toLowerCase() + "-close").val(hrs + " PM");
+    $("#" + day.toLowerCase() + "-open").val(hrs + " AM");
+    $("#" + day.toLowerCase() + "-close").val(hrs + " PM");
 }
 function GetHours() {
     var hrs = "{";
@@ -30,11 +31,29 @@ function GetLatLon() {
     return response;
 }
 
+function GetFilters() {
+    var a = [((filters.indexOf("locally-owned") >= 0) ? "1" : "0"),
+        ((filters.indexOf("minority-owned") >= 0) ? "1" : "0"),
+        ((filters.indexOf("environmentally-owned") >= 0) ? "1" : "0"),
+        ((filters.indexOf("locally-sourced") >= 0) ? "1" : "0"),
+        ((filters.indexOf("vegan-friendly") >= 0) ? "1" : "0"),
+        ((filters.indexOf("disability-friendly") >= 0) ? "1" : "0")];
+    var f = "{ \"locally-owned\" : \"" + a[0] + "\",";
+    f += "\"minority-owned\" : \"" + a[1] + "\",";
+    f += "\"environmentally-owned\" : \"" + a[2] + "\",";
+    f += "\"locally-sourced\" : \"" + a[3] + "\",";
+    f += "\"vegan-friendly\" : \"" + a[4] + "\",";
+    f += "\"disability-friendly\" : \"" + a[5] + "\"}";
+    var resp = JSON.parse(f);
+    return resp;
+}
+
 function RestaurantClass() {
     this.name = $("#name").val();
     this.phone = $("#phone").val();
     this.hours = GetHours();
     this.pricing = $("#priceRating").rate("getValue");
+    this.filters = GetFilters();
     this.rating = $("#starRating").rate("getValue");
     this.address = $("#address").val();
     this.location = GetLatLon();
@@ -53,26 +72,27 @@ function calcLoc() {
         return false;
     }
 
-        geocoder.geocode({ "address": address, componentRestrictions: { administrativeArea: "WA", country: "US" } }, function (results, status) {
-            if (status == "OK") {
-                console.log(results.length);
-                //validate by if the user finds more queries return false if its only one and not Washington then its a true address
-                if (results[0].formatted_address == "Washington, USA" || results.length > 1) {
-                    flag = false;
-                    return false;
-                }
-                console.log(results);
-                console.log("LAT LON calculated");
-                $("#address").val(results[0].formatted_address);
-                $("#lat").val(results[0].geometry.location.lat());
-                $("#lon").val(results[0].geometry.location.lng());
-                $("#location-div").show();
-                $("#addressButton").text("Update Location");
-                flag = true;
-                return true;            }
-            else {
-                alert("Geocode was not successful for the following reason: " + status);
+    geocoder.geocode({ "address": address, componentRestrictions: { administrativeArea: "WA", country: "US" } }, function (results, status) {
+        if (status == "OK") {
+            console.log(results.length);
+            //validate by if the user finds more queries return false if its only one and not Washington then its a true address
+            if (results[0].formatted_address == "Washington, USA" || results.length > 1) {
+                flag = false;
+                return false;
             }
+            console.log(results);
+            console.log("LAT LON calculated");
+            $("#address").val(results[0].formatted_address);
+            $("#lat").val(results[0].geometry.location.lat());
+            $("#lon").val(results[0].geometry.location.lng());
+            $("#location-div").show();
+            $("#addressButton").text("Update Location");
+            flag = true;
+            return true;
+        }
+        else {
+            alert("Geocode was not successful for the following reason: " + status);
+        }
     });
     return true;
 }
@@ -86,14 +106,14 @@ function submitform() {
     }
     calcLoc();
     if (flag) {
-    //Image Upload + rest.image link
-    if ($("#uploaded").attr('src') != "") {
-        rest.image = $("#uploaded").attr('src');
+        //Image Upload + rest.image link
+        if ($("#uploaded").attr('src') != "") {
+            rest.image = $("#uploaded").attr('src');
         }
-    filters.push($("#restType option:selected").text());
-    var filterStr = filters.toString();
-    console.log(rest);
-    //Add Restaurant Data
+        tags.push($("#restType option:selected").text());
+        var tagsOut = tags.toString();
+        console.log(rest);
+        //Add Restaurant Data
         $.ajax({
             url: "./add",
             type: "POST",
@@ -106,12 +126,12 @@ function submitform() {
                 $.ajax({
                     url: "./filters-add",
                     type: "POST",
-                    data: { rest: JSON.parse(JSON.stringify(rest)), filter: filterStr }
+                    data: { rest: JSON.parse(JSON.stringify(rest)), tags: tagsOut }
                 }).done(function () {
-                  toastr.success("Filters Added", function () {
-                    console.log("Filters Added");
-                    window.location = "./..";
-                  });
+                    toastr.success("Filters Added", function () {
+                        console.log("Filters Added");
+                        window.location = "./..";
+                    });
                 });
             }
         }).done(function () {
@@ -158,15 +178,15 @@ $(function () {
     });
 
     //Automation of Timers
-    $("#sun-open").timepicker('option', 'change', function (time) {
+    $("#sun-open").timepicker("option", "change", function (time) {
         // update startTime option in all time pickers
-        
+
         $.confirm({
-            title: 'Copy Hours?',
+            title: "Copy Hours?",
             backgroundDismiss: false,
-            type: 'green',
-            backgroundDismissAnimation: 'glow',
-            content: 'Copy Hours Into Other Time Inputs?',
+            type: "green",
+            backgroundDismissAnimation: "glow",
+            content: "Copy Hours Into Other Time Inputs?",
             buttons: {
                 confirm: function () {
                     var hrs = $("#sun-open").val().split(" ");
@@ -179,7 +199,7 @@ $(function () {
                     firstTimeSelection("FRI", hrs[0]);
                     firstTimeSelection("SAT", hrs[0]);
                 },
-                cancel: function () {}
+                cancel: function () { }
             }
         });
     });
@@ -197,7 +217,7 @@ $(function () {
     // with credentials available on
     // your Cloudinary account dashboard
     $.cloudinary.config({
-        cloud_name: 'savoursip', api_key: '738137753563181'
+        cloud_name: "savoursip", api_key: "738137753563181"
     });
 
     $("#upload-file").change(function () {
@@ -240,7 +260,7 @@ $(function () {
         submitform();
     });
     $("#addressButton").click(function () {
-     calcLoc();
+        calcLoc();
     });
 });
 
@@ -252,7 +272,7 @@ function Search() {
     $.ajax({
         url: "./addFilter",
         type: "POST",
-        data: { filter: val }
+        data: { tag: val }
     }).done(function () {
         console.log(val + " added to database");
     });
@@ -278,7 +298,7 @@ $(function () {
             filters.splice(filters.indexOf(filt), 1);
         }
     });
-    $("#filter-search").on('keyup', function (e) {
+    $("#filter-search").on("keyup", function (e) {
         if (e.keyCode == 13) {
             Search();
         }
@@ -286,27 +306,27 @@ $(function () {
 });
 
 function AddBubble(str) {
-    if (!filters.includes(str)) {
-        filters.push(str);
+    if (!tags.includes(str)) {
+        tags.push(str);
         $("#bubble-bar").append("<div class='actionBox'>" + str + "</div>");
 
         $(".actionBox").click(function () {
-            var index = filters.indexOf(this.innerText);
+            var index = tags.indexOf(this.innerText);
             if (index >= 0) {
-                filters.splice(index, 1);
+                tags.splice(index, 1);
                 this.remove();
             }
         });
     }
 }
-//Image Upload Functions 
+//Image Upload Functions
 window.ajaxSuccess = function () {
     var $body = $("body");
     response = JSON.parse(this.responseText);
     console.log("ajaxSuccess", typeof this.responseText);
-    document.getElementById('uploaded').setAttribute("src", response["secure_url"]);
-    document.getElementById('uploaded').setAttribute("src", response["secure_url"]);
-    document.getElementById('results').innerText = "Image Preview";
+    document.getElementById("uploaded").setAttribute("src", response["secure_url"]);
+    document.getElementById("uploaded").setAttribute("src", response["secure_url"]);
+    document.getElementById("results").innerText = "Image Preview";
     console.log(response.secure_url);
     toastr.success("Image Uploaded to Cloud");
     $body.removeClass("loading");
@@ -337,13 +357,13 @@ window.AJAXSubmit = function (formElement) {
 }
 
 
-//Prview Image
+//Preview Image
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#uploaded').attr('src', e.target.result);
+            $("#uploaded").attr("src", e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);
