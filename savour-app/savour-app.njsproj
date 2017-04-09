@@ -96,6 +96,7 @@
     <Content Include="public\images\curbside.jpg" />
     <Content Include="public\images\filter.png" />
     <Content Include="public\images\gino.jpg" />
+    <Content Include="public\images\loading.gif" />
     <Content Include="public\images\matt.jpg" />
     <Content Include="public\images\queenanne.jpg" />
     <Content Include="public\images\search.png" />
