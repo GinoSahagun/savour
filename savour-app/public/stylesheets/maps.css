@@ -75,12 +75,12 @@ position: static;
       background-color: #808080;
   }
 
-    /* Filter Menu*/
-    #filter-menu{
-    display:none;
-    height: 300px;
-    padding-top: 80px;
-    }
+/* Filter Menu*/
+   #filter-menu{
+       display:none;
+       height: 300px;
+       padding-top: 80px;
+   }
   .r-third{
       display:inline-block;
       width: 33.33333333%;

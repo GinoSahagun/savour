@@ -60,10 +60,10 @@ function Search() {
 
 $(function () {
     $("#addFilter").click(function () {
-        $("#hot-bar").toggle();
+        $("#filter-menu").slideToggle();
     });
 
-    $("#filter-search").on('keyup', function (e) {
+    $("#filter-search").on("keyup", function (e) {
         if (e.keyCode == 13) {
             Search();
         }
