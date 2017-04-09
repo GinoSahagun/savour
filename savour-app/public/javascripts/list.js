@@ -1,4 +1,5 @@
-﻿/*
+﻿
+/*
 $(function () {
     var tbl = $("#dashboard-list");
 
@@ -12,35 +13,35 @@ $(function () {
 
 var tbl;
 var bounds;
+
 function CreateRow(data) {
-    if (data._id == null) 
+    if (data._id == null)
         data._id = "";
     var row = "<tr><td><a href=./restaurant?id=" + data._id + "><div class='col-md-10'>";
-    row += data.name + "</div ></td ><td><div class='col-md-2'>" + "<div class = 'rating'></div> "+ "</div></td></a></tr>";
+    row += data.name + "</div ></td ><td><div class='col-md-2'>" + "<div class = 'rating'></div> " + "</div></td></a></tr>";
     row += "<tr><td colspan = '2'><div class='col-md-12'>";
-    row += data.desc + "</div ></td> </tr"; 
+    row += data.desc + "</div ></td> </tr";
     return row;
 }
 
 
-$(function ()
-{
+$(function() {
     tbl = $("#dashboard-list");
     // Get search data from server
-    var jqxhr = $.getJSON("search-data", function () {
-        console.log("success");
-    })
-        .done(function () {
+    var jqxhr = $.getJSON("search-data", function() {
+            console.log("success");
+        })
+        .done(function() {
             console.log("second success");
         })
-        .fail(function () {
+        .fail(function() {
             console.log("error");
         })
-        .always(function () {
+        .always(function() {
             console.log("complete");
         });
 
-    jqxhr.done(function (parsedResponse, statusText, jqXhr) {
+    jqxhr.done(function(parsedResponse, statusText, jqXhr) {
         var res;
         // Check for valid
         if (typeof parsedResponse === 'object')
@@ -48,7 +49,7 @@ $(function ()
         else {
             res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operation as its already a json object response
         }
-        console.log("second complete");        
+        console.log("second complete");
         console.log("res: ", res);
         //create bounds for each marker for right now
         bounds = new google.maps.LatLngBounds();
@@ -60,10 +61,12 @@ $(function ()
             map.fitBounds(bounds);
             var row = CreateRow(d);
             tbl.append(row);
-            $('.rating').rate({ readonly: true, initial_value: d.rating, change_once: true }); //needed for each appended rating
+            $('.rating').rate({
+                readonly: true,
+                initial_value: d.rating,
+                change_once: true
+            }); //needed for each appended rating
         }
     });
 
 });
-
-

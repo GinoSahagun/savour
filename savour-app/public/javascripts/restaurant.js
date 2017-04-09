@@ -1,18 +1,18 @@
 ﻿
 
 //Extend the Date Function
-(function () {
+(function() {
     var days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    Date.prototype.getMonthName = function () {
+    Date.prototype.getMonthName = function() {
         return months[this.getMonth()];
     };
-    Date.prototype.getDayName = function () {
+    Date.prototype.getDayName = function() {
         return days[this.getDay()];
     };
-    Date.prototype.getDayNum = function () {
+    Date.prototype.getDayNum = function() {
         return this.getDay();
     };
 })();
@@ -24,7 +24,7 @@ var dayValue = now.getDayNum();
 var filterArray = [];
 
 //Document Ready Function
-$(function () {
+$(function() {
     var holdURL = window.location.href;
     // Assign handlers immediately after making the request,
     // and remember the jqxhr object for this request
@@ -49,10 +49,10 @@ $(function () {
     }
     //Loading GIF
     $body = $("body");
-    $(window).ajaxStart(function () {
+    $(window).ajaxStart(function() {
         $body.addClass("loading");
     });
-    $(window).ajaxStop(function () {
+    $(window).ajaxStop(function() {
         $body.removeClass("loading");
     });
     if (urlID) {
@@ -61,16 +61,15 @@ $(function () {
         getReviewData(urlID);
         getFilterData(urlID);
 
-    }
-    else {
+    } else {
         //Pop Up a status message
         //redirect to home page if no ID was passed
-        
+
         window.location.href = "/";
     }
     // Perform other work here ...
     //Testing Review Rating for Submition
-    
+
 
     //options example
     var stuff = {
@@ -87,22 +86,21 @@ $(function () {
     }
     $("#restStars").rate(settings);
     //Create Div Here from Review Write One Button Slide Down and Slide Up
-    $("#create-review-button").click(function () {
+    $("#create-review-button").click(function() {
         if ($("#review-form").is(":hidden")) {
             $("#review-form").slideDown("slow");
-        }
-        else {
+        } else {
             $("#review-form").slideUp("slow");
         }
     });
     //Submit Form for a Creation of a review
-    $("#submit-button").click(function () {
+    $("#submit-button").click(function() {
         submitform(urlID);
         return false;
     });
 
     //toggle Hours table
-    $("#times").click(function () {
+    $("#times").click(function() {
         if ($(".table-responsive").css('display') == 'none') {
             document.getElementById("times").style.display = "none";
         }
@@ -115,8 +113,8 @@ $(function () {
             $(".table-responsive").toggle();
         }
     });
- });
-    
+});
+
 //Submit Form
 function submitform(urlID) {
     var rest = new reviewClass();
@@ -127,12 +125,12 @@ function submitform(urlID) {
         url: "./restaurant",
         type: "POST",
         data: json,
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.status);
             console.log("Could not post data");
             window.alert("Could not add Review");
         }
-    }).done(function () {
+    }).done(function() {
         //stay on the current page, let user know it worked, and slide up form
         //console.log(holdURL);
         //window.location = holdURL;
@@ -177,7 +175,7 @@ function CreateRow(data) {
     row += "<tr><td colspan = '2'><div class='col-md-12'>";
     row += data.review + "</div ></td> </tr";
     //adjust the rate of it when created nvm wont work
-    
+
     return row;
 }
 
@@ -187,14 +185,16 @@ function createItem(data) {
     var item = "<tr><td> " + data[0] + "</td><td>" + " " + data[1] + "</td></tr>";
 
 
-   return item;
+    return item;
 }
 
 //Get the Restaurant Data through a JSON Call
 function getRestaurantData(urlID) {
-    $.getJSON("restaurant-data", { id: urlID })
-        .done(function (parsedResponse) {
-            
+    $.getJSON("restaurant-data", {
+            id: urlID
+        })
+        .done(function(parsedResponse) {
+
             var res;
             //Recievd Response Text as JSON hopefully
             if (typeof parsedResponse === 'string')
@@ -202,7 +202,7 @@ function getRestaurantData(urlID) {
             else {
                 res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operaton as its already a json object response
             }
-           
+
 
             //Restaurant Image
             $('#restImage').attr('src', res.image);
@@ -210,11 +210,11 @@ function getRestaurantData(urlID) {
             $("#restName").text(res.name);
             //Restuaran Rating Stars
 
-            
-            $("#restStars").rate("setValue",res.rating);
+
+            $("#restStars").rate("setValue", res.rating);
             //<a href="#serious">serious</A>
-            $("#rest-link").append("<a href="+res.website+">Website</a>");
-            $("#menu-link").append("<a href="+res.menu+">Menu</a>");
+            $("#rest-link").append("<a href=" + res.website + ">Website</a>");
+            $("#menu-link").append("<a href=" + res.menu + ">Menu</a>");
 
             var result = [];
             //convert JSON hours into array
@@ -223,15 +223,14 @@ function getRestaurantData(urlID) {
 
             console.log(result);
             $("#times").text(result[dayValue][0] + " " + result[dayValue][1]);
-            $("#expanded-times").append("<tr><td style='font-weight: bold;'>" + result[dayValue][0] + "<td style='font-weight: bold;'>"
-                + result[dayValue][1] + "</td></td></tr>");
+            $("#expanded-times").append("<tr><td style='font-weight: bold;'>" + result[dayValue][0] + "<td style='font-weight: bold;'>" +
+                result[dayValue][1] + "</td></td></tr>");
             //look through all of the keys in hours
             var count = 0;
-            Object.keys(res.hours).forEach(function (k) {
+            Object.keys(res.hours).forEach(function(k) {
                 if (k === day) {
                     count++;
-                }
-                else {
+                } else {
                     var item = createItem(result[count]);
                     //console.log(item);
                     $("#expanded-times").append(item);
@@ -248,10 +247,10 @@ function getRestaurantData(urlID) {
             $("#phone").text(res.phone);
 
         })
-        .fail(function () {
+        .fail(function() {
             console.log("error");
         })
-        .always(function () {
+        .always(function() {
             console.log("complete");
         });
 
@@ -260,9 +259,11 @@ function getRestaurantData(urlID) {
 function getReviewData(urlID) {
 
     //Test using 58c64e8b90ffbe4bcc94080e
-    $.getJSON("review-data", { id: urlID })
-        .done(function (parsedResponse) {
-          
+    $.getJSON("review-data", {
+            id: urlID
+        })
+        .done(function(parsedResponse) {
+
             var ratings = 0;
             var sum = 0;
             var avg = 0;
@@ -273,27 +274,31 @@ function getReviewData(urlID) {
             else {
                 res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operaton as its already a json object response
             }
-            
+
             //reload json stuff here
             var len = res.length;
             var tbl = $("#review-list");
             $("#review-list tr").remove();
-            
+
             //Create Table of Review List
             for (var data of res) {
                 ratings++;
                 var row = CreateRow(data);
                 tbl.append(row);
                 sum += data.rating;
-                $(".rating").rate({ step_size: 1, readonly: true, initial_value: data.rating, change_once: true }); //needed for each appended rating
+                $(".rating").rate({
+                    step_size: 1,
+                    readonly: true,
+                    initial_value: data.rating,
+                    change_once: true
+                }); //needed for each appended rating
             }
 
             if (len == 0) {
                 if ($("#review-none").css("display") == "none") {
                     document.getElementById("review-none").style.display = "block";
                 }
-            }
-            else {
+            } else {
                 document.getElementById("review-none").style.display = "none";
             }
 
@@ -301,35 +306,38 @@ function getReviewData(urlID) {
                 avg = sum / ratings;
 
             $("#restStars").rate("setValue", avg);
-            
+
 
         })
-        .fail(function () {
+        .fail(function() {
             console.log("error");
         })
-        .always(function () {
+        .always(function() {
             console.log("complete");
         });
 }
 
 //Get the Filter Data through a JSON Call
-function getFilterData(urlID) {    
-    $.getJSON("filters-get", { id: urlID })
-        .done(function (data) {
+function getFilterData(urlID) {
+    $.getJSON("filters-get", {
+            id: urlID
+        })
+        .done(function(data) {
             console.log(data);
 
             var temp;
             //For each filter, retrieve the name
-            for (var i = 0; i < data.length; i++)
-            {
-                $.getJSON("filter-name-get", { filterID : data[i] })
-                    .always(function (name) {
+            for (var i = 0; i < data.length; i++) {
+                $.getJSON("filter-name-get", {
+                        filterID: data[i]
+                    })
+                    .always(function(name) {
                         console.log(name.responseText);
                         filterArray.push(name.responseText);
                         $("#filters").append(name.responseText + " ");
                     });
             }
-           
+
         });
 
 }

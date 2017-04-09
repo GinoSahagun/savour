@@ -1,11 +1,14 @@
-﻿//var ObjectId = require("mongodb").ObjectId; //create instance of Object ID
+﻿ //var ObjectId = require("mongodb").ObjectId; //create instance of Object ID
 //Document Ready Function
-var userPos = {lat: 47.651395, lng: -122.361466};
-$(function () {
+var userPos = {
+    lat: 47.651395,
+    lng: -122.361466
+};
+$(function() {
     // Assign handlers immediately after making the request,
     // and remember the jqxhr object for this request
     if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(function (position) {
+        navigator.geolocation.watchPosition(function(position) {
             userPos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
@@ -15,8 +18,10 @@ $(function () {
         window.alert("Turn on Geolocation!");
     }
 
-    $.getJSON("neighborhood-data", {location: userPos})
-        .fail(function () {
+    $.getJSON("neighborhood-data", {
+            location: userPos
+        })
+        .fail(function() {
             //Default to Queen Anne
             //Neighborhood name
             $("#neighborhoodName").text("No neighborhood found, so here's Queen Anne!");
@@ -31,9 +36,9 @@ $(function () {
             window.alert("Could not get neighborhood.");
             console.log("Error - Could not retrieve neighborhood");
         })
-        .always(function () {
+        .always(function() {
             console.log("Complete");
-        }).done(function (parsedResponse, statusText, jqXhr) {
+        }).done(function(parsedResponse, statusText, jqXhr) {
             var res;
             //Recievd Response Text as JSON
             if (typeof parsedResponse === Object) {
