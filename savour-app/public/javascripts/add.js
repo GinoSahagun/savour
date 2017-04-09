@@ -1,5 +1,6 @@
-﻿ // JS File for adding a new Restaurant etc. to the database.
+﻿// JS File for adding a new Restaurant etc. to the database.
 var filters = ["locally-owned", "minority-owned", "environmentally-friendly", "locally-sourced", "vegan-friendly", "disability-friendly"];
+var tags = [];
 var geocoder;
 
 function GetDayJSON(day) {
@@ -8,12 +9,10 @@ function GetDayJSON(day) {
     response += $("#" + day.toLowerCase() + "-close").val() + "\"";
     return response;
 }
-
 function firstTimeSelection(day, hrs) {
     $("#" + day.toLowerCase() + "-open").val(hrs + " AM");
     $("#" + day.toLowerCase() + "-close").val(hrs + " PM");
 }
-
 function GetHours() {
     var hrs = "{";
     hrs += GetDayJSON("SUN") + ",";
@@ -32,11 +31,29 @@ function GetLatLon() {
     return response;
 }
 
+function GetFilters() {
+    var a = [((filters.indexOf("locally-owned") >= 0) ? "1" : "0"),
+        ((filters.indexOf("minority-owned") >= 0) ? "1" : "0"),
+        ((filters.indexOf("environmentally-owned") >= 0) ? "1" : "0"),
+        ((filters.indexOf("locally-sourced") >= 0) ? "1" : "0"),
+        ((filters.indexOf("vegan-friendly") >= 0) ? "1" : "0"),
+        ((filters.indexOf("disability-friendly") >= 0) ? "1" : "0")];
+    var f = "{ \"locally-owned\" : \"" + a[0] + "\",";
+    f += "\"minority-owned\" : \"" + a[1] + "\",";
+    f += "\"environmentally-owned\" : \"" + a[2] + "\",";
+    f += "\"locally-sourced\" : \"" + a[3] + "\",";
+    f += "\"vegan-friendly\" : \"" + a[4] + "\",";
+    f += "\"disability-friendly\" : \"" + a[5] + "\"}";
+    var resp = JSON.parse(f);
+    return resp;
+}
+
 function RestaurantClass() {
     this.name = $("#name").val();
     this.phone = $("#phone").val();
     this.hours = GetHours();
     this.pricing = $("#priceRating").rate("getValue");
+    this.filters = GetFilters();
     this.rating = $("#starRating").rate("getValue");
     this.address = $("#address").val();
     this.location = GetLatLon();
@@ -55,13 +72,7 @@ function calcLoc() {
         return false;
     }
 
-    geocoder.geocode({
-        "address": address,
-        componentRestrictions: {
-            administrativeArea: "WA",
-            country: "US"
-        }
-    }, function(results, status) {
+    geocoder.geocode({ "address": address, componentRestrictions: { administrativeArea: "WA", country: "US" } }, function (results, status) {
         if (status == "OK") {
             console.log(results.length);
             //validate by if the user finds more queries return false if its only one and not Washington then its a true address
@@ -78,7 +89,8 @@ function calcLoc() {
             $("#addressButton").text("Update Location");
             flag = true;
             return true;
-        } else {
+        }
+        else {
             alert("Geocode was not successful for the following reason: " + status);
         }
     });
@@ -98,45 +110,42 @@ function submitform() {
         if ($("#uploaded").attr('src') != "") {
             rest.image = $("#uploaded").attr('src');
         }
-        filters.push($("#restType option:selected").text());
-        var filterStr = filters.toString();
+        tags.push($("#restType option:selected").text());
+        var tagsOut = tags.toString();
         console.log(rest);
         //Add Restaurant Data
         $.ajax({
             url: "./add",
             type: "POST",
             data: JSON.parse(JSON.stringify(rest)),
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 console.log("could not post data");
                 window.alert("Could not add Restaurant");
             },
-            success: function() {
+            success: function () {
                 $.ajax({
                     url: "./filters-add",
                     type: "POST",
-                    data: {
-                        rest: JSON.parse(JSON.stringify(rest)),
-                        filter: filterStr
-                    }
-                }).done(function() {
-                    toastr.success("Filters Added", function() {
+                    data: { rest: JSON.parse(JSON.stringify(rest)), tags: tagsOut }
+                }).done(function () {
+                    toastr.success("Filters Added", function () {
                         console.log("Filters Added");
                         window.location = "./..";
                     });
                 });
             }
-        }).done(function() {
-            toastr.success("Restaurant Added", function() {
+        }).done(function () {
+            toastr.success("Restaurant Added", function () {
                 window.location = "./..";
             });
 
         });
-    } else {
+    }
+    else {
         toastr.error("Please Verify Address");
         $("#address").focus();
     }
 }
-
 function validatePhone() {
     var reg = "^\\((\\d{3})\\)\\s(\\d{3})-(\\d{4})$";
     var regex = new RegExp(reg, "gm");
@@ -144,14 +153,14 @@ function validatePhone() {
     return regex.test(temp);
 }
 
-$(function() {
+$(function () {
     //Loading GIF
     $body = $("body");
 
-    $(window).ajaxStart(function() {
+    $(window).ajaxStart(function () {
         $body.addClass("loading");
     });
-    $(window).ajaxStop(function() {
+    $(window).ajaxStop(function () {
         $body.removeClass("loading");
     });
 
@@ -169,17 +178,17 @@ $(function() {
     });
 
     //Automation of Timers
-    $("#sun-open").timepicker('option', 'change', function(time) {
+    $("#sun-open").timepicker("option", "change", function (time) {
         // update startTime option in all time pickers
 
         $.confirm({
-            title: 'Copy Hours?',
+            title: "Copy Hours?",
             backgroundDismiss: false,
-            type: 'green',
-            backgroundDismissAnimation: 'glow',
-            content: 'Copy Hours Into Other Time Inputs?',
+            type: "green",
+            backgroundDismissAnimation: "glow",
+            content: "Copy Hours Into Other Time Inputs?",
             buttons: {
-                confirm: function() {
+                confirm: function () {
                     var hrs = $("#sun-open").val().split(" ");
                     console.log(hrs);
                     firstTimeSelection("SUN", hrs[0]);
@@ -190,13 +199,13 @@ $(function() {
                     firstTimeSelection("FRI", hrs[0]);
                     firstTimeSelection("SAT", hrs[0]);
                 },
-                cancel: function() {}
+                cancel: function () { }
             }
         });
     });
 
     //re-format
-    $("#phone").focusout(function() {
+    $("#phone").focusout(function () {
         var temp = $(this).val();
         if ($("#phone").val().length == 10) {
             temp = temp.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
@@ -208,11 +217,10 @@ $(function() {
     // with credentials available on
     // your Cloudinary account dashboard
     $.cloudinary.config({
-        cloud_name: 'savoursip',
-        api_key: '738137753563181'
+        cloud_name: "savoursip", api_key: "738137753563181"
     });
 
-    $("#upload-file").change(function() {
+    $("#upload-file").change(function () {
         readURL(this);
     });
 
@@ -248,10 +256,10 @@ $(function() {
     //set up for rating stars
     $("#starRating").rate(options);
 
-    $("#submitButton").click(function() {
+    $("#submitButton").click(function () {
         submitform();
     });
-    $("#addressButton").click(function() {
+    $("#addressButton").click(function () {
         calcLoc();
     });
 });
@@ -264,34 +272,33 @@ function Search() {
     $.ajax({
         url: "./addFilter",
         type: "POST",
-        data: {
-            filter: val
-        }
-    }).done(function() {
+        data: { tag: val }
+    }).done(function () {
         console.log(val + " added to database");
     });
 }
 
 // On Page Load
-$(function() {
-    $("#addFilter").click(function() {
+$(function () {
+    $("#addFilter").click(function () {
         $("#hot-bar-add").toggle();
     });
-    $("#search-button").click(function() {
+    $("#search-button").click(function () {
         Search();
     });
 
-    $(".hotBox").click(function() {
+    $(".hotBox").click(function () {
         var filt = this.innerHTML.toLowerCase().replace(" ", "-");
         if (this.classList.contains("inactive")) {
             this.classList.remove("inactive");
             filters.push(filt);
-        } else {
+        }
+        else {
             this.classList.add("inactive");
             filters.splice(filters.indexOf(filt), 1);
         }
     });
-    $("#filter-search").on('keyup', function(e) {
+    $("#filter-search").on("keyup", function (e) {
         if (e.keyCode == 13) {
             Search();
         }
@@ -299,33 +306,33 @@ $(function() {
 });
 
 function AddBubble(str) {
-    if (!filters.includes(str)) {
-        filters.push(str);
+    if (!tags.includes(str)) {
+        tags.push(str);
         $("#bubble-bar").append("<div class='actionBox'>" + str + "</div>");
 
-        $(".actionBox").click(function() {
-            var index = filters.indexOf(this.innerText);
+        $(".actionBox").click(function () {
+            var index = tags.indexOf(this.innerText);
             if (index >= 0) {
-                filters.splice(index, 1);
+                tags.splice(index, 1);
                 this.remove();
             }
         });
     }
 }
 //Image Upload Functions
-window.ajaxSuccess = function() {
+window.ajaxSuccess = function () {
     var $body = $("body");
     response = JSON.parse(this.responseText);
     console.log("ajaxSuccess", typeof this.responseText);
-    document.getElementById('uploaded').setAttribute("src", response["secure_url"]);
-    document.getElementById('uploaded').setAttribute("src", response["secure_url"]);
-    document.getElementById('results').innerText = "Image Preview";
+    document.getElementById("uploaded").setAttribute("src", response["secure_url"]);
+    document.getElementById("uploaded").setAttribute("src", response["secure_url"]);
+    document.getElementById("results").innerText = "Image Preview";
     console.log(response.secure_url);
     toastr.success("Image Uploaded to Cloud");
     $body.removeClass("loading");
 
 }
-window.AJAXSubmit = function(formElement) {
+window.AJAXSubmit = function (formElement) {
     console.log("starting AJAXSubmit");
     var $body = $("body");
     var input = $("#upload-file")
@@ -350,13 +357,13 @@ window.AJAXSubmit = function(formElement) {
 }
 
 
-//Prview Image
+//Preview Image
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
-        reader.onload = function(e) {
-            $('#uploaded').attr('src', e.target.result);
+        reader.onload = function (e) {
+            $("#uploaded").attr("src", e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);

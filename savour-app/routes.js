@@ -11,6 +11,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var app = express();
 
+// VERY BAD DONT DO THIS GLOBAL VARS ON SERVER ES NO BUENO
+var docLength;;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -115,10 +117,9 @@ router.get('/neighborhood-data', function (req, res) {
 });
 
 //Add new filters to database
-
-router.post('/addFilter', function (req, res) {
+router.post("/addFilter", function (req, res) {
     //Insert filter into database
-    addFilter(req.body.filter);
+    addFilter(req.body.tag);
     res.sendStatus(200); //Send the good news
 });
 
@@ -144,6 +145,7 @@ router.post('/add', function (req, res) {
             phone: deets.phone,
             hours: hours,
             pricing: deets.pricing,
+            filters: deets.filters,
             rating: deets.rating,
             address: deets.address,
             category: deets.category,
@@ -173,7 +175,7 @@ router.get("/filter-data", function (req, res) {
 
     var filterName = req.query.name;
     //Query database for filter name
-    filter.findOne({ "name" : filterName }, function (err, filter) {
+    filter.findOne({ "name": filterName }, function (err, filter) {
         if (err) {
             res.send(err);
             return handleError(err);
@@ -189,7 +191,7 @@ router.get("/filter-data", function (req, res) {
 router.post("/filters-add", function (req, res) {
     var restName = req.body["rest[name]"];
     var restAddress = req.body["rest[address]"];
-    var filterStr = req.body.filter;
+    var filterStr = req.body.tags;
     var restId;
 
     restaurant.findOne({ "name": restName, "address": restAddress }, function (err, restaurant) {
@@ -212,7 +214,7 @@ router.post("/filters-add", function (req, res) {
                     return;
                 }
                 if (filter) {
-                   addMatch(restId, filter._id);
+                    addMatch(restId, filter._id);
                 }
                 else {
                     console.log("Filter does not exist: " + thefilter);
@@ -242,7 +244,7 @@ function addMatch(rest, filt) {
 }
 
 function addFilter(filterName) {
-    //Insert filter into database    
+    //Insert filter into database
     filterName = filterName.toLowerCase();
     var tempFilter = new filter({
         name: filterName,
@@ -271,26 +273,26 @@ function addFilter(filterName) {
 }
 
 //Get filter ids from matches
-router.get('/filters-get', function (req, res) {
-    console.log('Getting filters for restaurant...');
+router.get("/filters-get", function (req, res) {
+    console.log("Getting filters for restaurant...");
     var restId = req.query.id;
     var filters = [];
 
     match.find({ "restID": restId }).stream()
-        .on('data', function (doc) {
+        .on("data", function (doc) {
             filters.push(doc.filterID);
         })
-        .on('error', function (err) {
+        .on("error", function (err) {
             // handle error
         })
-        .on('end', function () {
+        .on("end", function () {
             res.send(filters);
         });
 
 });
 
 //Get filter name and return it
-router.get('/filter-name-get', function (req, res) {
+router.get("/filter-name-get", function (req, res) {
     var filterId = req.query.filterID;
 
     filter.find({ "_id": filterId }, function (err, filter) {
@@ -306,12 +308,12 @@ router.get('/filter-name-get', function (req, res) {
 });
 
 //Get restaurant page
-router.get('/restaurant', function (req, res) {
-    res.render('restaurant', { title: 'Restaurant' });
+router.get("/restaurant", function (req, res) {
+    res.render("restaurant", { title: "Restaurant" });
 });
 
 //Post review restaurant page
-router.post('/restaurant', function (req, res) {
+router.post("/restaurant", function (req, res) {
     //Insert data into database test
     var deets = req.body;
     console.log(deets.id + "  -  " + deets.comment);
@@ -335,29 +337,29 @@ router.post('/restaurant', function (req, res) {
     });
 
 });
-//Using load Restaurant Data Function get Json request
-router.get('/restaurant-data', function (req, res) {
-    console.log('Getting Restaurants...');
+//Using load Restaurant Data Function get JSON request
+router.get("/restaurant-data", function (req, res) {
+    console.log("Getting Restaurants...");
     var args = req.query.id;
     var resStr;
-    if (args != "" || args!= null) {
+    if (args != "" || args != null) {
         console.log("id: ", args.id);
         var o_id = mongoose.Types.ObjectId(args); //convert into Object ID
         console.log("obj: ", o_id); //Object Id check
-      
-        //then we query the database for the specifc Object ID
+
+        //then we query the database for the specific Object ID
         restaurant.findById(o_id, function (err, doc) {
             if (err) {
-                console.log("Error Occured");
-                res.send(err + '\nError Has Occurred') //respond with error occured
+                console.log("Error Occurred");
+                res.send(err + '\nError Has Occurred') //respond with error occurred
             }
             else {
-                resStr = JSON.parse(JSON.stringify(doc)); //JsonParse Queried Data                
+                resStr = JSON.parse(JSON.stringify(doc)); //JsonParse Queried Data 
                 res.send(resStr); //send response back
             }
-        });        
+        });
     }
-    
+
 });
 //Using load Restaurant Data Function get Json request
 router.get('/review-data', function (req, res) {
@@ -365,10 +367,10 @@ router.get('/review-data', function (req, res) {
     var args = req.query.id;
     var resStr;
     if (args != "" || args != null) {
-        
-         
+
+
         //then we query the database for the specifc Object ID
-        review.find({ 'id': { $in: args } } ,function (err, doc) {
+        review.find({ 'id': { $in: args } }, function (err, doc) {
             if (err) {
                 console.log("Error Occured");
                 res.send(err + '\nError Has Occurred') //respond with error occured
@@ -385,23 +387,66 @@ router.get('/review-data', function (req, res) {
 
 //Retrieve collections from database
 router.get('/admin', function (req, res) {
-    res.render('admin', { title: 'Administrator'});
+    res.render('admin', { title: 'Administrator' });
 });
 
 //Retrieve collections from database
 router.get('/search-data', function (req, res) {
     console.log('Getting Restaurants...');
-    var resultsStr = [];
-    restaurant.find(function (err, results) {
-        if (err) {
-            console.log('Getting Restaurants...');
-            res.send(err + '\nError Has Occurred')
-        } else {
-            //console.log(results);
-            resultsStr = JSON.parse(JSON.stringify(results))
-            res.send(resultsStr);  
-        }
-    });
+    var activeFilters = req.query.tags;
+    var filterIDs = [];
+    var restaurants = [];
+
+    if (activeFilters == undefined) {
+        restaurant.find(function (err, results) {
+            if (err) {
+                res.send(err + '\nError Has Occurred')
+            } else {
+                //console.log(results);
+                resultsStr = JSON.parse(JSON.stringify(results))
+                res.send(resultsStr);
+            }
+        });
+    }
+    else {
+        //Get filterIDs first
+        filter.find({ name: { $in: activeFilters } }, function (err, doc) {
+            if (err) {
+                console.log("Error has occurred.");
+                res.send(err);
+            }
+            if (doc) {
+                docLength = doc.length;
+                for (var i = 0; i < doc.length; i++) {
+                    filterIDs[i] = doc[i]._id;
+                }
+                //Now search for matches
+                match.find({ filterID: { $in: filterIDs } }, function (err, doc2) {
+                    if (err) {
+                        console.log("Error has occurred.");
+                    }
+                    if (doc2) {
+                        for (var i = 0; i < doc2.length; i++) {
+                            restaurants[i] = doc2[i].restID;
+                        }
+
+                        //Now search for restaurants
+                        restaurant.find({ _id: { $in: restaurants } }, function (err, doc3) {
+                            if (err) {
+                                console.log("Error has occured.");
+                            }
+                            if (doc3) {
+                                console.log("Found restaurants for these filters!");
+                                resultsStr = JSON.parse(JSON.stringify(doc3))
+                                res.send(resultsStr);
+                            }
+                        });
+                    }
+
+                });
+            }
+        });
+    }
 
 });
 
