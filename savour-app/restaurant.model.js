@@ -1,4 +1,4 @@
-﻿var mongoose = require('mongoose');
+﻿var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 //Define Restaurant schema
@@ -16,8 +16,9 @@ var restaurantSchema = new Schema({
     website: String,
     menu: String,
     image: String,
-    owner: String
-}, { collection: 'rest' });
+    owner: String,
+    filters: Object
+}, {collection: "rest"});
 
 //Create Model and export it
-module.exports = mongoose.model('rest', restaurantSchema);
+module.exports = mongoose.model("rest", restaurantSchema);

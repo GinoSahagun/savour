@@ -14,7 +14,7 @@ function CreateRow(data) {
 }
 
 
-$(function () 
+$(function ()
 {
     //Call initial retrieval of restaurants on page load
     retrieveRestaurants();
@@ -83,7 +83,7 @@ $(function () {
             var index = mainFilters.indexOf(this.innerText.replace(" ", "-").toLowerCase());
             if (index >= 0) {
                 mainFilters.splice(index, 1);
-                retrieveRestaurants();  //get new restaurants with applied tags
+                // TODO filtrrrr rests in dsaved from last daters query
             }
         }
     });
@@ -92,7 +92,7 @@ $(function () {
 function retrieveRestaurants() {
     tbl = $("#dashboard-list");
     // Get search data from server
-    var jqxhr = $.getJSON("search-data", { filters: mainFilters, tags: tags }, function () {
+    var jqxhr = $.getJSON("search-data", {tags: tags}, function () {
         console.log("success");
     })
         .done(function () {

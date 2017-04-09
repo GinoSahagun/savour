@@ -11,6 +11,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var app = express();
 
+// VERY BAD DONT DO THIS GLOBAL VARS ON SERVER ES NO BUENO
+var docLength;;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -391,7 +393,7 @@ router.get('/admin', function (req, res) {
 //Retrieve collections from database
 router.get('/search-data', function (req, res) {
     console.log('Getting Restaurants...');
-    var activeFilters = req.query.filters;
+    var activeFilters = req.query.tags;
     var filterIDs = [];
     var restaurants = [];
 
@@ -414,6 +416,7 @@ router.get('/search-data', function (req, res) {
                 res.send(err);
             }
             if (doc) {
+                docLength = doc.length;
                 for (var i = 0; i < doc.length; i++) {
                     filterIDs[i] = doc[i]._id;
                 }
