@@ -1,4 +1,4 @@
-﻿
+﻿var bounds;
 var map;
 var infoWindow;
 var userMarker;
@@ -79,6 +79,7 @@ function initMap() {
             infoWindow.close();
         }
     });
+    bounds = new google.maps.LatLngBounds();
 
 }
 
