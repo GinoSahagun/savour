@@ -117,10 +117,9 @@ router.get('/neighborhood-data', function (req, res) {
 });
 
 //Add new filters to database
-
-router.post('/addFilter', function (req, res) {
+router.post("/addFilter", function (req, res) {
     //Insert filter into database
-    addFilter(req.body.filter);
+    addFilter(req.body.tag);
     res.sendStatus(200); //Send the good news
 });
 
@@ -146,6 +145,7 @@ router.post('/add', function (req, res) {
             phone: deets.phone,
             hours: hours,
             pricing: deets.pricing,
+            filters: deets.filters,
             rating: deets.rating,
             address: deets.address,
             category: deets.category,
@@ -191,7 +191,7 @@ router.get("/filter-data", function (req, res) {
 router.post("/filters-add", function (req, res) {
     var restName = req.body["rest[name]"];
     var restAddress = req.body["rest[address]"];
-    var filterStr = req.body.filter;
+    var filterStr = req.body.tags;
     var restId;
 
     restaurant.findOne({ "name": restName, "address": restAddress }, function (err, restaurant) {
@@ -244,7 +244,7 @@ function addMatch(rest, filt) {
 }
 
 function addFilter(filterName) {
-    //Insert filter into database    
+    //Insert filter into database
     filterName = filterName.toLowerCase();
     var tempFilter = new filter({
         name: filterName,
@@ -273,26 +273,26 @@ function addFilter(filterName) {
 }
 
 //Get filter ids from matches
-router.get('/filters-get', function (req, res) {
-    console.log('Getting filters for restaurant...');
+router.get("/filters-get", function (req, res) {
+    console.log("Getting filters for restaurant...");
     var restId = req.query.id;
     var filters = [];
 
     match.find({ "restID": restId }).stream()
-        .on('data', function (doc) {
+        .on("data", function (doc) {
             filters.push(doc.filterID);
         })
-        .on('error', function (err) {
+        .on("error", function (err) {
             // handle error
         })
-        .on('end', function () {
+        .on("end", function () {
             res.send(filters);
         });
 
 });
 
 //Get filter name and return it
-router.get('/filter-name-get', function (req, res) {
+router.get("/filter-name-get", function (req, res) {
     var filterId = req.query.filterID;
 
     filter.find({ "_id": filterId }, function (err, filter) {
@@ -308,12 +308,12 @@ router.get('/filter-name-get', function (req, res) {
 });
 
 //Get restaurant page
-router.get('/restaurant', function (req, res) {
-    res.render('restaurant', { title: 'Restaurant' });
+router.get("/restaurant", function (req, res) {
+    res.render("restaurant", { title: "Restaurant" });
 });
 
 //Post review restaurant page
-router.post('/restaurant', function (req, res) {
+router.post("/restaurant", function (req, res) {
     //Insert data into database test
     var deets = req.body;
     console.log(deets.id + "  -  " + deets.comment);
@@ -337,9 +337,9 @@ router.post('/restaurant', function (req, res) {
     });
 
 });
-//Using load Restaurant Data Function get Json request
-router.get('/restaurant-data', function (req, res) {
-    console.log('Getting Restaurants...');
+//Using load Restaurant Data Function get JSON request
+router.get("/restaurant-data", function (req, res) {
+    console.log("Getting Restaurants...");
     var args = req.query.id;
     var resStr;
     if (args != "" || args!= null) {
@@ -347,19 +347,19 @@ router.get('/restaurant-data', function (req, res) {
         var o_id = mongoose.Types.ObjectId(args); //convert into Object ID
         console.log("obj: ", o_id); //Object Id check
       
-        //then we query the database for the specifc Object ID
+        //then we query the database for the specific Object ID
         restaurant.findById(o_id, function (err, doc) {
             if (err) {
-                console.log("Error Occured");
-                res.send(err + '\nError Has Occurred') //respond with error occured
+                console.log("Error Occurred");
+                res.send(err + '\nError Has Occurred') //respond with error occurred
             }
             else {
-                resStr = JSON.parse(JSON.stringify(doc)); //JsonParse Queried Data                
+                resStr = JSON.parse(JSON.stringify(doc)); //JsonParse Queried Data 
                 res.send(resStr); //send response back
             }
-        });        
+        });
     }
-    
+
 });
 //Using load Restaurant Data Function get Json request
 router.get('/review-data', function (req, res) {

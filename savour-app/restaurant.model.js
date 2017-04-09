@@ -9,6 +9,7 @@ var restaurantSchema = new Schema({
     phone: String,
     hours: Object,
     pricing: Number,
+    filters: Object,
     rating: Number,
     address: String,
     category: String,
@@ -16,8 +17,7 @@ var restaurantSchema = new Schema({
     website: String,
     menu: String,
     image: String,
-    owner: String,
-    filters: Object
+    owner: String
 }, {collection: "rest"});
 
 //Create Model and export it
