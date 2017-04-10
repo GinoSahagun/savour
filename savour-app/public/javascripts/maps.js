@@ -109,9 +109,9 @@ function AddMarker(pos, rest) {
         }
     })(marker));
 
-
     var listener = google.maps.event.addListener(map, "idle", function () {
         google.maps.event.removeListener(listener);
     });
+    marks.push(marker);
 
 }

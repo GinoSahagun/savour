@@ -2,6 +2,8 @@
 var tags = [];
 var types = ["cafe","restaurant","bar"];
 var mainFilters = ["locally-owned", "minority-owned", "environmentally-friendly", "locally-sourced", "vegan-friendly", "disability-friendly"];
+var restaurants = [];
+var activeRestaurants = [];
 
 function CreateRow(data) {
     if (data._id == null)
@@ -88,6 +90,60 @@ $(function () {
     });
 });
 
+function matchingFilter(rest) {
+    if (rest.filters["locally-owned"] == "1" && mainFilters.indexOf("locally-owned") >= 0) {
+        return true;
+    }
+    if (rest.filters["minority-owned"] == "1" && mainFilters.indexOf("minority-owned") >= 0) {
+        return true;
+    }
+    if (rest.filters["environmentally-friendly"] == "1" && mainFilters.indexOf("environmentally-friendly") >= 0) {
+        return true;
+    }
+    if (rest.filters["locally-sourced"] == "1" && mainFilters.indexOf("locally-sourced") >= 0) {
+        return true;
+    }
+    if (rest.filters["vegan-friendly"] == "1" && mainFilters.indexOf("vegan-friendly") >= 0) {
+        return true;
+    }
+    if (rest.filters["disability-friendly"] == "1" && mainFilters.indexOf("disability-friendly") >= 0) {
+        return true;
+    }
+    return false;
+}
+
+function GetActive(rest){
+    var active = [];
+    for (r of rest) {
+        if (types.indexOf(r.type) < 0) {
+            continue;
+        }
+        if (!matchingFilter(r)) {
+            continue;
+        }
+        active.push(r);
+    }
+    return active;
+}
+
+function UpdateRestaurants() {
+    activeRestaurants = GetActive(restaurants);
+    console.log("Active Restaurants: ", activeRestaurants);
+    clearDash();
+    //create bounds for each marker for right now
+    var bounds = new google.maps.LatLngBounds();
+    //var geometry = new google.maps.geometry;
+    //console.log(geometry);
+    for (d of activeRestaurants) {
+        AddMarker(GooglePOS(d.location), d);
+        bounds.extend(GooglePOS(d.location));
+        map.fitBounds(bounds);
+        var row = CreateRow(d);
+        tbl.append(row);
+        $(".rating").rate({ readonly: true, initial_value: d.rating, change_once: true }); //needed for each appended rating
+    }
+}
+
 function retrieveRestaurants() {
     tbl = $("#dashboard-list");
     // Get search data from server
@@ -113,18 +169,21 @@ function retrieveRestaurants() {
             res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operation as its already a json object response
         }
         console.log("second complete");
-        console.log("res: ", res);
+        restaurants = res;
+        activeRestaurants = GetActive(res);
+        console.log("Active Restaurants: ", activeRestaurants);
+
         //create bounds for each marker for right now
         var bounds = new google.maps.LatLngBounds();
         //var geometry = new google.maps.geometry;
         //console.log(geometry);
-        for (d of res) {
+        for (d of activeRestaurants) {
             AddMarker(GooglePOS(d.location), d);
             bounds.extend(GooglePOS(d.location));
             map.fitBounds(bounds);
             var row = CreateRow(d);
             tbl.append(row);
-            $('.rating').rate({ readonly: true, initial_value: d.rating, change_once: true }); //needed for each appended rating
+            $(".rating").rate({ readonly: true, initial_value: d.rating, change_once: true }); //needed for each appended rating
         }
     });
 
@@ -144,6 +203,7 @@ function ToggleFilter(filter) {
     } else {
         mainFilters.push(filter);
     }
+    UpdateRestaurants();
 }
 
 function ToggleType(type) {
@@ -154,4 +214,5 @@ function ToggleType(type) {
     } else {
         types.push(type);
     }
+    UpdateRestaurants();
 }
