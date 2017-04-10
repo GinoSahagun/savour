@@ -1,134 +1,169 @@
 ﻿
 #map {
-height: 100%;
-width: 100%;
-position: static;
+    height: calc(100% - 250px);
+    width: 100%;
+    margin-top:30px;
+    -webkit-transition:  height .5s, margin .5s; /* Safari */
+    transition:  height .5s, margin .5s;
 }
+
+/* Remove text at bottom of maps */
+a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
+
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+    display:none;
+}
+.gmnoprint div {
+    background:none !important;
+}
+
 #search-bar {
-  position: absolute;
-  top: 55px;
-  left: 25px;
-  right:25px;
+    position: absolute;
+    top: 55px;
+    left: 25px;
+    right: 25px;
 }
+
 #search-bar {
-  z-index: 100;
+    z-index: 100;
 }
+
 #bubble-bar {
-  position: absolute;
-  top: 95px;
-  left: 25px;
-  right:25px;
+    position: absolute;
+    top: 95px;
+    left: 25px;
+    right: 25px;
 }
+
 #bubble-bar {
-  z-index: 80;
+    z-index: 80;
 }
+
 #hot-bar {
-  position: absolute;
-  top: 95px;
-  right:5px;
-  width:200px;
-  display: none;
+    position: absolute;
+    top: 95px;
+    right: 5px;
+    width: 200px;
+    display: none;
 }
+
 #hot-bar-add {
-  position: absolute;
-  bottom: 105px;
-  right:5px;
-  width:200px;
-  display: none;
-  z-index: 100;
+    position: absolute;
+    bottom: 105px;
+    right: 5px;
+    width: 200px;
+    display: none;
+    z-index: 100;
 }
+
 #hot-bar {
-  z-index: 100;
+    z-index: 100;
 }
 /*SEARCH FORM*/
 .search-form {
     border-radius: 5px 5px 5px 5px !important;
     /*border-radius:Top-left, Top-right, Bottom-right, Bottom-left;*/
 }
- .search-btn {
+
+.search-btn {
     border-radius: 0px 5px 5px 0px !important;
-    cursor:pointer;
+    cursor: pointer;
 }
- .filter-btn{
-     border-radius: 5px 5px 5px 5px !important;
-     cursor:pointer;
-     margin-left:15px !important;
- }
- .actionBox{
-  display:inline-block;
-  padding: 5px;
-  background-color: #cc6632;
-  color:#ffffff;
-  margin: 1px;
-  border-radius: 5px;
+
+.filter-btn {
+    border-radius: 5px 5px 5px 5px !important;
+    cursor: pointer;
+    margin-left: 15px !important;
 }
-  .hotBox{
-  display:inline-block;
-  padding: 5px;
-  background-color: #146734;
-  color:#ffffff;
-  margin: 1px;
-  border-radius: 5px;
-  float:right;
+
+.actionBox {
+    display: inline-block;
+    padding: 5px;
+    background-color: #cc6632;
+    color: #ffffff;
+    margin: 1px;
+    border-radius: 5px;
 }
-  .inactive{
-      background-color: #808080;
-  }
+
+.hotBox {
+    display: inline-block;
+    padding: 5px;
+    background-color: #146734;
+    color: #ffffff;
+    margin: 1px;
+    border-radius: 5px;
+    float: right;
+}
+
+.inactive {
+    background-color: #808080;
+}
 
 /* Filter Menu*/
-   #filter-menu{
-       display:none;
-       height: 300px;
-       padding-top: 80px;
-   }
-  .r-third{
-      display:inline-block;
-      width: 33.33333333%;
-      float: left;
-      text-align: center;
-      padding: 3px;
-      color:#146734;
-  }
-  .r-third img{
-      height: 25%;
-      display: block;
-      margin: 0 auto;
-    }
-  .sort-by{
-      border-style:solid;
-      border-width:2px;
-      border-color:#cccccc;
-      margin: 0px 15px 5px 15px;
-      color:#146734;
-  }
-  .main-filters{
-      margin: 0px 15px 0px 15px;
-      padding-left: 25px;
-  }
-  .mf-icon{
-      width:20%;
-      display:inline-block;
-      float: left;
-      text-align: center;
-      padding: 3px;
-  }
-  .mf-icon img{
-      height: 25px;
-      display: block;
-      margin: auto;
-  }
-  .mf-name{
-      width:80%;
-      display:inline-block;
-      float: left;
-      text-align: left;
-      vertical-align: middle;
-      line-height: 40px;
-      color:#146734;
-  }
-  .unselected{
-      color:#cccccc;
-  }
+#filter-menu {
+    display: none;
+    background-color: White;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-top: 100px;
+    z-index: 90;
+}
 
-  
-  
+.r-third {
+    display: inline-block;
+    width: 33.33333333%;
+    float: left;
+    text-align: center;
+    padding: 3px;
+    color: #146734;
+}
+
+    .r-third img {
+        height: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+
+.sort-by {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #cccccc;
+    margin: 0px 15px 5px 15px;
+    color: #146734;
+}
+
+.main-filters {
+    margin: 0px 15px 0px 15px;
+    padding-left: 25px;
+}
+
+.mf-icon {
+    width: 20%;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    padding: 3px;
+}
+
+    .mf-icon img {
+        height: 25px;
+        display: block;
+        margin: auto;
+    }
+
+.mf-name {
+    width: 80%;
+    display: inline-block;
+    float: left;
+    text-align: left;
+    vertical-align: middle;
+    line-height: 40px;
+    color: #146734;
+}
+
+.unselected {
+    color: #cccccc;
+}

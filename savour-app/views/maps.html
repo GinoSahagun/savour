@@ -1,8 +1,20 @@
 ﻿
 <!-- maps.html -->
+<div id="map"></div>
+<div id="search-bar">
+    <div class="input-group">
+        <input id="filter-search" type="text" class="form-control search-form" placeholder="search">
+        <span class="input-group-btn">
+            <button id="addFilter" class="btn btn-primary filter-btn">
+                <span>filter</span>
+            </button>
+        </span>
+    </div>
+</div>
+<div id="bubble-bar"></div>
 <div id="filter-menu">
     <div class="container type-selector">
-        <div class="row">
+        <div class="row" style="height:80px">
             <div class="r-third cafe" onclick="ToggleType('cafe')">
                 <img src="images/assets-3x/cafe.png" />
             </div>
@@ -87,19 +99,6 @@
         </div>
     </div>
 </div>
-<div id="map"></div>
-<div id="search-bar">
-    <div class="input-group">
-        <input id="filter-search" type="text" class="form-control search-form" placeholder="search">
-        <span class="input-group-btn">
-                <button id="addFilter" class="btn btn-primary filter-btn">
-                    <span>filter</span>
-        </button>
-        </span>
-    </div>
-</div>
-<div id="bubble-bar"></div>
-
 <!-- Matt has the API Key -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi-ncVIncoUwpSGqxxRpR2loOmNB2tp8Y&callback=initMap">
 </script>

@@ -59,7 +59,8 @@ function initMap() {
         zoom: 13,
         center: omh,
         disableDefaultUI: true,
-        mapTypeId: "mapStyle"
+        mapTypeId: "mapStyle",
+        gestureHandling: 'greedy'
     });
     map.mapTypes.set("mapStyle", new google.maps.StyledMapType(mapStyle, { name: "Map Style" }));
     google.maps.event.addListener(map, "click", function () {

@@ -60,9 +60,26 @@ function Search() {
         });
 }
 
+function ToggleScreen() {
+    if ($("#filter-menu").css("display") == "block") {
+        $("#map").css("height", "calc(100% - 250px)");
+        $("#map").css("margin-top", "30");
+    }
+    else {
+        $("#map").css("height", "calc(100% - 490px)");
+        $("#map").css("margin-top", "470px");
+    }
+    $("#filter-menu").slideToggle();
+    $(".navbar-fixed-bottom").slideToggle();
+    // Notify maps that the size changed after its done changing sizes
+    setTimeout(function () {
+        google.maps.event.trigger(map, "resize");
+    }, 500);
+}
+
 $(function () {
     $("#addFilter").click(function () {
-        $("#filter-menu").slideToggle();
+        ToggleScreen();
     });
 
     $("#filter-search").on("keyup", function (e) {
@@ -215,4 +232,11 @@ function ToggleType(type) {
         types.push(type);
     }
     UpdateRestaurants();
+}
+
+function ToggleListBar() {
+    $(".navbar-fixed-bottom").toggleClass("small-listbar");
+    if ($("#filter-menu").css("display") == "block") {
+        $("#filter-menu").toggle();
+    }
 }

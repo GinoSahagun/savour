@@ -11,8 +11,9 @@ body.slide-active {
 }
 /*wrap the entire page content but not nav inside this div if not a fixed top, don't add any top padding */
 #page-content {
-    position: relative;
-    left: 0;
+    height:100%;
+    width:100%;
+    overflow:hidden;
 }
 #page-content.slide-active {
     padding-top: 0
