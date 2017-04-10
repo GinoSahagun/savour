@@ -3,8 +3,8 @@
     height: calc(100% - 250px);
     width: 100%;
     margin-top:30px;
-    -webkit-transition:  height .5s, margin .5s; /* Safari */
-    transition:  height .5s, margin .5s;
+    -webkit-transition:  margin .5s; /* Safari */
+    transition:  margin .5s;
 }
 
 /* Remove text at bottom of maps */

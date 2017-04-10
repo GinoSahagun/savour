@@ -63,17 +63,26 @@ function Search() {
 function ToggleScreen() {
     if ($("#filter-menu").css("display") == "block") {
         $("#map").css("height", "calc(100% - 250px)");
+        google.maps.event.trigger(map, "resize");
         $("#map").css("margin-top", "30");
+        map.fitBounds(bounds);
     }
     else {
-        $("#map").css("height", "calc(100% - 490px)");
         $("#map").css("margin-top", "470px");
+        map.fitBounds(bounds);
+        setTimeout(function () {
+            $("#map").css("height", "calc(100% - 490px)");
+            google.maps.event.trigger(map, "resize");
+            map.panToBounds(bounds);
+        }, 500);
     }
     $("#filter-menu").slideToggle();
     $(".navbar-fixed-bottom").slideToggle();
     // Notify maps that the size changed after its done changing sizes
+    //map.fitBounds(bounds);
     setTimeout(function () {
         google.maps.event.trigger(map, "resize");
+        //map.fitBounds(bounds);
     }, 500);
 }
 
@@ -148,7 +157,7 @@ function UpdateRestaurants() {
     console.log("Active Restaurants: ", activeRestaurants);
     clearDash();
     //create bounds for each marker for right now
-    var bounds = new google.maps.LatLngBounds();
+    bounds = new google.maps.LatLngBounds();
     //var geometry = new google.maps.geometry;
     //console.log(geometry);
     for (d of activeRestaurants) {
@@ -191,7 +200,7 @@ function retrieveRestaurants() {
         console.log("Active Restaurants: ", activeRestaurants);
 
         //create bounds for each marker for right now
-        var bounds = new google.maps.LatLngBounds();
+        bounds = new google.maps.LatLngBounds();
         //var geometry = new google.maps.geometry;
         //console.log(geometry);
         for (d of activeRestaurants) {

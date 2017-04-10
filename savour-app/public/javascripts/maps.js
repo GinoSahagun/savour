@@ -2,6 +2,7 @@
 var infoWindow;
 var userMarker;
 var marks = [];
+var bounds;
 
 function initMap() {
     var omh = { lat: 47.651395, lng: -122.361466 };
@@ -68,7 +69,7 @@ function initMap() {
             infoWindow.close();
         }
     });
-
+    bounds = new google.maps.LatLngBounds();
 }
 
 // Converts the JSON object we're using in mongodb to a google latlng
