@@ -44,8 +44,7 @@ function GetFilters() {
     f += "\"locally-sourced\" : \"" + a[3] + "\",";
     f += "\"vegan-friendly\" : \"" + a[4] + "\",";
     f += "\"disability-friendly\" : \"" + a[5] + "\"}";
-    var resp = JSON.parse(f);
-    return resp;
+    return f;
 }
 
 function RestaurantClass() {

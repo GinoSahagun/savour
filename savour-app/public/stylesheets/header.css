@@ -13,7 +13,7 @@ body.slide-active {
 #page-content {
     height:100%;
     width:100%;
-    overflow:hidden;
+    /*overflow:hidden;*/
 }
 #page-content.slide-active {
     padding-top: 0

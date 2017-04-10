@@ -138,6 +138,7 @@ router.post('/add', function (req, res) {
     try {
         var location = JSON.parse(deets.location);
         var hours = JSON.parse(deets.hours);
+        var filters = JSON.parse(deets.filters);
 
         var tempRest = new restaurant({
             name: deets.name,
@@ -145,7 +146,7 @@ router.post('/add', function (req, res) {
             phone: deets.phone,
             hours: hours,
             pricing: deets.pricing,
-            filters: deets.filters,
+            filters: filters,
             type: deets.type,
             rating: deets.rating,
             address: deets.address,
