@@ -100,8 +100,13 @@ function calcLoc() {
 function submitform() {
     var rest = new RestaurantClass();
     if (!(validatePhone())) {
-        toastr.error("Verify Phone Number");
+        toastr.error("Enter Valid Phone Number");
         $("#phone").focus();
+        return false;
+    }
+    if (filters.length <= 0) {
+        toastr.error("Please Select at least one Filter. Green == Selected");
+        $("#hot-bar-add").toggle();
         return false;
     }
     calcLoc();
