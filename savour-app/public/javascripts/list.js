@@ -165,6 +165,7 @@ function UpdateRestaurants() {
     bounds = new google.maps.LatLngBounds();
     //var geometry = new google.maps.geometry;
     //console.log(geometry);
+    ClearMarkers()
     for (d of activeRestaurants) {
         AddMarker(GooglePOS(d.location), d);
         bounds.extend(GooglePOS(d.location));

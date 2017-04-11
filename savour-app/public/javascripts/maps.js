@@ -1,7 +1,7 @@
 ﻿var map;
 var infoWindow;
 var userMarker;
-var marks = [];
+var markers = [];
 var bounds;
 
 function initMap() {
@@ -83,7 +83,13 @@ function GooglePOS(jsonPos) {
         return new google.maps.LatLng();
     }
 }
-
+function ClearMarkers() {
+    var mtest;
+    while (markers.length > 0) {
+        mtest = markers.pop();
+        mtest.setMap(null);
+    }
+}
 function AddMarker(pos, rest) {
     // TODO validation
     //Create Html Part of Info Windows
@@ -98,7 +104,7 @@ function AddMarker(pos, rest) {
         "<img style='width:100px; height: 100px; id='popWin' src=" + rest.image + ">" +
         '</div>';
 
-    var infowindow = new google.maps.InfoWindow({
+    infoWindow = new google.maps.InfoWindow({
         content: contentString
     });
     var marker = new google.maps.Marker({
@@ -107,13 +113,13 @@ function AddMarker(pos, rest) {
     });
     google.maps.event.addListener(marker, 'click', (function (marker) {
         return function () {
-            infowindow.open(map, marker);
+            infoWindow.open(map, marker);
         }
     })(marker));
 
     var listener = google.maps.event.addListener(map, "idle", function () {
         google.maps.event.removeListener(listener);
     });
-    marks.push(marker);
+    markers.push(marker);
 
 }
