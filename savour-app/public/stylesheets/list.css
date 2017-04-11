@@ -59,3 +59,9 @@
     max-height: 50px;
     overflow: hidden;
 }
+
+.filter-img{
+    height:35px;
+    display:block;
+    margin:0;
+}
