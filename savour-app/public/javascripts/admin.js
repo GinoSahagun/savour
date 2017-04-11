@@ -57,7 +57,8 @@ $(document).ready(function () {
                 row += "Image: <input type=\"text\" class=\"image\" value=\"" + data.image + "\"disabled><br>";
                 row += "<h6 class = \"id\">Restaurant ID: " + data._id + "</h6>";
                 row += "<button id=\"delete\" class=\"delete\"> Delete </button> <button class=\"edit\"> Edit </button>";
-                row += "<button class=\"save\" disabled> Save </button> </figcaption ></figure > ";
+                row += "<button class=\"save\" disabled> Save </button>";
+                row += /*"<form id=\"imageForm\" action=\"\" method=\"post\" enctype=\"multipart/form-data\" onsubmit=\"AJAXSubmit(this); return false;\"><fieldset><p><label style=\"display:none;\" for=\"upload_preset\">Unsigned upload Preset: <input id=\"upload-preset\" type=\"text\" name=\"upload_preset\" value=\"abssk3w2\">(set it <a href=\"https://cloudinary.com/console/settings/upload#upload_presets\">here</a>)</label></p><p><label>Select your photo:<input id=\"upload-file\" type=\"file\" name=\"file\"></label></p><p><input class=\"btn btn-primary\" type=\"submit\" value=\"Upload to Cloud\" /></p><img class=\"img-thumbnail\" style=\"width: 175px; height: 175px; \" id=\"uploaded\"><div id=\"results\"></div></fieldset></form>*/"</figcaption ></figure > ";
                 return row;
             }
 
