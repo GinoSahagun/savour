@@ -51,3 +51,11 @@
     text-align:center;
 }
 
+.list-desc{
+    max-height: 55px;
+    overflow: hidden;
+}
+.list-title{
+    max-height: 50px;
+    overflow: hidden;
+}

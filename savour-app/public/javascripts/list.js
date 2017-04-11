@@ -8,10 +8,15 @@ var activeRestaurants = [];
 function CreateRow(data) {
     if (data._id == null)
         data._id = "";
-    var row = "<tr><td><a href=./restaurant?id=" + data._id + "><div class='col-md-10'>";
+    var desc = data.desc;
+    if (desc.length > 115) {
+        desc = desc.substr(0, 115);
+        desc += "... <a href=./restaurant?id=" + data._id + ">Read More</a>";
+    }
+    var row = "<tr><td><a href=./restaurant?id=" + data._id + "><div class='col-md-10 list-title'>";
     row += data.name + "</div ></td ><td><div class='col-md-2'>" + "<div class = 'rating'></div> " + "</div></td></a></tr>";
-    row += "<tr><td colspan = '2'><div class='col-md-12'>";
-    row += data.desc + "</div ></td> </tr";
+    row += "<tr><td colspan = '2'><div class='col-md-12 list-desc'>";
+    row += desc + "</div ></td> </tr";
     return row;
 }
 
