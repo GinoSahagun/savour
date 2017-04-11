@@ -33,11 +33,9 @@
 
         $(this).toggleClass("slide-active", !selected);
         $("#slidemenu").toggleClass("slide-active");
-
-
         $("#page-content, .navbar, body, .navbar-header").toggleClass("slide-active");
 
-        $("#dashboard-list").toggleClass("invisible");
+        //$("#dashboard-list").toggleClass("invisible");
 
     });
     
@@ -45,7 +43,6 @@
 
 
     $(window).on("resize", function () {
-
         if ($(window).width() > 767 && $(".navbar-toggle").is(":hidden")) {
             $(selected).removeClass("slide-active");
         }

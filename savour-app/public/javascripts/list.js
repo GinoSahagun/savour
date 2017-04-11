@@ -77,7 +77,7 @@ function ToggleScreen() {
         }, 500);
     }
     $("#filter-menu").slideToggle();
-    $(".navbar-fixed-bottom").slideToggle();
+    $(".navbar-fixed-bottom").toggleClass("min-listbar");
     // Notify maps that the size changed after its done changing sizes
     //map.fitBounds(bounds);
     setTimeout(function () {
@@ -88,7 +88,12 @@ function ToggleScreen() {
 
 $(function () {
     $("#addFilter").click(function () {
+        $("#addFilter").prop("disabled", true);
         ToggleScreen();
+        setTimeout(function () {
+            $("#addFilter").prop("disabled", false);
+            //map.fitBounds(bounds);
+        }, 500);
     });
 
     $("#filter-search").on("keyup", function (e) {
@@ -244,8 +249,13 @@ function ToggleType(type) {
 }
 
 function ToggleListBar() {
-    $(".navbar-fixed-bottom").toggleClass("small-listbar");
-    if ($("#filter-menu").css("display") == "block") {
-        $("#filter-menu").toggle();
+    if ($(".navbar-fixed-bottom").is(".min-listbar")) {
+        ToggleScreen();
+        $(".navbar-fixed-bottom").toggleClass("small-listbar");
+    } else {
+        $(".navbar-fixed-bottom").toggleClass("small-listbar");
+        if ($("#filter-menu").css("display") == "block") {
+            $("#filter-menu").toggle();
+        }
     }
 }

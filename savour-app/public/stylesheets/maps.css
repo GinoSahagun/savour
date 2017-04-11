@@ -58,7 +58,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 }
 
 #hot-bar {
-    z-index: 100;
+    z-index: 80;
 }
 /*SEARCH FORM*/
 .search-form {

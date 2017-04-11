@@ -2,9 +2,17 @@
     width: 100%;    
     background-color: #ffffff;
     overflow:scroll;
+    height: calc(100% - 50px);
+    transition: height .5s;
+    z-index:100;
 }
 .small-listbar{
     height: 200px;
+    transition: height .5s;
+}
+.min-listbar{
+    height: 15px;
+    transition: height .5s;
 }
 
 #dashboard-list {

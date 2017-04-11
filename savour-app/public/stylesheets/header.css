@@ -13,15 +13,20 @@ body.slide-active {
 #page-content {
     height:100%;
     width:100%;
-    /*overflow:hidden;*/
+}
+#dash-pg {
+    overflow:hidden;
 }
 #page-content.slide-active {
     padding-top: 0
 }
 
-.nav-text{
+.no-scroll{
     color: #146734;
     font-size:14px;
+}
+#slidemenu {
+    z-index: 150;
 }
 
 
@@ -47,7 +52,7 @@ body.slide-active {
     margin: 5px 0 0 0;
 }
 #slide-nav .navbar-toggle.slide-active .icon-bar {
-    background: orange
+    background: #cc6632
 }
 .navbar-header {
     position: relative
@@ -138,7 +143,6 @@ body.slide-active {
 	    min-width: 0;
 	    position: absolute;
 	    padding-left: 0;
-	    z-index: 2;
 	    top: -8px;
 	    margin: 0;
         overflow-y: scroll;
