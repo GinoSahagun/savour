@@ -1,0 +1,10 @@
+﻿.img-favorites {
+    height: 150px;
+    width: 150px;
+    margin: auto;
+    display: block;
+}
+
+.fav-rest {
+    margin-bottom: 25px;
+}

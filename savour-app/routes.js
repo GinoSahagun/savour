@@ -171,6 +171,12 @@ router.post('/add', function (req, res) {
 
 });
 
+//Get add restaurant page
+router.get("/favorites", function (req, res) {
+    res.render("favorites", { title: "My Places" });
+});
+
+
 //Get filter data
 router.get("/filter-data", function (req, res) {
     console.log("Checking filter...");
@@ -415,7 +421,7 @@ router.get('/search-data', function (req, res) {
         filter.find({ name: { $in: activeFilters } }, function (err, doc) {
             if (err) {
                 console.log("Error has occurred.");
-                res.send(err);
+                //res.send(err);
             }
             if (doc) {
                 docLength = doc.length;

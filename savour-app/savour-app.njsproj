@@ -38,6 +38,7 @@
     <Compile Include="public\javascripts\add.js" />
     <Compile Include="public\javascripts\bootstrap.min.js" />
     <Compile Include="public\javascripts\cloudinary-jquery-file-upload.js" />
+    <Compile Include="public\javascripts\favorites.js" />
     <Compile Include="public\javascripts\header.js" />
     <Compile Include="public\javascripts\jquery-confirm.min.js" />
     <Compile Include="public\javascripts\jquery.fileupload.js" />
@@ -105,6 +106,7 @@
     <Content Include="public\stylesheets\admin.css" />
     <Content Include="public\stylesheets\bootstrap.css" />
     <Content Include="public\stylesheets\add.css" />
+    <Content Include="public\stylesheets\favorites.css" />
     <Content Include="public\stylesheets\header-color.css" />
     <Content Include="public\stylesheets\header.css" />
     <Content Include="public\stylesheets\jquery-confirm.min.css" />
@@ -120,6 +122,8 @@
     <Content Include="views\add.html" />
     <Content Include="views\add.jade" />
     <Content Include="views\about.jade" />
+    <Content Include="views\favorites.html" />
+    <Content Include="views\favorites.jade" />
     <Content Include="views\list.html" />
     <Content Include="views\login.html" />
     <Content Include="views\login.jade" />
