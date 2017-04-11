@@ -1,4 +1,4 @@
-<div class="row maincolumn">
+<div class="row maincolumn" style="margin-bottom: 25px;">
 <div class="col-sm-2"> </div>
 <div class="col-sm-8"><!-- Start Body -->
 <h1>Add Restaurant</h1>
@@ -166,7 +166,8 @@
         <option value="bar">bar</option>
     </select>
     <br />
-    <label for="filter-bar">Filters and Tags</label><br />
+    <label for="filter-bar">Filters and Tags</label>
+    <small>Tags make it easier for users to search for this restaurant. Please add any tags a user may think to search for</small><br />
     <div id="filter-bar">
         <div class="input-group">
             <input id="filter-search" type="text" class="form-control search-form" placeholder="tag name">
@@ -182,12 +183,12 @@
     </div>
     <div id="bubble-bar" style="position:static"></div>
     <div id="hot-bar-add">
-        <div class="hotBox">Locally Owned</div>
-        <div class="hotBox">Minority Owned</div>
-        <div class="hotBox">Environmentally Friendly</div>
-        <div class="hotBox">Locally Sourced</div>
-        <div class="hotBox">Vegan Friendly</div>
-        <div class="hotBox">Disability Friendly</div>
+        <div class="hotBox inactive">Locally Owned</div>
+        <div class="hotBox inactive">Minority Owned</div>
+        <div class="hotBox inactive">Environmentally Friendly</div>
+        <div class="hotBox inactive">Locally Sourced</div>
+        <div class="hotBox inactive">Vegan Friendly</div>
+        <div class="hotBox inactive">Disability Friendly</div>
     </div>
         <button class="btn btn-primary" id="submitButton">Submit</button>
     </div><!-- End Body -->

@@ -3,6 +3,17 @@
  font-family: Arial, Helvetica, sans-serif;
 }
 
+h1{
+    color: #ef6c00 ;
+    text-transform: uppercase;
+}
+a{
+    color: #0b8040;
+}
+#dashboard-list a{
+    /*text-transform: uppercase;*/
+}
+
 .btn-primary {
   color: #fff;
   background-color: #146734;
@@ -16,7 +27,7 @@
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #187b3e;
+  background-color: #187B3E;
   border-color: #0b8040;
 }
 .btn-primary:active,
