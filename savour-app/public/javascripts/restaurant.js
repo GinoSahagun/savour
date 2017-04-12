@@ -193,6 +193,13 @@ function createItem(data) {
    return item;
 }
 
+// Create an anchor tag with link to the address on google maps
+function GetAddressAnchor(address) {
+    var link = "https://www.google.com/maps/place/" + address.replace(" ", "+");
+    var a = "<a href=\"" + link + "\">" + address.substr(0, address.indexOf(",")) + "</a>";
+    return a;
+}
+
 //Get the Restaurant Data through a JSON Call
 function getRestaurantData(urlID) {
     $.getJSON("restaurant-data", { id: urlID })
@@ -239,7 +246,7 @@ function getRestaurantData(urlID) {
 
             //Bio for restaurants
             $("#bio").text(res.desc);
-            $("#address").text(res.address.replace(", USA",""));
+            $("#address").append(GetAddressAnchor(res.address));
             $("#phone").text(res.phone);
             SetFilters(res.filters);
         })
