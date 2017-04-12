@@ -59,18 +59,12 @@ $(function () {
 
         getRestaurantData(urlID);
         getReviewData(urlID);
-        getFilterData(urlID);
-
     }
     else {
         //Pop Up a status message
         //redirect to home page if no ID was passed
-        
         window.location.href = "/";
     }
-    // Perform other work here ...
-    //Testing Review Rating for Submition
-    
 
     //options example
     var stuff = {
@@ -127,7 +121,7 @@ $(function () {
         }
     });
  });
-    
+
 //Submit Form
 function submitform(urlID) {
     var rest = new reviewClass();
@@ -154,7 +148,7 @@ function submitform(urlID) {
     });
 }
 
-//Review class Assocation with ID from Restaurant
+//Review class Association with ID from Restaurant
 function reviewClass() {
     this.comment = $("#comment").val();
     this.rating = $("#review-rating").rate("getValue");
@@ -178,6 +172,7 @@ function getUrlParameter(sParam) {
         }
     }
 };
+
 //Create Cells for Reviews
 function CreateRow(data) {
     if (data.id == null)
@@ -188,7 +183,6 @@ function CreateRow(data) {
     row += "<tr><td colspan = '2'><div class='col-md-12'>";
     row += data.review + "</div ></td> </tr";
     //adjust the rate of it when created nvm wont work
-    
     return row;
 }
 
@@ -196,43 +190,34 @@ function CreateRow(data) {
 function createItem(data) {
     //console.log(data);
     var item = "<tr><td> " + data[0] + "</td><td>" + " " + data[1] + "</td></tr>";
-
-
    return item;
 }
 
 //Get the Restaurant Data through a JSON Call
 function getRestaurantData(urlID) {
-
-   
     $.getJSON("restaurant-data", { id: urlID })
         .done(function (parsedResponse) {
-            
             var res;
-            //Recievd Response Text as JSON hopefully
-            if (typeof parsedResponse === 'string')
+            //Received Response Text as JSON hopefully
+            if (typeof parsedResponse === "string") {
                 res = parsedResponse;
-            else {
-                res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operaton as its already a json object response
             }
-           
+            else {
+                res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operation as its already a JSON object response
+            }
 
             //Restaurant Image
-            $('#restImage').attr('src', res.image);
+            $("#restImage").attr("src", res.image);
             //Restaurant Name
             $("#restName").text(res.name);
-            //Restuaran Rating Stars
-
-            
-            //$("#restStars").rate("setValue",res.rating);
-            //<a href="#serious">serious</A>
             $("#rest-link").append("<a href="+res.website+">Website</a>");
             $("#menu-link").append("<a href="+res.menu+">Menu</a>");
 
             var result = [];
             //convert JSON hours into array
-            for (var i in res.hours)
+            for (var i in res.hours) {
                 result.push([i, res.hours[i]]);
+            }
 
             console.log(result);
             $("#times").text(result[dayValue][0] + " " + result[dayValue][1]);
@@ -252,14 +237,11 @@ function getRestaurantData(urlID) {
                 }
             });
 
-
-
-
             //Bio for restaurants
             $("#bio").text(res.desc);
-            $("#address").text(res.address);
+            $("#address").text(res.address.replace(", USA",""));
             $("#phone").text(res.phone);
-
+            SetFilters(res.filters);
         })
         .fail(function () {
             console.log("error");
@@ -267,15 +249,38 @@ function getRestaurantData(urlID) {
         .always(function () {
             console.log("complete");
         });
-
 }
+function SetFilters(filters) {
+    console.log(filters);
+    if (filters["locally-owned"] == 1) {
+        $(".house").attr("src", 'images/icons/house.png');
+    }
+    if (filters["minority-owned"] == 1) {
+        $(".person").attr("src", 'images/icons/person.png');
+    }
+    if (filters["environmentally-friendly"] == 1) {
+        $(".tree").attr("src", 'images/icons/tree.png');
+    }
+    if (filters["locally-sourced"] == 1) {
+        $(".flower").attr("src", 'images/icons/flower.png');
+    }if (filters["disability-friendly"] == 1) {
+        $(".disability").attr("src", 'images/icons/disability.png');
+    }
+    if (filters["vegan-friendly"] == 1) {
+        $(".carrot").attr("src", 'images/icons/carrot.png');
+    }
+    if (filters["disability-friendly"] == 1) {
+        $(".disability").attr("src", 'images/icons/disability.png');
+    }
+}
+
 //Get the Review Data through a JSON Call
 function getReviewData(urlID) {
 
     //Test using 58c64e8b90ffbe4bcc94080e
     $.getJSON("review-data", { id: urlID })
         .done(function (parsedResponse) {
-          
+
             var ratings = 0;
             var sum = 0;
             var avg = 0;
@@ -286,12 +291,12 @@ function getReviewData(urlID) {
             else {
                 res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operaton as its already a json object response
             }
-            
+
             //reload json stuff here
             var len = res.length;
             var tbl = $("#review-list");
             $("#review-list tr").remove();
-            
+
             //Create Table of Review List
             for (var data of res) {
                 ratings++;
@@ -314,7 +319,6 @@ function getReviewData(urlID) {
                 avg = sum / ratings;
 
             $("#restStars").rate("setValue", avg);
-            
 
         })
         .fail(function () {
@@ -325,27 +329,6 @@ function getReviewData(urlID) {
         });
 }
 
-//Get the Filter Data through a JSON Call
-function getFilterData(urlID) {    
-    $.getJSON("filters-get", { id: urlID })
-        .done(function (data) {
-            console.log(data);
-
-            var temp;
-            //For each filter, retrieve the name
-            for (var i = 0; i < data.length; i++)
-            {
-                $.getJSON("filter-name-get", { filterID : data[i] })
-                    .always(function (name) {
-                        console.log(name.responseText);
-                        filterArray.push(name.responseText);
-                        $("#filters").append(name.responseText + " ");
-                    });
-            }
-           
-        });
-
-}
 
 function updateRating(urlID, rating) {
     //Call ajax method to update restaurant

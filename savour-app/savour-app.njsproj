@@ -97,6 +97,18 @@
     <Content Include="public\images\curbside.jpg" />
     <Content Include="public\images\filter.png" />
     <Content Include="public\images\gino.jpg" />
+    <Content Include="public\images\icons\carrot-i.png" />
+    <Content Include="public\images\icons\carrot.png" />
+    <Content Include="public\images\icons\disability-i.png" />
+    <Content Include="public\images\icons\disability.png" />
+    <Content Include="public\images\icons\flower-i.png" />
+    <Content Include="public\images\icons\flower.png" />
+    <Content Include="public\images\icons\house-i.png" />
+    <Content Include="public\images\icons\house.png" />
+    <Content Include="public\images\icons\person-i.png" />
+    <Content Include="public\images\icons\person.png" />
+    <Content Include="public\images\icons\tree-i.png" />
+    <Content Include="public\images\icons\tree.png" />
     <Content Include="public\images\loading.gif" />
     <Content Include="public\images\matt.jpg" />
     <Content Include="public\images\queenanne.jpg" />
@@ -144,6 +156,7 @@
     <Folder Include="public\images\assets-2x\" />
     <Folder Include="public\images\assets-3x\" />
     <Folder Include="public\images\assets\" />
+    <Folder Include="public\images\icons\" />
     <Folder Include="public\javascripts\" />
     <Folder Include="public\stylesheets\" />
     <Folder Include="typings\" />
