@@ -193,3 +193,12 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 #info-window{
     width: 200px;
 }
+#create-review-button {
+    height: 60px;
+    line-height: 60px;
+    vertical-align: middle;
+}
+#create-review-button img{
+    height: 80%;
+    margin-top: 15px;
+}

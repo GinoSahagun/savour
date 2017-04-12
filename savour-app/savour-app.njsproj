@@ -112,6 +112,8 @@
     <Content Include="public\images\icons\marker-g2.png" />
     <Content Include="public\images\icons\marker-o.png" />
     <Content Include="public\images\icons\marker-b.png" />
+    <Content Include="public\images\icons\pen-g.png" />
+    <Content Include="public\images\icons\pen-o.png" />
     <Content Include="public\images\icons\person-i.png" />
     <Content Include="public\images\icons\person.png" />
     <Content Include="public\images\icons\tree-i.png" />
