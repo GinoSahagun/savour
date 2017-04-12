@@ -13,7 +13,7 @@ function initMap() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-            var blueMarker = "../images/blue-marker.png";
+            var blueMarker = "../images/icons/marker-b.png";
             if (userMarker == null) {
                 userMarker = new google.maps.Marker({
                     position: userPos,
@@ -107,9 +107,11 @@ function AddMarker(pos, rest) {
     infoWindow = new google.maps.InfoWindow({
         content: contentString
     });
+    var greenMarker = "../images/icons/marker-g.png";
     var marker = new google.maps.Marker({
         position: pos,
-        map: map
+        map: map,
+        icon: greenMarker
     });
     google.maps.event.addListener(marker, 'click', (function (marker) {
         return function () {
