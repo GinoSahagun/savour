@@ -184,3 +184,12 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 #bio{
     color: #808080;
 }
+.iwImg{
+    max-height: 100px;
+    width: 60px;
+    float: left;
+    margin-right: 10px;
+}
+#info-window{
+    width: 200px;
+}

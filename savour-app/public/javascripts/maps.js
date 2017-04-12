@@ -1,8 +1,12 @@
 ﻿var map;
 var infoWindow;
+var selectedMarker;
 var userMarker;
 var markers = [];
 var bounds;
+var blueMarker = "../images/icons/marker-b.png";
+var greenMarker = "../images/icons/marker-g.png";
+var orangeMarker = "../images/icons/marker-o.png";
 
 function initMap() {
     var omh = { lat: 47.651395, lng: -122.361466 };
@@ -12,8 +16,7 @@ function initMap() {
             var userPos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
-            };
-            var blueMarker = "../images/icons/marker-b.png";
+            };            
             if (userMarker == null) {
                 userMarker = new google.maps.Marker({
                     position: userPos,
@@ -41,19 +44,7 @@ function initMap() {
             stylers: [
                 { visibility: "off" }
             ]
-        }/*, {
-            featureType: "water",
-            elementType: "labels",
-            stylers: [
-                { visibility: "off" }
-            ]
-        }, {
-            featureType: "road",
-            elementType: "labels",
-            stylers: [
-                { visibility: "off" }
-            ]
-        }*/
+        }
     ];
 
     map = new google.maps.Map(document.getElementById('map'), {
@@ -65,13 +56,19 @@ function initMap() {
     });
     map.mapTypes.set("mapStyle", new google.maps.StyledMapType(mapStyle, { name: "Map Style" }));
     google.maps.event.addListener(map, "click", function () {
-        if (infoWindow != null) {
-            infoWindow.close();
-        }
+        UnSelectMarker();
     });
     bounds = new google.maps.LatLngBounds();
 }
 
+function UnSelectMarker() {
+    if (infoWindow != null) {
+        infoWindow.close();
+    }
+    if (selectedMarker != null) {
+        selectedMarker.setIcon(greenMarker);
+    }
+}
 // Converts the JSON object we're using in mongodb to a google latlng
 function GooglePOS(jsonPos) {
     try {
@@ -90,24 +87,28 @@ function ClearMarkers() {
         mtest.setMap(null);
     }
 }
+
+function GetAddressAnchor(address) {
+    var link = "https://www.google.com/maps/place/" + address.replace(" ", "+");
+    var a = "<a href=\"" + link + "\">" + address.substr(0, address.indexOf(",")) + "</a>";
+    return a;
+}
 function AddMarker(pos, rest) {
     // TODO validation
     //Create Html Part of Info Windows
-    var contentString = '<div id="content">' +
+    var contentString = '<div id="info-window">' +
         '<div id="siteNotice">' +
+        "<img class='iwImg' id='popWin' src=" + rest.image + ">" +
         '</div>' +
         '<h5 id="firstHeading" style="white-space: nowrap;" class="firstHeading"><a href=./restaurant?id=' + rest._id + '>' + rest.name + '<a/> </h5>' +
         '<div id="bodyContent">' +
-        '<p>' + rest.address + '</p>' +
-        '<p><a href=' + rest.website + '>' + rest.name + 's Website' + '</a>' + '</p>' +
-        '</div class="row" >' +
-        "<img style='width:100px; height: 100px; id='popWin' src=" + rest.image + ">" +
-        '</div>';
-
+        '<p>' + GetAddressAnchor(rest.address) + '</p>' +
+        '<p><a href=' + rest.website + '>' + 'Website' + '</a>' + '</p>' +
+        '</div class="row" ></div>';
+    
     infoWindow = new google.maps.InfoWindow({
         content: contentString
     });
-    var greenMarker = "../images/icons/marker-g.png";
     var marker = new google.maps.Marker({
         position: pos,
         map: map,
@@ -116,6 +117,9 @@ function AddMarker(pos, rest) {
     google.maps.event.addListener(marker, 'click', (function (marker) {
         return function () {
             infoWindow.open(map, marker);
+            $(".gm-style-iw").next().toggle()
+            selectedMarker = marker;
+            marker.setIcon(orangeMarker);
         }
     })(marker));
 
