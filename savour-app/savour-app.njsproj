@@ -83,6 +83,7 @@
     <Content Include="public\images\assets-3x\Asset 7%403x.png.png" />
     <Content Include="public\images\assets-3x\Asset 8%403x.png.png" />
     <Content Include="public\images\assets-3x\Asset 9%403x.png.png" />
+    <Content Include="public\images\assets-3x\bar-i.png" />
     <Content Include="public\images\assets\Asset 10.png" />
     <Content Include="public\images\assets\Asset 11.png" />
     <Content Include="public\images\assets\Asset 12.png" />

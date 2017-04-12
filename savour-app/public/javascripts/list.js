@@ -236,8 +236,12 @@ function ToggleFilter(filter) {
     $("." + filter).toggleClass("unselected");
     var index = mainFilters.indexOf(filter);
     if (index >= 0) {
+        var src = $("." + filter + " img").attr("src").replace(".png", "-i.png");
+        $("." + filter + " img").attr("src",src);
         mainFilters.splice(index, 1);
     } else {
+        var src = $("." + filter + " img").attr("src").replace("-i.png", ".png");
+        $("." + filter + " img").attr("src", src);
         mainFilters.push(filter);
     }
     UpdateRestaurants();
@@ -247,8 +251,12 @@ function ToggleType(type) {
     $("." + type).toggleClass("unselected");
     var index = types.indexOf(type);
     if (index >= 0) {
+        var src = $("." + type + " img").attr("src").replace(".png", "-i.png");
+        $("." + type + " img").attr("src", src);
         types.splice(index, 1);
     } else {
+        var src = $("." + type + " img").attr("src").replace("-i.png", ".png");
+        $("." + type + " img").attr("src", src);
         types.push(type);
     }
     UpdateRestaurants();
