@@ -161,19 +161,43 @@ function GetActive(rest){
     }
     return active;
 }
-
+function locs(distance, index) {
+    this.dist = distance;
+    this.index = index;
+}
+function sortLocations(locations) {
+    locations.sort(function (l1, l2) {
+        return l1.dist - l2.dist;
+    });
+}
+//calculates distance between two points in km's
+function calcDistance(p1, p2) {
+    return parseInt((google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2));
+}
 function UpdateRestaurants() {
     activeRestaurants = GetActive(restaurants);
     console.log("Active Restaurants: ", activeRestaurants);
+    console.log(userMarker);
     clearDash();
     //create bounds for each marker for right now
     bounds = new google.maps.LatLngBounds();
     //var geometry = new google.maps.geometry;
     //console.log(geometry);
+    var dist = [];
+    var temp;
+    var i = 0;
+    var user = userMarker;
     ClearMarkers()
+    
     for (d of activeRestaurants) {
         AddMarker(GooglePOS(d.location), d);
         bounds.extend(GooglePOS(d.location));
+        if (user != null) {
+            temp = calcDistance(userMarker.position, GooglePOS(d.location));
+            var spot = new locs(temp, i);
+            dist.push(spot);
+            i++;
+        }
         map.fitBounds(bounds);
         var row = CreateRow(d);
         tbl.append(row);
@@ -193,6 +217,8 @@ function UpdateRestaurants() {
             },
         }); //needed for each appended rating
     }
+    sortLocations(dist);
+    console.log(dist);
 }
 
 function retrieveRestaurants() {
@@ -223,13 +249,23 @@ function retrieveRestaurants() {
         restaurants = res;
         activeRestaurants = GetActive(res);
         console.log("Active Restaurants: ", activeRestaurants);
-
+        if (userMarker != null)
+        console.log(userMarker.position);
+        var dist = [];
+        var temp;
+        var i = 0;
         //create bounds for each marker for right now
         bounds = new google.maps.LatLngBounds();
         //var geometry = new google.maps.geometry;
         //console.log(geometry);
         for (d of activeRestaurants) {
             AddMarker(GooglePOS(d.location), d);
+            if (userMarker != null) {
+                temp = calcDistance(userMarker.position, GooglePOS(d.location));
+                var spot = new locs(temp, i);
+                dist.push(spot);
+                i++;
+            }
             bounds.extend(GooglePOS(d.location));
             map.fitBounds(bounds);
             var row = CreateRow(d);
@@ -250,6 +286,10 @@ function retrieveRestaurants() {
                 },
             }); //needed for each appended rating //needed for each appended rating
         }
+        sortLocations(dist);
+        console.log(dist);
+        //console.log(markers);
+
     });
 
 

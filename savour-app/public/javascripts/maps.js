@@ -24,6 +24,7 @@ function initMap() {
                     icon: blueMarker,
                     title: "You are here"
                 });
+
                 map.setCenter(userPos);
             } else {
                 userMarker.setPosition(userPos);
@@ -115,6 +116,7 @@ function AddMarker(pos, rest) {
         map: map,
         icon: greenMarker
     });
+    //console.log(marker.position);
     google.maps.event.addListener(marker, 'click', (function (marker) {
         return function () {
             infoWindow.open(map, marker);
