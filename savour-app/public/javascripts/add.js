@@ -209,7 +209,7 @@ $(function () {
         });
     });
 
-    //re-format
+    //re-format phone number
     $("#phone").focusout(function () {
         var temp = $(this).val();
         if ($("#phone").val().length == 10) {
@@ -252,8 +252,16 @@ $(function () {
 
     //set up for price rating
     var options = {
+        selected_symbol_type: 'image2',
         max_value: 5,
-        step_size: 1
+        step_size: 1,
+        symbols: {
+            image2: {
+                base: '<div class="im"></div>',
+                hover: '<div class="im2"></div>',
+                selected: '<div class="im2"></div>',
+            },
+        },
     };
     //set up for price rating
     $("#priceRating").rate(options);

@@ -17,6 +17,7 @@
 
 #dashboard-list {
     margin-bottom: 0px;
+    display: flex;
 }
 
 .cell-fill{
@@ -64,4 +65,23 @@
     height:35px;
     display:block;
     margin:0;
+}
+/*Images for Rating bars*/
+.im
+ {
+     background-image: url('../images/assets/Empty.png');
+     background-size: 32px 32px;
+     background-repeat: no-repeat;
+     width: 32px;
+     height: 32px;
+    display: inline-block;
+}
+.im2
+{
+    background-image: url('../images/assets/Full.png');
+    background-size: 32px 32px;
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
 }

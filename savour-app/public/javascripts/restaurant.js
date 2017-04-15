@@ -70,6 +70,14 @@ $(function () {
     var stuff = {
         max_value: 5,
         step_size: 1,
+        selected_symbol_type: 'image2',
+        symbols: {
+            image2: {
+                base: '<div class="im"></div>',
+                hover: '<div class="im2"></div>',
+                selected: '<div class="im2"></div>',
+            },
+        },
     }
     $("#review-rating").rate(stuff);
     //Test Example of Rating Stars using standard rate
@@ -78,6 +86,14 @@ $(function () {
         initial_value: 2,
         readonly: true,
         step_size: 0.5,
+        selected_symbol_type: 'image2',
+        symbols: {
+            image2: {
+                base: '<div class="im"></div>',
+                hover: '<div class="im2"></div>',
+                selected: '<div class="im2"></div>',
+            },
+        },
     }
     $("#restStars").rate(settings);
 
@@ -310,7 +326,21 @@ function getReviewData(urlID) {
                 var row = CreateRow(data);
                 tbl.append(row);
                 sum += data.rating;
-                $(".rating").rate({ step_size: 1, readonly: true, initial_value: data.rating, change_once: true }); //needed for each appended rating
+                $(".rating").rate({
+                    readonly: true,
+                    initial_value: d.rating,
+                    change_once: true,
+                    selected_symbol_type: 'image2',
+                    max_value: 5,
+                    step_size: 1,
+                    symbols: {
+                        image2: {
+                            base: '<div class="im"></div>',
+                            hover: '<div class="im2"></div>',
+                            selected: '<div class="im2"></div>',
+                        },
+                    },
+                }); //needed for each appended rating
             }
 
             if (len == 0) {

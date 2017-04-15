@@ -93,6 +93,8 @@
     <Content Include="public\images\assets\Asset 7.png" />
     <Content Include="public\images\assets\Asset 8.png" />
     <Content Include="public\images\assets\Asset 9.png" />
+    <Content Include="public\images\assets\Empty.png" />
+    <Content Include="public\images\assets\Full.png" />
     <Content Include="public\images\blue-marker.png" />
     <Content Include="public\images\brandon.jpg" />
     <Content Include="public\images\curbside.jpg" />

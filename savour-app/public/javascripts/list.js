@@ -177,7 +177,21 @@ function UpdateRestaurants() {
         map.fitBounds(bounds);
         var row = CreateRow(d);
         tbl.append(row);
-        $(".rating").rate({ readonly: true, initial_value: d.rating, change_once: true }); //needed for each appended rating
+        $(".rating").rate({
+            readonly: true,
+            initial_value: d.rating,
+            change_once: true,
+            selected_symbol_type: 'image2',
+            max_value: 5,
+            step_size: 1,
+            symbols: {
+                image2: {
+                    base: '<div class="im"></div>',
+                    hover: '<div class="im2"></div>',
+                    selected: '<div class="im2"></div>',
+                },
+            },
+        }); //needed for each appended rating
     }
 }
 
@@ -220,7 +234,21 @@ function retrieveRestaurants() {
             map.fitBounds(bounds);
             var row = CreateRow(d);
             tbl.append(row);
-            $(".rating").rate({ readonly: true, initial_value: d.rating, change_once: true }); //needed for each appended rating
+            $(".rating").rate({
+                readonly: true,
+                initial_value: d.rating,
+                change_once: true,
+                selected_symbol_type: 'image2',
+                max_value: 5,
+                step_size: 1,
+                symbols: {
+                    image2: {
+                        base: '<div class="im"></div>',
+                        hover: '<div class="im2"></div>',
+                        selected: '<div class="im2"></div>',
+                    },
+                },
+            }); //needed for each appended rating //needed for each appended rating
         }
     });
 

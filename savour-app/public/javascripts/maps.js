@@ -96,11 +96,12 @@ function GetAddressAnchor(address) {
 function AddMarker(pos, rest) {
     // TODO validation
     //Create Html Part of Info Windows
+    //console.log(rest);
     var contentString = '<div id="info-window">' +
         '<div id="siteNotice">' +
         "<img class='iwImg' id='popWin' src=" + rest.image + ">" +
         '</div>' +
-        '<h5 id="firstHeading" style="white-space: nowrap;" class="firstHeading"><a href=./restaurant?id=' + rest._id + '>' + rest.name + '<a/> </h5>' +
+        '<h5 id="firstHeading" style="white-space: nowrap;" class="firstHeading"><a href=./restaurant?id=' + rest.id + '>' + rest.name + '<a/> </h5>' +
         '<div id="bodyContent">' +
         '<p>' + GetAddressAnchor(rest.address) + '</p>' +
         '<p><a href=' + rest.website + '>' + 'Website' + '</a>' + '</p>' +
@@ -117,7 +118,8 @@ function AddMarker(pos, rest) {
     google.maps.event.addListener(marker, 'click', (function (marker) {
         return function () {
             infoWindow.open(map, marker);
-            $(".gm-style-iw").next().toggle()
+            infoWindow.setContent(contentString);
+            $(".gm-style-iw").next().toggle();
             selectedMarker = marker;
             marker.setIcon(orangeMarker);
         }
