@@ -72,10 +72,14 @@ router.post('/delete-restaurant', function (req, res) {
 
 });
 
+/* GET edit page. */
+router.get('/edit', function (req, res) {
+    res.render('edit', { title: 'Edit Restaurant' });
+});
+
 /* GET login page. */
 router.get('/login', function (req, res) {
     res.render('login', { title: 'Login' });
-    //res.res('about', { title: 'Express' });
 });
 
 /* GET neighborhood page. */
@@ -200,6 +204,9 @@ router.post("/filters-add", function (req, res) {
     var restName = req.body["rest[name]"];
     var restAddress = req.body["rest[address]"];
     var filterStr = req.body.tags;
+    if (filterStr == "") {
+        return;
+    }
     var restId;
 
     restaurant.findOne({ "name": restName, "address": restAddress }, function (err, restaurant) {

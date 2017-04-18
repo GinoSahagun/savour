@@ -44,8 +44,8 @@ $(document).ready(function () {
                 var row = "<figure><button class=\"toggle-more-less\">" + data.name + "</button><figcaption>";
                 row += "Name: <input type=\"text\" class=\"name\" value=\"" + data.name + "\"disabled><br>";
                 row += "Description: <input type=\"text\" class=\"description\" value=\"" + data.desc +"\"disabled><br>";
-                row += "Rating: <span><input type=\"text\" class=\"rating\" value=\"" + data.rating + "\"disabled><br>";
-                row += "Price: <span><input type=\"text\" class=\"pricing\" value=\"" + data.pricing + "\"disabled><br>";
+                row += "Rating: <input type=\"text\" class=\"restRating\" value=\"" + data.rating + "\"disabled><br>";
+                row += "Price: <input type=\"text\" class=\"pricing\" value=\"" + data.pricing + "\"disabled><br>";
                 row += "Address: <input type=\"text\" class=\"address\" value=\"" + data.address + "\"disabled><br>";
                 var hours = JSON.stringify(data.hours);
                 hours = hours.replace(/\"/g, "'");
@@ -57,8 +57,6 @@ $(document).ready(function () {
                 row += "Image: <input type=\"text\" class=\"image\" value=\"" + data.image + "\"disabled><br>";
                 row += "<h6 class = \"id\">Restaurant ID: " + data._id + "</h6>";
                 row += "<button id=\"delete\" class=\"delete\"> Delete </button> <button class=\"edit\"> Edit </button>";
-                row += "<button class=\"save\" disabled> Save </button>";
-                row += /*"<form id=\"imageForm\" action=\"\" method=\"post\" enctype=\"multipart/form-data\" onsubmit=\"AJAXSubmit(this); return false;\"><fieldset><p><label style=\"display:none;\" for=\"upload_preset\">Unsigned upload Preset: <input id=\"upload-preset\" type=\"text\" name=\"upload_preset\" value=\"abssk3w2\">(set it <a href=\"https://cloudinary.com/console/settings/upload#upload_presets\">here</a>)</label></p><p><label>Select your photo:<input id=\"upload-file\" type=\"file\" name=\"file\"></label></p><p><input class=\"btn btn-primary\" type=\"submit\" value=\"Upload to Cloud\" /></p><img class=\"img-thumbnail\" style=\"width: 175px; height: 175px; \" id=\"uploaded\"><div id=\"results\"></div></fieldset></form>*/"</figcaption ></figure > ";
                 return row;
             }
 
@@ -81,26 +79,10 @@ $(document).ready(function () {
             });
 
             $(".edit").click(function () {
-                $("input").prop("disabled", false);
-                $(".save").prop("disabled", false);
-            });
-
-            $(".save").click(function () {
-                $("input").prop("disabled", true);
-                $(".save").prop("disabled", true);
-
-                //Get updated restaurant information
-                var updatedRest = new RestaurantClass();
-
-                //Call ajax method to update restaurant
-                 $.ajax({
-                     url: "./update-restaurant",
-                     type: "POST",
-                     data: updatedRest,
-                 }).done(function () {
-                     console.log("Restaurant Updated");
-                     toastr.success("Restaurant Updated!");
-                 });
+                var id = $(this).closest('.show').find('.id')[0].innerHTML
+                id = id.substr(15); //extract id
+                var url = "./edit?id=";
+                window.location.href = url + id;
             });
 
         });
@@ -109,27 +91,3 @@ $(document).ready(function () {
  
 });
 
-function LatLon(str) {
-    var response = "{ \"LAT\": \"" + str.substring(0, str.indexOf(",")) + "\", \"LON\": \"" + str.substring(str.indexOf(",") + 2) + "\"}";
-    return JSON.parse(response);
-}
-
-function Hrs(str) {
-    var response = str.replace(new RegExp('\'', 'g'), '\"');
-    return JSON.parse(response);
-}
-
-function RestaurantClass() {
-    this.id = $("button.save").closest('.show').find('.id')["0"].innerHTML.substr(15);
-    this.name = $("button.save").closest('.show').find('.name')["0"].value;
-    this.phone = $("button.save").closest('.show').find('.phone')["0"].value;
-    this.hours = Hrs($("button.save").closest('.show').find('.hours')["0"].value);
-    this.pricing = $("button.save").closest('.show').find('.pricing')["0"].value;
-    this.rating = $("button.save").closest('.show').find('.rating')["0"].value;
-    this.address = $("button.save").closest('.show').find('.address')["0"].value;
-    this.location = LatLon($("button.save").closest('.show').find('.location')["0"].value);
-    this.desc = $("button.save").closest('.show').find('.description')["0"].value;
-    this.website = $("button.save").closest('.show').find('.website')["0"].value;
-    this.menu = $("button.save").closest('.show').find('.menu')["0"].value;
-    this.image = $("button.save").closest('.show').find('.image')["0"].value;
-}
