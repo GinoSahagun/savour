@@ -201,8 +201,9 @@ router.get("/filter-data", function (req, res) {
 
 //Post filters
 router.post("/filters-add", function (req, res) {
-    var restName = req.body["rest[name]"];
-    var restAddress = req.body["rest[address]"];
+    var temp = req.body["rest"];
+    var restName = temp.name;
+    var restAddress = temp.address;
     var filterStr = req.body.tags;
     if (filterStr == "") {
         return;
@@ -211,9 +212,12 @@ router.post("/filters-add", function (req, res) {
 
     restaurant.findOne({ "name": restName, "address": restAddress }, function (err, restaurant) {
         if (err) return handleError(err);
-        else {
+        else if (restaurant) {
             console.log(restaurant._id)
             restId = restaurant._id;
+        }
+        else {
+            return;
         }
 
         var filterList = filterStr.split(",");
