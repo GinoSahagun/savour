@@ -328,7 +328,7 @@ function getReviewData(urlID) {
                 sum += data.rating;
                 $(".rating").rate({
                     readonly: true,
-                    initial_value: d.rating,
+                    initial_value: data.rating,
                     change_once: true,
                     selected_symbol_type: 'image2',
                     max_value: 5,
