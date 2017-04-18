@@ -21,6 +21,10 @@ connection.on('error', console.error.bind(console, 'connection error:'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+//Increase limit for files
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));

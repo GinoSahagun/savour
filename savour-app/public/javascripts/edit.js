@@ -50,16 +50,16 @@ function GetFilters() {
 function RestaurantClass() {
     this.name = $("#name").val();
     this.phone = $("#phone").val();
-    this.hours = GetHours();
-    this.pricing = $("#priceRating").rate("getValue");
-    this.filters = GetFilters();
+    this.hours = JSON.parse(GetHours());
+    this.pricing = $("#price").val();
+    this.filters = JSON.parse(GetFilters());
     this.type = $("#restType option:selected").text();
-    this.rating = $("#starRating").rate("getValue");
     this.address = $("#address").val();
-    this.location = GetLatLon();
+    this.location = JSON.parse(GetLatLon());
     this.desc = $("#desc").val();
     this.website = $("#website").val();
     this.menu = $("#menu").val();
+    this.id = getUrlParameter('id');
     this.image = "";
 }
 //currently global variable need to figure something else out
@@ -118,14 +118,15 @@ function submitform() {
         //tags.push($("#restType option:selected").text());
         var tagsOut = tags.toString();
         console.log(rest);
+        var rest2 = JSON.parse(JSON.stringify(rest));
         //Add Restaurant Data
         $.ajax({
-            url: "./add",
+            url: "./update-restaurant",
             type: "POST",
-            data: JSON.parse(JSON.stringify(rest)),
+            data: rest2,
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log("could not post data");
-                window.alert("Could not add Restaurant");
+                window.alert("Could not update restaurant");
             },
             success: function () {
                 $.ajax({
@@ -133,15 +134,15 @@ function submitform() {
                     type: "POST",
                     data: { rest: JSON.parse(JSON.stringify(rest)), tags: tagsOut }
                 }).done(function () {
-                    toastr.success("Filters Added", function () {
-                        console.log("Filters Added");
-                        window.location = "./..";
+                    toastr.success("Filters Updated", function () {
+                        console.log("Filters Updated");
+                        window.location = "./admin";
                     });
                 });
             }
         }).done(function () {
-            toastr.success("Restaurant Added", function () {
-                window.location = "./..";
+            toastr.success("Restaurant Updated", function () {
+                window.location = "./admin";
             });
 
         });
@@ -159,6 +160,18 @@ function validatePhone() {
 }
 
 $(function () {
+    var restID = getUrlParameter('id');
+
+    if (restID) {
+        getRestaurantData(restID);
+        //getReviewData(restID);
+    }
+    else {
+        //Pop Up a status message
+        //redirect to home page if no ID was passed
+        window.location.href = "/";
+    }
+
     //Loading GIF
     $body = $("body");
 
@@ -258,10 +271,7 @@ $(function () {
     //set up for price rating
     $("#priceRating").rate(options);
 
-    //set up for rating stars
-    $("#starRating").rate(options);
-
-    $("#submitButton").click(function () {
+    $("#saveButton").click(function () {
         submitform();
     });
     $("#addressButton").click(function () {
@@ -372,5 +382,109 @@ function readURL(input) {
         }
 
         reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+
+function getRestaurantData(urlID) {
+    $.getJSON("restaurant-data", { id: urlID })
+        .done(function (parsedResponse) {
+            var res;
+            //Received Response Text as JSON hopefully
+            if (typeof parsedResponse === "string") {
+                res = parsedResponse;
+            }
+            else {
+                res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operation as its already a JSON object response
+            }
+
+            //Restaurant Name
+            $("#name").val(res.name);
+            $("#phone").val(res.phone);
+
+            //Fill in hours fields
+            var result = [];
+            //convert JSON hours into array
+            for (var i in res.hours) {
+                var openHours = res.hours[i].substring(0, 7);
+                var closedHours = res.hours[i].substring(8);
+                result.push(openHours);
+                result.push(closedHours);
+            }
+            $("#sun-open").val(result[0]);
+            $("#sun-close").val(result[01]);
+            $("#mon-open").val(result[2]);
+            $("#mon-close").val(result[3]);
+            $("#tue-open").val(result[4]);
+            $("#tue-close").val(result[5]);
+            $("#wed-open").val(result[6]);
+            $("#wed-close").val(result[7]);
+            $("#thu-open").val(result[8]);
+            $("#thu-close").val(result[9]);
+            $("#fri-open").val(result[10]);
+            $("#fri-close").val(result[11]);
+            $("#sat-open").val(result[12]);
+            $("#sat-close").val(result[13]);
+
+            $("#price").val(res.pricing);
+            $("#address").val(res.address);
+            $("#desc").val(res.desc);
+            $("#website").val(res.website);
+            $("#menu").val(res.menu);
+
+            $("#upload-file").text(res.image);
+            $("#uploaded").attr("src", res.image);
+
+            $("#restType").val(res.type);
+
+            //Fill in filters bar
+            setFilters(res);
+
+        })
+        .fail(function () {
+            console.log("error");
+        })
+        .always(function () {
+            console.log("complete");
+        });
+}
+function setFilters(rest) {
+    if (rest.filters["locally-owned"] == "1") {
+        filters.push("locally-owned");
+        $(".hotbox")[0].className = "hotbox"
+    }
+    if (rest.filters["minority-owned"] == "1") {
+        filters.push("minority-owned");
+        $(".hotbox")[1].className = "hotbox"
+    }
+    if (rest.filters["environmentally-friendly"] == "1") {
+        filters.push("environmentally-friendly");
+        $(".hotbox")[2].className = "hotbox"
+    }
+    if (rest.filters["locally-sourced"] == "1") {
+        filters.push("locally-sourced"); 
+        $(".hotbox")[3].className = "hotbox"
+    }
+    if (rest.filters["vegan-friendly"] == "1") {
+        filters.push("vegan-friendly");
+        $(".hotbox")[4].className = "hotbox"
+    }
+    if (rest.filters["disability-friendly"] == "1") {
+        filters.push("disability-friendly");
+        $(".hotbox")[5].className = "hotbox"
     }
 }

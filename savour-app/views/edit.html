@@ -1,0 +1,200 @@
+﻿<div class="row maincolumn" style="margin-bottom: 25px;">
+    <div class="col-sm-2"> </div>
+    <div class="col-sm-8">
+        <!-- Start Body -->
+        <h1>Edit Restaurant</h1>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Restaurant of Coffee Shop Name">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="form-control bfh-phone" id="phone" data-format="(ddd) ddd-dddd">
+        </div>
+        <label>Sunday</label>
+        <div class="form-group row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-2"><label>Open</label></div>
+            <div class="col-xs-3">
+                <input id="sun-open" class="form-control timepicker " />
+            </div>
+            <div class="col-xs-2"><label>Close</label></div>
+            <div class="col-xs-3">
+                <input id="sun-close" class="form-control timepicker " />
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+        <label>Monday</label>
+        <div class="form-group row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-2"><label>Open</label></div>
+            <div class="col-xs-3">
+                <input id="mon-open" class="form-control timepicker " />
+            </div>
+            <div class="col-xs-2"><label>Close</label></div>
+            <div class="col-xs-3">
+                <input id="mon-close" class="form-control timepicker " />
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+        <label>Tuesday</label>
+        <div class="form-group row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-2"><label>Open</label></div>
+            <div class="col-xs-3">
+                <input id="tue-open" class="form-control timepicker " />
+            </div>
+            <div class="col-xs-2"><label>Close</label></div>
+            <div class="col-xs-3">
+                <input id="tue-close" class="form-control timepicker " />
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+        <label>Wednesday</label>
+        <div class="form-group row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-2"><label>Open</label></div>
+            <div class="col-xs-3">
+                <input id="wed-open" class="form-control timepicker " />
+            </div>
+            <div class="col-xs-2"><label>Close</label></div>
+            <div class="col-xs-3">
+                <input id="wed-close" class="form-control timepicker " />
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+        <label>Thursday</label>
+        <div class="form-group row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-2"><label>Open</label></div>
+            <div class="col-xs-3">
+                <input id="thu-open" class="form-control timepicker " />
+            </div>
+            <div class="col-xs-2"><label>Close</label></div>
+            <div class="col-xs-3">
+                <input id="thu-close" class="form-control timepicker " />
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+        <label>Friday</label>
+        <div class="form-group row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-2"><label>Open</label></div>
+            <div class="col-xs-3">
+                <input id="fri-open" class="form-control timepicker " />
+            </div>
+            <div class="col-xs-2"><label>Close</label></div>
+            <div class="col-xs-3">
+                <input id="fri-close" class="form-control timepicker " />
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+        <label>Saturday</label>
+        <div class="form-group row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-2"><label>Open</label></div>
+            <div class="col-xs-3">
+                <input id="sat-open" class="form-control timepicker " />
+            </div>
+            <div class="col-xs-2"><label>Close</label></div>
+            <div class="col-xs-3">
+                <input id="sat-close" class="form-control timepicker " />
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+        <div class="form-group">
+            <label for="pricing">Price Rating</label>
+            <input id="price" class="form-control" />
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea class="form-control" id="address" rows="2"></textarea>
+        </div>
+        <button class="btn btn-primary" id="addressButton">Verify Address</button>
+        <br />
+        <div id="location-div" class="form-group row">
+            <div class="col-xs-6">
+                <label for="lat">Lat</label>
+                <input type="text" class="form-control" id="lat" placeholder="##.######">
+            </div>
+            <div class="col-xs-6">
+                <label for="lon">Lon</label>
+                <input type="text" class="form-control" id="lon" placeholder="##.######">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="desc">Short Description</label>
+            <textarea class="form-control" id="desc" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="website">Website Link</label>
+            <input type="text" class="form-control" id="website" placeholder="example-restaurant.com">
+        </div>
+        <div class="form-group">
+            <label for="menu">Menu Link</label>
+            <input type="text" class="form-control" id="menu" placeholder="example-restaurant.com/menu">
+        </div>
+        <div class="form-group">
+            <form id="imageForm" action="" method="post" enctype="multipart/form-data" onsubmit="AJAXSubmit(this); return false;">
+                <fieldset>
+                    <p>
+                        <label style="display:none;" for="upload_preset">Unsigned upload Preset: <input id="upload-preset" type="text" name="upload_preset" value="abssk3w2">(set it <a href="https://cloudinary.com/console/settings/upload#upload_presets">here</a>)</label>
+                    </p>
+
+                    <p>
+                        <label>
+                            Select a new photo: <small>Image will not be saved until you click "Upload to Cloud"</small>
+                            <input id="upload-file" type="file" name="file">
+                        </label>
+                    </p>
+                    <p>
+                        <input class="btn btn-primary" type="submit" value="Upload to Cloud" />
+                    </p>
+                    <img class="img-thumbnail" style="width:175px;height:175px;" id="uploaded">
+                    <div id="results"></div>
+                </fieldset>
+            </form>
+        </div>
+        <br />
+        <label for="type">Restaurant Type</label>
+        <select id="restType" class="form-control">
+            <option value="restaurant">restaurant</option>
+            <option value="cafe">cafe</option>
+            <option value="bar">bar</option>
+        </select>
+        <br />
+        <label for="filter-bar">Filters and Tags</label>
+        <small>Tags make it easier for users to search for this restaurant. Please add any tags a user may think to search for</small><br />
+        <div id="filter-bar">
+            <div class="input-group">
+                <input id="filter-search" type="text" class="form-control search-form" placeholder="Enter new tags here">
+                <span class="input-group-btn">
+                    <button id="search-button" class="btn btn-primary search-btn">
+                        <img src="../images/search.png" width="18" />
+                    </button>
+                    <button id="addFilter" class="btn btn-primary filter-btn">
+                        <span>filters</span>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div id="bubble-bar" style="position:static"></div>
+        <div id="hot-bar-add">
+            <div class="hotBox inactive">Locally Owned</div>
+            <div class="hotBox inactive">Minority Owned</div>
+            <div class="hotBox inactive">Environmentally Friendly</div>
+            <div class="hotBox inactive">Locally Sourced</div>
+            <div class="hotBox inactive">Vegan Friendly</div>
+            <div class="hotBox inactive">Disability Friendly</div>
+        </div>
+        <button class="btn btn-primary" id="saveButton">Save</button>
+    </div><!-- End Body -->
+    <div class="col-sm-2"> </div>
+</div><!-- End Row-->
+<div class="modal"><!-- Place at bottom of page Overlay --></div>
+
+<!-- Gino has the APU Key -->
+<script async defer>
+    //$.cloudinary.config({ "api_key": "738137753563181", "cloud_name": "savoursip" });
+</script>
+
+<!-- /add.html -->

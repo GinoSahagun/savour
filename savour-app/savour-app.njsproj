@@ -58,6 +58,7 @@
     <Compile Include="review.model.js" />
     <Compile Include="routes.js" />
     <Compile Include="bin\www" />
+    <Compile Include="public\javascripts\edit.js" />
     <None Include="Matt Desktop.pubxml" />
     <Content Include="JSLintNet.json" />
     <Content Include="Matt Desktop.pubxml.user" />
@@ -142,6 +143,8 @@
     <Content Include="views\add.html" />
     <Content Include="views\add.jade" />
     <Content Include="views\about.jade" />
+    <Content Include="views\edit.html" />
+    <Content Include="views\edit.jade" />
     <Content Include="views\favorites.html" />
     <Content Include="views\favorites.jade" />
     <Content Include="views\list.html" />
