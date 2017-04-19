@@ -128,9 +128,10 @@ function AddMarker(pos, rest) {
     //console.log(marker.position);
     google.maps.event.addListener(marker, 'click', (function (marker) {
         return function () {
+            UnSelectMarker();
             infoWindow.open(map, marker);
             infoWindow.setContent(contentString);
-            $(".gm-style-iw").next().toggle();
+            $(".gm-style-iw").next().toggle();            
             selectedMarker = marker;
             marker.setIcon(orangeMarker);
         }

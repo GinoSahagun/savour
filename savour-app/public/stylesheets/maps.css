@@ -17,7 +17,6 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 .gmnoprint div {
     background:none !important;
 }
-
 #search-bar {
     position: absolute;
     top: 55px;
@@ -191,7 +190,8 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
     margin-right: 10px;
 }
 #info-window{
-    width: 200px;
+    min-width: 250px;
+    overflow-x: hidden;
 }
 #create-review-button {
     height: 60px;
