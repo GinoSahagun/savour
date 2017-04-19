@@ -1,15 +1,15 @@
 ﻿$(function () {
 
     //Load local data here
-    var favRestaurants;
+    var savourFavRestaurants;
     //Check to see if browser supports storage
     if (typeof (Storage) !== "undefined") {
         //Check to see if there is already an array with saved data
-        if (localStorage.getItem("favRestaurants") != null) {
-            favRestaurants = JSON.parse(localStorage.getItem("favRestaurants"));
+        if (localStorage.getItem("savourFavRestaurants") != null || localStorage.getItem("savourFavRestaurants") != "[]") {
+            savourFavRestaurants = JSON.parse(localStorage.getItem("savourFavRestaurants"));
 
             //Call retrieval of restaurants using local data
-            var jqxhr = $.getJSON("favorites-get", { favRestaurants }, function () {
+            var jqxhr = $.getJSON("favorites-get", { savourFavRestaurants }, function () {
                 console.log("success");
             })
                 .done(function () {
@@ -49,7 +49,7 @@
         }
         else {
             //No favorites saved yet!
-            $("#faves").append("<h2> No Favorites saved! Go find a restaurant and select the heart in the upper right-hand corner! </h2>");
+            $("#faves").append("<h4><center> No favorites saved! </h4><h4><center> Go find a restaurant and select the heart in the upper right-hand corner! <center></h4>");
         }
     }
     else {

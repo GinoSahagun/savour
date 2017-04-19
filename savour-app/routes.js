@@ -184,11 +184,11 @@ router.get("/favorites", function (req, res) {
 router.get("/favorites-get", function (req, res) {
 
     console.log('Getting favorite restaurants...');
-    var favRests = req.query.favRestaurants;
+    var favRests = req.query.savourFavRestaurants;
     var resStr;
 
         //then we query the database for the array of favRest IDs
-        restaurant.find({ 'id': { $in: favRests } }, function (err, doc) {
+        restaurant.find({ '_id': { $in: favRests } }, function (err, doc) {
             if (err) {
                 console.log("Error Occured");
                 res.send(err + '\nError Has Occurred') //respond with error occured

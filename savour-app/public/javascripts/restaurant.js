@@ -141,12 +141,12 @@ $(function () {
         var src = $("#favorite").attr("src");
         if (src.indexOf("-i.png") < 0) {
             //Unfavorite this restaurant
-            var storedRestaurants = JSON.parse(localStorage.getItem("favRestaurants"));
+            var storedRestaurants = JSON.parse(localStorage.getItem("savourFavRestaurants"));
             
             if (storedRestaurants.indexOf(urlID) != -1) {
                 //Remove from local storage
-                storedRestaurants.splice(storedRestaurants.indexOf(urlID, 1));
-                localStorage.setItem("favRestaurants", JSON.stringify(storedRestaurants));
+                storedRestaurants.splice(storedRestaurants.indexOf(urlID), 1);
+                localStorage.setItem("savourFavRestaurants", JSON.stringify(storedRestaurants));
             } 
             $("#favorite").attr("src", src.replace(".png", "-i.png"));  //make heart gray
 
@@ -157,16 +157,16 @@ $(function () {
                 $("#favorite").attr("src", src.replace("-i.png", ".png"));
 
                 //Check to see if there is already an array with saved data
-                if (localStorage.getItem("favRestaurants") != null) {
-                    var rests = JSON.parse(localStorage.getItem("favRestaurants"));
+                if (localStorage.getItem("savourFavRestaurants") != null) {
+                    var rests = JSON.parse(localStorage.getItem("savourFavRestaurants"));
                     rests.push(urlID);
-                    localStorage.setItem("favRestaurants", JSON.stringify(rests));
+                    localStorage.setItem("savourFavRestaurants", JSON.stringify(rests));
                 }
                 else {
                     //Create new local storage array for the user, push restaurant into array
-                    var favRestaurants = [];
-                    favRestaurants.push(urlID);
-                    localStorage.setItem("favRestaurants", JSON.stringify(favRestaurants));
+                    var savourFavRestaurants = [];
+                    savourFavRestaurants.push(urlID);
+                    localStorage.setItem("savourFavRestaurants", JSON.stringify(savourFavRestaurants));
                 }
                
             }
@@ -175,7 +175,7 @@ $(function () {
     });
 
     //Set favorites heart if restaurant is in favorites
-    var storedRestaurants = JSON.parse(localStorage.getItem("favRestaurants"));
+    var storedRestaurants = JSON.parse(localStorage.getItem("savourFavRestaurants"));
     if (storedRestaurants != null) {
         if (storedRestaurants.indexOf(urlID) != -1) {
             var src = $("#favorite").attr("src");
