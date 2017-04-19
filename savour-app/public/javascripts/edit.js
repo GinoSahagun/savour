@@ -420,8 +420,8 @@ function getRestaurantData(urlID) {
             var result = [];
             //convert JSON hours into array
             for (var i in res.hours) {
-                var openHours = res.hours[i].substring(0, 7);
-                var closedHours = res.hours[i].substring(8);
+                var openHours = res.hours[i].substring(0, 8);
+                var closedHours = res.hours[i].substring(9);
                 result.push(openHours);
                 result.push(closedHours);
             }
