@@ -107,6 +107,9 @@
         padding-top: 25px;
         float: left !important;
     }
+    .details-col{
+        padding-top: 80px;
+    }
     
 }
 @media (max-width:768px) { 
