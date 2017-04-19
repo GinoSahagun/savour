@@ -340,6 +340,7 @@ router.post("/restaurant", function (req, res) {
     try {
         var tempReview = new review({
             id: deets.id,
+            title: deets.title,
             rating: parseFloat(deets.rating),
             review: deets.comment,
             name: deets.name

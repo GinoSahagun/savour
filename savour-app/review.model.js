@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 //Define Restaurant schema
 var reviewSchema = new Schema({
     name: String,
+    title: String,
     id: String,
     rating: Number,
     review: String

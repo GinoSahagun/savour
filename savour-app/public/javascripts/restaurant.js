@@ -63,7 +63,7 @@ $(function () {
     else {
         //Pop Up a status message
         //redirect to home page if no ID was passed
-        window.location.href = "/";
+        document.location.href = "/";
     }
 
     //options example
@@ -170,6 +170,7 @@ function reviewClass() {
     this.rating = $("#review-rating").rate("getValue");
     this.id = getUrlParameter('id');
     this.name = $("#restName").text();
+    this.title = $("#title").val();
 
 }
 
@@ -191,11 +192,12 @@ function getUrlParameter(sParam) {
 
 //Create Cells for Reviews
 function CreateRow(data) {
-    if (data.id == null)
-        data.id = "";
+    var temp = data.title;
+    if (data.title == "")
+        temp = data.name;
 
     var row = "<tr><td><a href=./restaurant?id=" + data.id + "><div class='col-md-10'>";
-    row += data.name + "</div ></td><td><div class='col-md-2'></a><div class='rating'></div></div></td></tr>";
+    row += temp + "</div ></td><td><div class='col-md-2'></a><div class='rating'></div></div></td></tr>";
     row += "<tr><td colspan = '2'><div class='col-md-12'>";
     row += data.review + "</div ></td> </tr";
     //adjust the rate of it when created nvm wont work
@@ -229,8 +231,20 @@ function getRestaurantData(urlID) {
                 res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operation as its already a JSON object response
             }
 
+            
+           
             //Restaurant Image
-            $("#restImage").attr("src", res.image);
+            UrlExists(res.image, function (status) {
+                if (status === 200) {
+                    $("#restImage").attr("src", res.image);
+                }
+                else if (status === 404) {
+                    $("#restImage").attr("src", "../images/ss-logo -round.png");
+                }
+            });
+            if (res.image == "" || (typeof (res.image) == 'undefined')) {
+                $("#restImage").attr("src", "../images/ss-logo-round.png");
+            }
             //Restaurant Name
             $("#restName").text(res.name);
             $("#rest-link").append("<a href="+res.website+">Website</a>");
@@ -376,5 +390,18 @@ function updateRating(urlID, rating) {
     }).done(function () {
         console.log("Rating Updated");
         //toastr.success("Rating Updated!");
+    });
+}
+
+
+function UrlExists(url, cb) {
+    jQuery.ajax({
+        url: url,
+        dataType: 'text',
+        type: 'GET',
+        complete: function (xhr) {
+            if (typeof cb === 'function')
+                cb.apply(this, [xhr.status]);
+        }
     });
 }

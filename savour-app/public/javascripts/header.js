@@ -11,10 +11,16 @@
     var slidewidth = "250px";
     var menuneg = "-100%";
     var slideneg = "-250px";
-
+    var slideNav = $(".icon-bar");
+    var orgColor = $(".icon-bar").css("background-color");
     $("#slide-nav").on("click", toggler, function (e) {
         var selected = $(this).hasClass("slide-active");
-
+        if (slideNav.css("background-color") === orgColor) {
+            slideNav.css("background-color", "grey");
+        }
+        else {
+            slideNav.css("background-color", orgColor);
+        }
         $("#slidemenu").stop().animate({
             left: selected ? menuneg : '0px'
         });
@@ -45,6 +51,7 @@
     $(window).on("resize", function () {
         if ($(window).width() > 767 && $(".navbar-toggle").is(":hidden")) {
             $(selected).removeClass("slide-active");
+            slideNav.css("background-color", "red");
         }
     });
 });

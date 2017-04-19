@@ -112,9 +112,21 @@ function submitform() {
     calcLoc();
     if (flag) {
         //Image Upload + rest.image link
-        if ($("#uploaded").attr('src') != "") {
-            rest.image = $("#uploaded").attr('src');
+        if ($("#uploaded").attr("src") != "") {
+            rest.image = $("#uploaded").attr("src");
         }
+        if (rest.image == "" || typeof (rest.image) == "undefined") {
+            rest.image = "../images/ss-logo-round.png";
+        }
+        //Restaurant Image
+        UrlExists(rest.image, function (status) {
+            if (status === 200) {
+                rest.image = $("#uploaded").attr("src");
+            }
+            else if (status === 404) {
+                rest.image = "../images/ss-logo-round.png";
+            }
+        });
         //tags.push($("#restType option:selected").text());
         var tagsOut = tags.toString();
         console.log(rest);
@@ -381,4 +393,15 @@ function readURL(input) {
 
         reader.readAsDataURL(input.files[0]);
     }
+}
+function UrlExists(url, cb) {
+    jQuery.ajax({
+        url: url,
+        dataType: 'text',
+        type: 'GET',
+        complete: function (xhr) {
+            if (typeof cb === 'function')
+                cb.apply(this, [xhr.status]);
+        }
+    });
 }
