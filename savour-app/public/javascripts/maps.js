@@ -104,7 +104,9 @@ function AddMarker(pos, rest) {
     if (o_id == "" || typeof (o_id) == "undefined") {
         o_id = rest._id;
     }
-
+    if (rest.image == "" || (typeof (rest.image) == 'undefined')) {
+        rest.image = "../images/ss-logo-round.png";
+    }
     var contentString = '<div id="info-window">' +
         '<div id="siteNotice">' +
         "<img class='iwImg' id='popWin' src=" + rest.image + ">" +

@@ -242,7 +242,7 @@ function getRestaurantData(urlID) {
                     $("#restImage").attr("src", "../images/ss-logo -round.png");
                 }
             });
-            if (res.image == "" || (typeof (res.image) == 'undefined')) {
+            if (res.image == "" || (typeof(res.image) == 'undefined')) {
                 $("#restImage").attr("src", "../images/ss-logo-round.png");
             }
             //Restaurant Name
