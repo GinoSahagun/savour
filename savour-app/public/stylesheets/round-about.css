@@ -98,6 +98,10 @@
     z-index: 150;
 }
 
+.img {
+    max-width: 350px;
+} 
+
 /* screw writing imports, just stick it in max width since these classes are not shared between sizes */
 @media (min-width:767px) { 
 	.img {
@@ -114,7 +118,6 @@
 }
 @media (max-width:768px) { 
     #create-review-button{
-    float:right!important;
+        float:right!important;
     }    
-
 }
