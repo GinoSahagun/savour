@@ -6,15 +6,14 @@
 
 #review-form{
     display:none;
-
-
 }
 
 #review-list {
-   margin-bottom: 0px;
+    margin-bottom: 0px;
     width: 100%;
     background-color: #ffffff;
-    overflow:scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .cell-fill{
@@ -74,10 +73,7 @@
 }
 .img-center {
 	margin: 35px auto;
-
 }
-
-
 
 #restImage {
     width: 100%;
@@ -92,6 +88,16 @@
   overflow: hidden;
   background-color: #e5e5e5;
 }
+
+#favorite{
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    height: 50px;
+    width: 50px;
+    z-index: 150;
+}
+
 /* screw writing imports, just stick it in max width since these classes are not shared between sizes */
 @media (min-width:767px) { 
 	.img {
@@ -106,7 +112,6 @@
 @media (max-width:768px) { 
     #create-review-button{
     float:right!important;
-    }
-    
+    }    
 
 }
