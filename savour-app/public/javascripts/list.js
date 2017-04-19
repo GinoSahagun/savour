@@ -67,7 +67,11 @@ function Search() {
 
 function ToggleScreen() {
     if ($("#filter-menu").css("display") == "block") {
-        $("#map").css("height", "calc(100% - 250px)");
+        if ($(window).width() <= 1000) {
+            $("#map").css("height", "calc(100% - 250px)");
+        } else {
+            $("#map").css("height", "100%");
+        }        
         google.maps.event.trigger(map, "resize");
         $("#map").css("margin-top", "30");
         map.fitBounds(bounds);

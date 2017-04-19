@@ -6,15 +6,21 @@
     #search-bar{
         margin-left: 300px;
     }
-     .navbar-fixed-bottom{
+    #filter-menu{
+        margin-left:300px;
+    }
+    .navbar-fixed-bottom{
         height: 100%;
         width: 300px;
+        padding-top: 15px;
     }
     .expand-bar{
         display: none;
-
     }
     .navbar-savour{
         margin-left: 300px;
     }
+    #page-content {
+    overflow: hidden;
+}
 }
