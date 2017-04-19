@@ -136,6 +136,15 @@ $(function () {
             $(".table-responsive").toggle();
         }
     });
+
+    $("#favorite").click(function () {
+        var src = $("#favorite").attr("src");
+        if (src.indexOf("-i.png") < 0) {
+            $("#favorite").attr("src", src.replace(".png", "-i.png"));
+        } else {
+            $("#favorite").attr("src", src.replace("-i.png", ".png"));
+        }
+    });
  });
 
 //Submit Form

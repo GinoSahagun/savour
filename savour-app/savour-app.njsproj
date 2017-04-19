@@ -108,6 +108,8 @@
     <Content Include="public\images\icons\disability.png" />
     <Content Include="public\images\icons\flower-i.png" />
     <Content Include="public\images\icons\flower.png" />
+    <Content Include="public\images\icons\heart-i.png" />
+    <Content Include="public\images\icons\heart.png" />
     <Content Include="public\images\icons\house-i.png" />
     <Content Include="public\images\icons\house.png" />
     <Content Include="public\images\icons\marker-g.png" />
