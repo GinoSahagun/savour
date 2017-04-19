@@ -193,7 +193,7 @@ function getUrlParameter(sParam) {
 //Create Cells for Reviews
 function CreateRow(data) {
     var temp = data.title;
-    if (data.title == "")
+    if (data.title == "" || (typeof (data.title) == "undefined"))
         temp = data.name;
 
     var row = "<tr><td><a href=./restaurant?id=" + data.id + "><div class='col-md-10'>";
