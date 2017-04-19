@@ -5,7 +5,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <Name>savour-app</Name>
     <RootNamespace>savour-app</RootNamespace>
-    <NameOfLastUsedPublishProfile>Matt Desktop</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>laaptop</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -61,6 +61,7 @@
     <Compile Include="public\javascripts\edit.js" />
     <None Include="Matt Desktop.pubxml" />
     <Content Include="JSLintNet.json" />
+    <None Include="laaptop.pubxml" />
     <Content Include="Matt Desktop.pubxml.user" />
     <None Include="Matt Laptop.pubxml" />
     <Content Include="Matt Laptop.pubxml.user" />
@@ -109,10 +110,7 @@
     <Content Include="public\images\icons\flower.png" />
     <Content Include="public\images\icons\house-i.png" />
     <Content Include="public\images\icons\house.png" />
-    <Content Include="public\images\icons\marker-02.png" />
-    <Content Include="public\images\icons\marker-b2.png" />
     <Content Include="public\images\icons\marker-g.png" />
-    <Content Include="public\images\icons\marker-g2.png" />
     <Content Include="public\images\icons\marker-o.png" />
     <Content Include="public\images\icons\marker-b.png" />
     <Content Include="public\images\icons\pen-g.png" />
@@ -130,6 +128,7 @@
     <Content Include="public\stylesheets\admin.css" />
     <Content Include="public\stylesheets\bootstrap.css" />
     <Content Include="public\stylesheets\add.css" />
+    <Content Include="public\stylesheets\dashboard-only.css" />
     <Content Include="public\stylesheets\favorites.css" />
     <Content Include="public\stylesheets\header.css" />
     <Content Include="public\stylesheets\jquery-confirm.min.css" />

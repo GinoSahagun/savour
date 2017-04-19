@@ -1,0 +1,20 @@
+﻿@media (min-width:1000px) { 
+    #map{
+        height:100%;
+        margin-left: 300px;
+    }
+    #search-bar{
+        margin-left: 300px;
+    }
+     .navbar-fixed-bottom{
+        height: 100%;
+        width: 300px;
+    }
+    .expand-bar{
+        display: none;
+
+    }
+    .navbar-savour{
+        margin-left: 300px;
+    }
+}
