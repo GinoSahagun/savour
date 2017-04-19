@@ -47,6 +47,13 @@ function GetFilters() {
     return f;
 }
 
+function ValidateHREF(site){
+    if (site.indexOf("http://") < 0 && site.indexOf("https://") < 0) {
+        site = "http://" + site;
+    }
+    return site;
+}
+
 function RestaurantClass() {
     this.name = $("#name").val();
     this.phone = $("#phone").val();
@@ -58,8 +65,8 @@ function RestaurantClass() {
     this.address = $("#address").val();
     this.location = GetLatLon();
     this.desc = $("#desc").val();
-    this.website = $("#website").val();
-    this.menu = $("#menu").val();
+    this.website = ValidateHREF($("#website").val());
+    this.menu = ValidateHREF($("#menu").val());
     this.image = "";
 }
 //currently global variable need to figure something else out
@@ -228,6 +235,13 @@ $(function () {
             temp = temp.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
             $("#phone").val(temp);
         }
+    });
+
+    $("#website").focusout(function () {
+        $("#website").val(ValidateHREF($("#website").val()));
+    });
+    $("#menu").focusout(function () {
+        $("#menu").val(ValidateHREF($("#menu").val()));
     });
 
     // Configure Cloudinary
