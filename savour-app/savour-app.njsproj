@@ -136,6 +136,7 @@
     <Content Include="public\stylesheets\jquery.timepicker.min.css" />
     <Content Include="public\stylesheets\list.css" />
     <Content Include="public\stylesheets\maps.css" />
+    <Content Include="public\stylesheets\neighborhood.css" />
     <Content Include="public\stylesheets\round-about.css" />
     <Content Include="public\stylesheets\style.css" />
     <Content Include="public\stylesheets\theme.css" />
