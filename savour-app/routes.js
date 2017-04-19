@@ -180,6 +180,28 @@ router.get("/favorites", function (req, res) {
     res.render("favorites", { title: "My Places" });
 });
 
+//Get favorite restaurants
+router.get("/favorites-get", function (req, res) {
+
+    console.log('Getting favorite restaurants...');
+    var favRests = req.query.favRestaurants;
+    var resStr;
+
+        //then we query the database for the array of favRest IDs
+        restaurant.find({ 'id': { $in: favRests } }, function (err, doc) {
+            if (err) {
+                console.log("Error Occured");
+                res.send(err + '\nError Has Occurred') //respond with error occured
+            }
+            else {
+                resStr = JSON.parse(JSON.stringify(doc)); //JsonParse Queried Data                
+                res.send(resStr); //send response back
+            }
+        });
+    
+});
+
+
 
 //Get filter data
 router.get("/filter-data", function (req, res) {

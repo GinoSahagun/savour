@@ -140,11 +140,47 @@ $(function () {
     $("#favorite").click(function () {
         var src = $("#favorite").attr("src");
         if (src.indexOf("-i.png") < 0) {
-            $("#favorite").attr("src", src.replace(".png", "-i.png"));
+            //Unfavorite this restaurant
+            var storedRestaurants = JSON.parse(localStorage.getItem("favRestaurants"));
+            
+            if (storedRestaurants.indexOf(urlID) != -1) {
+                //Remove from local storage
+                storedRestaurants.splice(storedRestaurants.indexOf(urlID, 1));
+                localStorage.setItem("favRestaurants", JSON.stringify(storedRestaurants));
+            } 
+            $("#favorite").attr("src", src.replace(".png", "-i.png"));  //make heart gray
+
         } else {
-            $("#favorite").attr("src", src.replace("-i.png", ".png"));
+            //Check to see if browser supports local storage
+            if (typeof (Storage) !== "undefined") {
+                //Set heart to red
+                $("#favorite").attr("src", src.replace("-i.png", ".png"));
+
+                //Check to see if there is already an array with saved data
+                if (localStorage.getItem("favRestaurants") != null) {
+                    var rests = JSON.parse(localStorage.getItem("favRestaurants"));
+                    rests.push(urlID);
+                    localStorage.setItem("favRestaurants", JSON.stringify(rests));
+                }
+                else {
+                    //Create new local storage array for the user, push restaurant into array
+                    var favRestaurants = [];
+                    favRestaurants.push(urlID);
+                    localStorage.setItem("favRestaurants", JSON.stringify(favRestaurants));
+                }
+               
+            }
+            
         }
     });
+
+    //Set favorites heart if restaurant is in favorites
+    var storedRestaurants = JSON.parse(localStorage.getItem("favRestaurants"));
+    if (storedRestaurants.indexOf(urlID) != -1) {
+        var src = $("#favorite").attr("src");
+        $("#favorite").attr("src", src.replace("-i.png", ".png"));
+    }
+
  });
 
 //Submit Form
