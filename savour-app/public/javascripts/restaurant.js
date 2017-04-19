@@ -176,9 +176,11 @@ $(function () {
 
     //Set favorites heart if restaurant is in favorites
     var storedRestaurants = JSON.parse(localStorage.getItem("favRestaurants"));
-    if (storedRestaurants.indexOf(urlID) != -1) {
-        var src = $("#favorite").attr("src");
-        $("#favorite").attr("src", src.replace("-i.png", ".png"));
+    if (storedRestaurants != null) {
+        if (storedRestaurants.indexOf(urlID) != -1) {
+            var src = $("#favorite").attr("src");
+            $("#favorite").attr("src", src.replace("-i.png", ".png"));
+        }
     }
 
  });
