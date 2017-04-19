@@ -1,0 +1,10 @@
+﻿
+.right-col {
+    margin-top: 25px;
+}
+
+@media (min-width:767px) {
+    .right-col {
+        margin-top: 100px;
+    }
+}
