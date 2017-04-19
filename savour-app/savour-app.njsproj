@@ -65,7 +65,6 @@
     <Content Include="Matt Desktop.pubxml.user" />
     <None Include="Matt Laptop.pubxml" />
     <Content Include="Matt Laptop.pubxml.user" />
-    <Content Include="misc\Matt Laptop.pubxml.user" />
     <Content Include="package.json" />
     <Content Include="public\images\assets-2x\Asset 10%402x.png.png" />
     <Content Include="public\images\assets-2x\Asset 11%402x.png.png" />
@@ -165,7 +164,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
-    <Folder Include="misc\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\images\assets-2x\" />
@@ -188,7 +186,6 @@
     <Folder Include="typings\globals\mongoose\" />
     <Folder Include="typings\globals\morgan\" />
     <Folder Include="typings\globals\node\" />
-    <Folder Include="typings\globals\serve-favicon\" />
     <Folder Include="typings\globals\serve-static\" />
     <Folder Include="typings\globals\stylus\" />
     <Folder Include="typings\globals\toastr\" />
@@ -219,7 +216,6 @@
     <TypeScriptCompile Include="typings\globals\mongoose\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\morgan\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
-    <TypeScriptCompile Include="typings\globals\serve-favicon\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\serve-static\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\stylus\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\toastr\index.d.ts" />
