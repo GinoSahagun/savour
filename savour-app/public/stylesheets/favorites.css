@@ -8,3 +8,8 @@
 .fav-rest {
     margin-bottom: 25px;
 }
+
+#faves{
+    max-width: 1000px;
+    margin:auto;
+}

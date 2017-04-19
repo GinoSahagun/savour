@@ -34,7 +34,7 @@
         function CreateRest(data) {
             if (data.image == undefined || data.image == "undefined")
                 data.image = "images/brandon.jpg";
-            var rest = "<div class=\"col-md-3 fav-rest\"><a href=./restaurant?id=" + data._id + ">" + "<img class=\"img-circle img-favorites\" src=\"" + data.image + "\"";
+            var rest = "<div class=\"col-sm-3 fav-rest\"><a href=./restaurant?id=" + data._id + ">" + "<img class=\"img-circle img-favorites\" src=\"" + data.image + "\"";
             rest += "<h3><center>" + data.name + "</center></h3></a>";
             rest+= "</div>";
             return rest;
