@@ -1,6 +1,7 @@
 ﻿var tbl;
 var tags = [];
-var types = ["cafe","restaurant","bar"];
+var types = ["cafe", "restaurant", "bar"];
+var sort = "distance";
 var mainFilters = [];
 var restaurants = [];
 var activeRestaurants = [];
@@ -73,6 +74,28 @@ function AddBubble(str) {
             }
         });
     }
+}
+
+function ChangeSort(sortby) {
+    switch (sortby) {
+        case "distance":
+            $(".distance").addClass("sort-selected");
+            $(".sort-rating").removeClass("sort-selected");
+            $(".alphabetical").removeClass("sort-selected");
+            break;
+        case "sort-rating":
+            $(".distance").removeClass("sort-selected");
+            $(".sort-rating").addClass("sort-selected");
+            $(".alphabetical").removeClass("sort-selected");
+            break;
+        case "alphabetical":
+            $(".distance").removeClass("sort-selected");
+            $(".sort-rating").removeClass("sort-selected");
+            $(".alphabetical").addClass("sort-selected");
+            break;
+    }
+    sort = sortby;
+    UpdateRestaurants();
 }
 
 function Search() {
@@ -212,6 +235,27 @@ function sortLocations(locations) {
 function calcDistance(p1, p2) {
     return parseInt((google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2));
 }
+
+function SortActiveRestaurants(_activeRestaurants, _dist) {
+    var sortedRests = [];
+    for (_d of _dist) {
+        sortedRests.push(_activeRestaurants[_d.index]);
+    }
+    return sortedRests;
+}
+
+function dynamicSort(property) {
+    var sortOrder = 1;
+    if (property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a, b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
+
 function UpdateRestaurants() {
     activeRestaurants = GetActive(restaurants);
     console.log("Active Restaurants: ", activeRestaurants);
@@ -229,16 +273,27 @@ function UpdateRestaurants() {
     if (userMarker != null) {
         bounds.extend(userMarker.position);
     }
-    // Extend the map bounds to fit all the restaurants
+    // Sort the list
+    if (sort == "distance") {
+        for (d of activeRestaurants) {
+            if (userMarker != null) {
+                temp = calcDistance(userMarker.position, GooglePOS(d.location));
+                var spot = new locs(temp, i);
+                dist.push(spot);
+                i++;
+            }
+        }
+        sortLocations(dist);
+        activeRestaurants = SortActiveRestaurants(activeRestaurants, dist);
+    } else if (sort == "alphabetical") {
+        activeRestaurants = activeRestaurants.sort(dynamicSort("name"))
+    } else {
+        activeRestaurants = activeRestaurants.sort(dynamicSort("name")).sort(dynamicSort("rating")).reverse();
+    }
+    // display all restaurants
     for (d of activeRestaurants) {
         AddMarker(GooglePOS(d.location), d);
         bounds.extend(GooglePOS(d.location));
-        if (user != null) {
-            temp = calcDistance(userMarker.position, GooglePOS(d.location));
-            var spot = new locs(temp, i);
-            dist.push(spot);
-            i++;
-        }
         map.fitBounds(bounds);
         var row = CreateRow(d);
         tbl.append(row);
@@ -258,8 +313,6 @@ function UpdateRestaurants() {
             },
         }); //needed for each appended rating
     }
-    sortLocations(dist);
-    console.log(dist);
 }
 
 function retrieveRestaurants() {
@@ -299,14 +352,27 @@ function retrieveRestaurants() {
         bounds = new google.maps.LatLngBounds();
         //var geometry = new google.maps.geometry;
         //console.log(geometry);
+
+        // Sort the list
+        if (sort == "distance") {
+            for (d of activeRestaurants) {
+                if (userMarker != null) {
+                    temp = calcDistance(userMarker.position, GooglePOS(d.location));
+                    var spot = new locs(temp, i);
+                    dist.push(spot);
+                    i++;
+                }
+            }
+            sortLocations(dist);
+            activeRestaurants = SortActiveRestaurants(activeRestaurants, dist);
+        } else if (sort == "alphabetical") {
+            activeRestaurants = activeRestaurants.sort(dynamicSort("name"))
+        } else {
+            activeRestaurants = activeRestaurants.sort(dynamicSort("name")).sort(dynamicSort("rating")).reverse();
+        }
+        // Display restaurants on map
         for (d of activeRestaurants) {
             AddMarker(GooglePOS(d.location), d);
-            if (userMarker != null) {
-                temp = calcDistance(userMarker.position, GooglePOS(d.location));
-                var spot = new locs(temp, i);
-                dist.push(spot);
-                i++;
-            }
             bounds.extend(GooglePOS(d.location));
             map.fitBounds(bounds);
             var row = CreateRow(d);

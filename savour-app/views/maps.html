@@ -15,36 +15,36 @@
 <div id="filter-menu">
     <div class="container type-selector">
         <div class="row" style="height:80px">
-            <div class="r-third cafe" onclick="ToggleType('cafe')">
+            <div class="r-third cafe clickable" onclick="ToggleType('cafe')">
                 <img src="images/assets-3x/cafe.png" />
             </div>
-            <div class="r-third restaurant" onclick="ToggleType('restaurant')">
+            <div class="r-third restaurant clickable" onclick="ToggleType('restaurant')">
                 <img src="images/assets-3x/restaurant.png" />
             </div>
-            <div class="r-third bar" onclick="ToggleType('bar')">
+            <div class="r-third bar clickable" onclick="ToggleType('bar')">
                 <img src="images/assets-3x/bar.png" />
             </div>
         </div>
         <div class="row">
-            <div class="r-third cafe" onclick="ToggleType('cafe')">
+            <div class="r-third cafe clickable" onclick="ToggleType('cafe')">
                 cafes
             </div>
-            <div class="r-third restaurant" onclick="ToggleType('restaurant')">
+            <div class="r-third restaurant clickable" onclick="ToggleType('restaurant')">
                 restaurants
             </div>
-            <div class="r-third bar" onclick="ToggleType('bar')">
+            <div class="r-third bar clickable" onclick="ToggleType('bar')">
                 bars
             </div>
         </div>
     </div>
     <div class="sort-by row">
-        <div class="r-third">
+        <div class="r-third clickable distance sort-selected" onclick="ChangeSort('distance')">
             distance
         </div>
-        <div class="r-third middle-sort">
+        <div class="r-third middle-sort clickable sort-rating" onclick="ChangeSort('sort-rating')">
             rating
         </div>
-        <div class="r-third">
+        <div class="r-third clickable alphabetical" onclick="ChangeSort('alphabetical')">
             a&ndash;z
         </div>
     </div>

@@ -32,6 +32,11 @@
   width: 100%;
 }
 
+.sort-selected{
+    background-color: #146734;
+    color: #ffffff;
+}
+
  .dashTable td,
  .dashTable tr {
     background-color: #ffffff !important;

@@ -29,6 +29,9 @@ body.slide-active {
     z-index: 150;
 }
 
+.clickable{
+    cursor:pointer;
+}
 
 
 /* put toggle bars on the left :: not using button */
