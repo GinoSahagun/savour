@@ -126,6 +126,7 @@
     <Content Include="public\images\search.png" />
     <Content Include="public\images\ss-logo-round.png" />
     <Content Include="public\images\ss-logo-wide.png" />
+    <Content Include="public\images\ssTeam.jpg" />
     <Content Include="public\stylesheets\admin.css" />
     <Content Include="public\stylesheets\bootstrap.css" />
     <Content Include="public\stylesheets\add.css" />
