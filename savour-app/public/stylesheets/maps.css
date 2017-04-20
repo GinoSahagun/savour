@@ -7,6 +7,10 @@
     transition:  margin .5s;
 }
 
+#filter-search{
+    font-size: 16px;
+}
+
 /* Remove text at bottom of maps */
 a[href^="http://maps.google.com/maps"]{display:none !important}
 a[href^="https://maps.google.com/maps"]{display:none !important}
