@@ -66,7 +66,7 @@
     <None Include="Matt Laptop.pubxml" />
     <Content Include="Matt Laptop.pubxml.user" />
     <Content Include="package.json" />
-    <Content Include="public\images\allison.JPG" />
+    <Content Include="public\images\allison.jpg" />
     <Content Include="public\images\ash.jpg" />
     <Content Include="public\images\assets-2x\Asset 10%402x.png.png" />
     <Content Include="public\images\assets-2x\Asset 11%402x.png.png" />
