@@ -41,7 +41,6 @@ $(function () {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
-
 /*
  * Fix for footer when the keyboard is displayed
  */

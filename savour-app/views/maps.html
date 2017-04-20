@@ -99,6 +99,19 @@
         </div>
     </div>
 </div>
+<div class="modal">
+
+</div>
+<script type="text/javascript">
+    //loading gif
+    $body = $("body");
+    $(window).ajaxStart(function () {
+        $body.addClass("loading");
+    });
+    $(window).ajaxStop(function () {
+        $body.removeClass("loading");
+    });
+</script>
 <!-- Matt has the API Key -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi-ncVIncoUwpSGqxxRpR2loOmNB2tp8Y&callback=initMap&libraries=geometry">
 </script>

@@ -66,6 +66,8 @@
     <None Include="Matt Laptop.pubxml" />
     <Content Include="Matt Laptop.pubxml.user" />
     <Content Include="package.json" />
+    <Content Include="public\images\allison.JPG" />
+    <Content Include="public\images\ash.jpg" />
     <Content Include="public\images\assets-2x\Asset 10%402x.png.png" />
     <Content Include="public\images\assets-2x\Asset 11%402x.png.png" />
     <Content Include="public\images\assets-2x\Asset 12%402x.png.png" />
@@ -98,11 +100,13 @@
     <Content Include="public\images\assets\Full.png" />
     <Content Include="public\images\blue-marker.png" />
     <Content Include="public\images\brandon.jpg" />
+    <Content Include="public\images\crystal.jpeg" />
     <Content Include="public\images\curbside.jpg" />
     <Content Include="public\images\filter.png" />
     <Content Include="public\images\gino.jpg" />
     <Content Include="public\images\icons\arrow-down.png" />
     <Content Include="public\images\icons\arrow.png" />
+    <Content Include="public\images\haley.jpg" />
     <Content Include="public\images\icons\carrot-i.png" />
     <Content Include="public\images\icons\carrot.png" />
     <Content Include="public\images\icons\disability-i.png" />
@@ -122,10 +126,12 @@
     <Content Include="public\images\icons\person.png" />
     <Content Include="public\images\icons\tree-i.png" />
     <Content Include="public\images\icons\tree.png" />
+    <Content Include="public\images\jessinia.jpg" />
     <Content Include="public\images\loading.gif" />
     <Content Include="public\images\matt.jpg" />
     <Content Include="public\images\queenanne.jpg" />
     <Content Include="public\images\search.png" />
+    <Content Include="public\images\serena.jpg" />
     <Content Include="public\images\ss-logo-round.png" />
     <Content Include="public\images\ss-logo-wide.png" />
     <Content Include="public\images\ssTeam.jpg" />
