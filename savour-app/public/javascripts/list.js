@@ -1,7 +1,7 @@
 ﻿var tbl;
 var tags = [];
 var types = ["cafe","restaurant","bar"];
-var mainFilters = ["locally-owned", "minority-owned", "environmentally-friendly", "locally-sourced", "vegan-friendly", "disability-friendly"];
+var mainFilters = [];
 var restaurants = [];
 var activeRestaurants = [];
 
@@ -24,7 +24,6 @@ function CreateRow(data) {
 $(function () {
     //Call initial retrieval of restaurants on page load
     retrieveRestaurants();
-
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -150,7 +149,10 @@ $(function () {
     });
 });
 
-function matchingFilter(rest) {
+function MatchingFilter(rest) {
+    if (mainFilters.length <= 0) {
+        return true;
+    }
     if (rest.filters["locally-owned"] == "1" && mainFilters.indexOf("locally-owned") >= 0) {
         return true;
     }
@@ -178,7 +180,7 @@ function GetActive(rest){
         if (types.indexOf(r.type) < 0) {
             continue;
         }
-        if (!matchingFilter(r)) {
+        if (!MatchingFilter(r)) {
             continue;
         }
         active.push(r);
@@ -212,7 +214,8 @@ function UpdateRestaurants() {
     var i = 0;
     var user = userMarker;
     ClearMarkers()
-    
+    bounds.extend(userMarker.position);
+    // Extend the map bounds to fit all the restaurants
     for (d of activeRestaurants) {
         AddMarker(GooglePOS(d.location), d);
         bounds.extend(GooglePOS(d.location));

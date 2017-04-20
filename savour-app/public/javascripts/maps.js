@@ -24,7 +24,7 @@ function initMap() {
                     icon: blueMarker,
                     title: "You are here"
                 });
-
+                bounds.extend(userMarker.position);
                 map.setCenter(userPos);
             } else {
                 userMarker.setPosition(userPos);
