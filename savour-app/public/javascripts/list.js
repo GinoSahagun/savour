@@ -24,6 +24,24 @@ function CreateRow(data) {
 $(function () {
     //Call initial retrieval of restaurants on page load
     retrieveRestaurants();
+
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-bottom-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "150",
+        "hideDuration": "500",
+        "timeOut": "2000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
 });
 
 function AddBubble(str) {
@@ -49,11 +67,13 @@ function AddBubble(str) {
 
 function Search() {
     var val = $("#filter-search").val();
+    val = val.toLowerCase();
 
     //Check to see if filter is in database, apply if found
     $.getJSON("filter-data", { name: val })
         .fail(function () {
-            window.alert("Could not find filter, please try a different one.");
+            toastr.error("Tag does not exist, please try another one!");
+            $("#filter-search").val("");
         })
         .always(function () {
             console.log("Complete");
