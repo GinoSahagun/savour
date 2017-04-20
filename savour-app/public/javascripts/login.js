@@ -1,21 +1,19 @@
-﻿var attempt = 3; // Variable to count number of attempts.
-// Below function Executes on click of login button.
+﻿// Below function Executes on click of login button.
 function validate() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-    if (true) {
-        window.location = "admin"; // Redirecting to other page.
-        return false;
-    }
-    else {
-        //attempt--;// Decrementing by one.
-        alert("You have left " + attempt + " attempt;");
-        // Disabling fields after 3 attempts.
-        if (attempt == 0) {
-            document.getElementById("username").disabled = true;
-            document.getElementById("password").disabled = true;
-            document.getElementById("submit").disabled = true;
-            return false;
+
+    $.ajax({
+        url: "./login-check",
+        type: "GET",
+        data: { username: username, password: password }
+    }).done(function (data) {
+        if (data == true) {
+            window.location = "admin"; // Successful login. Redirecting to other page.
         }
-    }
+        else {
+            alert("Incorrect, please try again.");
+        }
+
+    });
 }

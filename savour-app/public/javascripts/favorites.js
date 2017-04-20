@@ -5,7 +5,7 @@
     //Check to see if browser supports storage
     if (typeof (Storage) !== "undefined") {
         //Check to see if there is already an array with saved data
-        if (localStorage.getItem("savourFavRestaurants") != null || localStorage.getItem("savourFavRestaurants") != "[]") {
+        if (localStorage.getItem("savourFavRestaurants") != null && localStorage.getItem("savourFavRestaurants") != "[]") {
             savourFavRestaurants = JSON.parse(localStorage.getItem("savourFavRestaurants"));
 
             //Call retrieval of restaurants using local data

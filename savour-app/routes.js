@@ -433,6 +433,19 @@ router.get('/admin', function (req, res) {
 });
 
 //Retrieve collections from database
+router.get('/login-check', function (req, res) {
+    var username = req.query.username;
+    var password = req.query.password;
+
+    if (username == "savourAdmin" && password == "savoursipSVC") {
+        res.send(true);
+    }
+    else {
+        res.send(false);
+    }
+});
+
+//Retrieve collections from database
 router.get('/search-data', function (req, res) {
     console.log('Getting Restaurants...');
     var activeFilters = req.query.tags;
