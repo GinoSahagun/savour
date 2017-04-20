@@ -41,6 +41,18 @@ $(function () {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
+
+/*
+ * Fix for footer when the keyboard is displayed
+ */
+    $(document).on('focus', 'input, textarea', function () {
+        $(".navbar-fixed-bottom small-listbar").hide();
+    });
+
+    $(document).on('blur', 'input, textarea', function () {
+        $(".navbar-fixed-bottom small-listbar").show();
+    });
+
 });
 
 function AddBubble(str) {
