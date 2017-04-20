@@ -96,6 +96,9 @@ function ChangeSort(sortby) {
     }
     sort = sortby;
     UpdateRestaurants();
+    if ($(window).width() < 1000) {
+        ToggleScreen();
+    }
 }
 
 function Search() {
@@ -188,25 +191,37 @@ function MatchingFilter(rest) {
     if (mainFilters.length <= 0) {
         return true;
     }
-    if (rest.filters["locally-owned"] == "1" && mainFilters.indexOf("locally-owned") >= 0) {
-        return true;
+    if (mainFilters.indexOf("locally-owned") >= 0) {
+        if (rest.filters["locally-owned"] != "1") {
+            return false;
+        }
     }
-    if (rest.filters["minority-owned"] == "1" && mainFilters.indexOf("minority-owned") >= 0) {
-        return true;
+    if (mainFilters.indexOf("minority-owned") >= 0) {
+        if (rest.filters["minority-owned"] != "1") {
+            return false;
+        }
     }
-    if (rest.filters["environmentally-friendly"] == "1" && mainFilters.indexOf("environmentally-friendly") >= 0) {
-        return true;
+    if (mainFilters.indexOf("environmentally-friendly") >= 0) {
+        if (rest.filters["environmentally-friendly"] != "1") {
+            return false;
+        }
     }
-    if (rest.filters["locally-sourced"] == "1" && mainFilters.indexOf("locally-sourced") >= 0) {
-        return true;
+    if (mainFilters.indexOf("locally-sourced") >= 0) {
+        if (rest.filters["locally-sourced"] != "1") {
+            return false;
+        }
     }
-    if (rest.filters["vegan-friendly"] == "1" && mainFilters.indexOf("vegan-friendly") >= 0) {
-        return true;
+    if (mainFilters.indexOf("vegan-friendly") >= 0) {
+        if (rest.filters["vegan-friendly"] != "1") {
+            return false;
+        }
     }
-    if (rest.filters["disability-friendly"] == "1" && mainFilters.indexOf("disability-friendly") >= 0) {
-        return true;
+    if (mainFilters.indexOf("disability-friendly") >= 0) {
+        if (rest.filters["disability-friendly"] != "1") {
+            return false;
+        }
     }
-    return false;
+    return true;
 }
 
 function GetActive(rest){

@@ -149,6 +149,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
     float: left;
     text-align: center;
     padding: 3px;
+    cursor:pointer;
 }
 
     .mf-icon img {
@@ -165,6 +166,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
     vertical-align: middle;
     line-height: 40px;
     color: #146734;
+    cursor:pointer;
 }
 
 .unselected {
