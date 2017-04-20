@@ -101,6 +101,8 @@
     <Content Include="public\images\curbside.jpg" />
     <Content Include="public\images\filter.png" />
     <Content Include="public\images\gino.jpg" />
+    <Content Include="public\images\icons\arrow-down.png" />
+    <Content Include="public\images\icons\arrow.png" />
     <Content Include="public\images\icons\carrot-i.png" />
     <Content Include="public\images\icons\carrot.png" />
     <Content Include="public\images\icons\disability-i.png" />

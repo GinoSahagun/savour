@@ -130,6 +130,7 @@ $(function () {
     $("#addFilter").click(function () {
         $("#addFilter").prop("disabled", true);
         ToggleScreen();
+        ToggleListBarArrow();
         setTimeout(function () {
             $("#addFilter").prop("disabled", false);
             //map.fitBounds(bounds);
@@ -373,10 +374,30 @@ function ToggleListBar() {
     if ($(".navbar-fixed-bottom").is(".min-listbar")) {
         ToggleScreen();
         $(".navbar-fixed-bottom").toggleClass("small-listbar");
+        ListArrowUp();
     } else {
         $(".navbar-fixed-bottom").toggleClass("small-listbar");
         if ($("#filter-menu").css("display") == "block") {
             $("#filter-menu").toggle();
         }
+    }
+    ToggleListBarArrow();
+}
+
+function ToggleListBarArrow() {
+    if ($(".navbar-fixed-bottom").hasClass("small-listbar") || $(".navbar-fixed-bottom").hasClass("min-listbar")) {
+        ListArrowUp();
+    } else {
+        ListArrowDown();
+    }
+}
+
+
+function ListArrowUp() {
+    $(".expand-bar img").attr("src", $(".expand-bar img").attr("src").replace("-down.png", ".png"));
+}
+function ListArrowDown() {
+    if ($(".expand-bar img").attr("src").indexOf("-down.png") < 0) {
+        $(".expand-bar img").attr("src", $(".expand-bar img").attr("src").replace(".png", "-down.png"));
     }
 }
