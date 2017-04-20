@@ -227,7 +227,9 @@ function UpdateRestaurants() {
     var i = 0;
     var user = userMarker;
     ClearMarkers()
-    bounds.extend(userMarker.position);
+    if (userMarker != null) {
+        bounds.extend(userMarker.position);
+    }
     // Extend the map bounds to fit all the restaurants
     for (d of activeRestaurants) {
         AddMarker(GooglePOS(d.location), d);
