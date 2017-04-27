@@ -56,9 +56,7 @@ $(function () {
         $body.removeClass("loading");
     });
     if (urlID) {
-
         getRestaurantData(urlID);
-        getReviewData(urlID);
     }
     else {
         //Pop Up a status message
@@ -326,9 +324,13 @@ function getRestaurantData(urlID) {
             $("#address").append(GetAddressAnchor(res.address));
             $("#phone").text(res.phone);
             SetFilters(res.filters);
+
+            //Get review data
+            getReviewData(urlID);
         })
         .fail(function () {
             console.log("error");
+            window.location.href = "/";
         })
         .always(function () {
             console.log("complete");
