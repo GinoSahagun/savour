@@ -426,6 +426,23 @@ router.get('/review-data', function (req, res) {
 
 });
 
+//Using load Restaurant Data Function get JSON request
+router.get("/retrieve-all-restaurants", function (req, res) {
+
+        //then we query the database for the specific Object ID
+    restaurant.find( {}, function (err, doc) {
+            if (err) {
+                console.log("Error Occurred");
+                res.send(err + '\nError Has Occurred') //respond with error occurred
+            }
+            else {
+                resStr = JSON.parse(JSON.stringify(doc)); //JsonParse Queried Data 
+                res.send(resStr); //send response back
+            }
+        });
+
+});
+
 
 //Retrieve collections from database
 router.get('/admin', function (req, res) {

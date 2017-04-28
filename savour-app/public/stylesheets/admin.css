@@ -4,7 +4,7 @@
     color: #444;
 }
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+/* Add a background color to the button if it is clicked on or hovered over*/
 .delete.active, .delete:hover {
     background-color: #ff0000;
     color: white;
@@ -18,7 +18,7 @@ figcaption {
 
 .show {
     height: auto;
-    max-height: 500px;
+    max-height: 200px;
 }
 
 .toggle-more-less {
