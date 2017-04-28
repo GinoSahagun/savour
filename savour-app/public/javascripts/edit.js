@@ -51,7 +51,7 @@ function RestaurantClass() {
     this.name = $("#name").val();
     this.phone = $("#phone").val();
     this.hours = JSON.parse(GetHours());
-    this.pricing = $("#price").val();
+    this.pricing = $("#priceRating").rate("getValue");
     this.filters = JSON.parse(GetFilters());
     this.type = $("#restType option:selected").text();
     this.address = $("#address").val();
@@ -455,7 +455,7 @@ function getRestaurantData(urlID) {
             $("#sat-open").val(result[12]);
             $("#sat-close").val(result[13]);
 
-            $("#price").val(res.pricing);
+            $("#priceRating").rate("setValue", res.pricing);
             $("#address").val(res.address);
             $("#desc").val(res.desc);
             $("#website").val(res.website);
