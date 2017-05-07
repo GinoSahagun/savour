@@ -99,6 +99,10 @@ function calcLoc() {
 
 function submitform() {
     var rest = new RestaurantClass();
+    if (!wrapperValHours()) {
+        toastr.error("Please Verify Hours");
+        return false;
+    }
     if (!(validatePhone())) {
         toastr.error("Enter Valid Phone Number");
         $("#phone").focus();
@@ -110,6 +114,9 @@ function submitform() {
         return false;
     }
     calcLoc();
+
+
+
     if (flag) {
         //Image Upload + rest.image link
         if ($("#uploaded").attr('src') != "") {
@@ -165,7 +172,57 @@ function ValidateHREF(site) {
     }
     return site;
 }
+//function to validate all hours + ensure the times
+function valHours(day) {
 
+    var open = $("#" + day.toLowerCase() + "-open").val();
+    var close = $("#" + day.toLowerCase() + "-close").val();
+    var reg = (/(\d{1,2}):(\d{2})\s([AP][M])/);
+    var dayOpen = $("#" + day.toLowerCase() + "-open");
+    var dayClose = $("#" + day.toLowerCase() + "-close");
+    var stuff = dayOpen;
+    var Regex = new RegExp(reg);
+
+    if (Regex.test(open) && Regex.test(close)) {
+        open = open.split(" ");
+        close = close.split(" ");
+        if (open[1] == close[1]) {
+            open = open[0].split(":");
+            close = close[0].split(":");
+            if (parseInt(close[0]) <= parseInt(open[0])) {
+                dayClose.focus();
+                //dayClose.click();
+                toastr.error("Please Verify Close Time");
+                return false;
+            }
+            else
+                return true;
+
+        }
+        else
+            return true;
+    }
+    else if (!Regex.test(open)) {
+        dayOpen.focus();
+        toastr.error("Please Verify Hours");
+        return false;
+    }
+    else if (!Regex.test(close)) {
+        dayClose.focus();
+        toastr.error("Please Verify Hours");
+        return false;
+    }
+
+
+}
+//Wrapper function to validate all hours + ensure the times
+function wrapperValHours() {
+
+    if (valHours("SUN") && valHours("MON") && valHours("TUE") && valHours("WED") && valHours("THU") && valHours("FRI") && valHours("SAT"))
+        return true;
+    else
+        return false;
+}
 $(function () {
     var restID = getUrlParameter('id');
 
@@ -288,6 +345,7 @@ $(function () {
 
     $("#saveButton").click(function () {
         submitform();
+        return false;
     });
     $("#addressButton").click(function () {
         calcLoc();

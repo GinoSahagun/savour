@@ -110,6 +110,7 @@
     #create-review-button{
         padding-top: 25px;
         float: left !important;
+        cursor: pointer;
     }
     .details-col{
         padding-top: 80px;
@@ -118,5 +119,6 @@
 @media (max-width:768px) { 
     #create-review-button{
         float:right!important;
+        cursor: pointer;
     }    
 }
