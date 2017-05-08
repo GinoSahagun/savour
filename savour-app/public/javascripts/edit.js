@@ -228,7 +228,7 @@ $(function () {
 
     if (restID) {
         getRestaurantData(restID);
-        //getReviewData(restID);
+        getReviewData(restID);
     }
     else {
         //Pop Up a status message
@@ -560,4 +560,64 @@ function setFilters(rest) {
         filters.push("disability-friendly");
         $(".hotbox")[5].className = "hotbox"
     }
+}
+
+function getReviewData(urlID) {
+
+    //Test using 58c64e8b90ffbe4bcc94080e
+    $.getJSON("review-data", { id: urlID })
+        .done(function (parsedResponse) {
+            var res;
+            //Recievd Response Text as JSON hopefully
+            if (typeof parsedResponse === 'string')
+                res = parsedResponse;
+            else {
+                res = JSON.parse(JSON.stringify(parsedResponse)); //make sure object is parsed
+            }
+
+            for (d of res) {
+                var newRow = CreateRow(d);
+                $(".reviews").append(newRow);   //append new review
+            }
+
+            function CreateRow(data) {
+                if(data.title == undefined) {
+                    data.title = data.name;
+                }
+                var row = "<figure><button class=\"toggle-more-less\">" + data.title + "</button><figcaption>";
+                row += "<h4> Review:" + data.review + "</h4>";
+                row += "<h6 class=\"id\">Review ID:" + data._id + "</h6>";
+                row += "<button id=\"delete\" class=\"delete\"> Delete </button></figcaption></figure>";
+                return row;
+            }
+
+            $(".toggle-more-less").click(function () {
+                $(this).closest("figure").find("figcaption").toggleClass("show"); //toggle the review's details
+            });
+
+             $(".delete").click(function () {
+                var choice = confirm("Are you sure you want to delete this review?");
+                if (choice == true) {
+                    //Get closest review ID
+                    var id = $(this).prev("h6")["0"].innerHTML;
+                    id = id.substr(10); //extract id
+                    //Call ajax method to delete review
+                    $.ajax({
+                        url: "./delete-review",
+                        type: "POST",
+                        data: { review: id }
+                    }).done(function () {
+                        $(".reviews figure").remove();  //clear reviews and regenerate list
+                        getReviewData(urlID);
+                    });
+                }
+            });
+
+        })
+        .fail(function () {
+            console.log("Error when trying to delete review");   //Could not delete review for some reason
+        })
+        .always(function () {
+            //console.log("complete");
+        });
 }

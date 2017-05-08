@@ -72,6 +72,21 @@ router.post('/delete-restaurant', function (req, res) {
 
 });
 
+//Delete restaurant review
+router.post('/delete-review', function (req, res) {
+    var o_id = mongoose.Types.ObjectId(req.body.review); //convert into Object ID
+    //Delete the review with this id
+    review.findByIdAndRemove(o_id, function (err) {
+        if (err)
+            res.send(err);
+        else {
+            console.log("Review deleted");
+            res.sendStatus(200);    //Send the good new
+        }
+    });
+
+});
+
 /* GET edit page. */
 router.get('/edit', function (req, res) {
     res.render('edit', { title: 'Edit Restaurant' });
