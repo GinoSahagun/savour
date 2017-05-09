@@ -74,6 +74,10 @@ $(document).ready(function () {
                 window.location.href = url + id;
             });
 
+            $("#clean").click(function () {
+                window.alert("Database Successfully Cleaned");
+            });
+
         });
     });
 

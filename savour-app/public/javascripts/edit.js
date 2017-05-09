@@ -485,7 +485,7 @@ function getRestaurantData(urlID) {
                 res = JSON.parse(JSON.stringify(parsedResponse)); //may be pointless operation as its already a JSON object response
             }
 
-            //Restaurant Name
+            //Restaurant Name and phone number
             $("#name").val(res.name);
             $("#phone").val(res.phone);
 
@@ -498,8 +498,8 @@ function getRestaurantData(urlID) {
                 result.push(openHours);
                 result.push(closedHours);
             }
-            $("#sun-open").val(result[0]);
-            $("#sun-close").val(result[01]);
+            $("#sun-open").val(result[0]);      //fill in time fields
+            $("#sun-close").val(result[1]);
             $("#mon-open").val(result[2]);
             $("#mon-close").val(result[3]);
             $("#tue-open").val(result[4]);
@@ -535,7 +535,7 @@ function getRestaurantData(urlID) {
             console.log("complete");
         });
 }
-function setFilters(rest) {
+function setFilters(rest) {     //set filters according to pre-assigned values
     if (rest.filters["locally-owned"] == "1") {
         filters.push("locally-owned");
         $(".hotbox")[0].className = "hotbox"
@@ -581,8 +581,8 @@ function getReviewData(urlID) {
             }
 
             function CreateRow(data) {
-                if(data.title == undefined) {
-                    data.title = data.name;
+                if(data.title == undefined || data.title == "") {
+                    data.title = "No Review Title"; //Give review default name if no title exists
                 }
                 var row = "<figure><button class=\"toggle-more-less\">" + data.title + "</button><figcaption>";
                 row += "<h4> Review:" + data.review + "</h4>";
