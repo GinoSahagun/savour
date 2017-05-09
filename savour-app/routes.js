@@ -419,7 +419,7 @@ router.get("/restaurant-data", function (req, res) {
 
 });
 //Using load Restaurant Data Function get Json request
-router.get('/review-data', function (req, res) {
+router.get("/review-data", function (req, res) {
     console.log('Getting Reviews...');
     var args = req.query.id;
     var resStr;
@@ -461,19 +461,25 @@ router.get("/retrieve-all-restaurants", function (req, res) {
 
 //Retrieve collections from database
 router.get('/admin', function (req, res) {
-    res.render('admin', { title: 'Administrator' });
+    if (req.query.secret == "a2e7d053-b954-4620-b763-0f4240cd36bd") {
+        res.render('admin', { title: 'Administrator' });
+    }
+    else {
+        res.render('login', { title: 'Invalid Login' });
+    }
 });
 
+
 //Retrieve collections from database
-router.get('/login-check', function (req, res) {
+router.get("/login-check", function (req, res) {
     var username = req.query.username;
     var password = req.query.password;
 
     if (username == "savourAdmin" && password == "savoursipSVC") {
-        res.send(true);
+        res.render("admin", {"secret": "a2e7d053-b954-4620-b763-0f4240cd36bd",  title: "Administrator" });
     }
     else {
-        res.send(false);
+        res.render("login", {title: "Invalid Login" });
     }
 });
 
