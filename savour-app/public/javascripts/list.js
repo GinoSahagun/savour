@@ -289,7 +289,7 @@ function UpdateRestaurants() {
         bounds.extend(userMarker.position);
     }
     // Sort the list
-    if (sort == "distance") {
+    if (sort == "distance" && userMarker != null) {
         for (d of activeRestaurants) {
             if (userMarker != null) {
                 temp = calcDistance(userMarker.position, GooglePOS(d.location));
@@ -369,14 +369,12 @@ function retrieveRestaurants() {
         //console.log(geometry);
 
         // Sort the list
-        if (sort == "distance") {
+        if (sort == "distance" && userMarker != null) {
             for (d of activeRestaurants) {
-                if (userMarker != null) {
-                    temp = calcDistance(userMarker.position, GooglePOS(d.location));
-                    var spot = new locs(temp, i);
-                    dist.push(spot);
-                    i++;
-                }
+                temp = calcDistance(userMarker.position, GooglePOS(d.location));
+                var spot = new locs(temp, i);
+                dist.push(spot);
+                i++;
             }
             sortLocations(dist);
             activeRestaurants = SortActiveRestaurants(activeRestaurants, dist);
