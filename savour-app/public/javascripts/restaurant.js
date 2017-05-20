@@ -292,8 +292,16 @@ function getRestaurantData(urlID) {
             }
             //Restaurant Name
             $("#restName").text(res.name);
-            $("#rest-link").append("<a href="+res.website+">Website</a>");
-            $("#menu-link").append("<a href="+res.menu+">Menu</a>");
+            var website = res.website;
+            if (website.slice(-1) == "/") {
+                website = website.slice(0, -1);
+            }
+            var menu = res.menu;
+            if (menu.slice(-1) == "/") {
+                menu = menu.slice(0, -1);
+            }
+            $("#menu-link").append("<a href=" + menu + ">Menu</a>");
+            $("#rest-link").append("<a href=" + website + ">Website</a>");
 
             var result = [];
             //convert JSON hours into array
