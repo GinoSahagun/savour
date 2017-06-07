@@ -2,20 +2,118 @@
 This is the git Repository for the Savour and Sip app, created for the computer science senior project class, Software Engineering.
 The project was built by [Matt G. Hall](githubb.com/mattghall), [Brandon Duncan](githubb.com/brandondunc94), and [Gino Sahagun](GinoSahagun).
 
+## Environment
+Instructions for setting up your dev environment
+- [Install Node.js (32 bit)](https://nodejs.org/en/download/)
+- [Install Node.js Tools for Visual Studio](https://www.visualstudio.com/vs/node-js/)
+- Pull the Savour Git repo and open the Visual Studio project
+- Missing Node Packages? Under Solution Explorer, right click `npm` and select "Install Missing npm Packages"
+
+## Database
+Get data in your local database - please use camel case for table and key names
+- `> mongod.exe` _starts a local instance of mongoDB_
+- `> use savour` _Creates Savour database_
+- `> db.rest.insert({ name : 'Curbside', location : 'Queen Anne', ...});` _Restaurant collection is created_
+- `> show collections` _to view the created collections/tables_
+- `> db.rest.find({})` _List all elements in Restaurant collection_
+
+#### Sample insert
+```shell
+db.rest.insert({
+    "name" : "Pho Cyclo Cafe",
+    "location" : {
+        "LON" : "-122.34195249999999",
+        "LAT" : "47.62726010000001"
+    },
+    "phone" : "(206) 284-2897",
+    "hours" : {
+        "SAT" : "11:00 AM-8:00 PM",
+        "FRI" : "11:00 AM-8:00 PM",
+        "THU" : "11:00 AM-8:00 PM",
+        "WED" : "11:00 AM-8:00 PM",
+        "TUE" : "11:00 AM-8:00 PM",
+        "MON" : "11:00 AM-8:00 PM",
+        "SUN" : "11:00 AM-8:00 PM"
+    },
+    "filters" : {
+        "disability-friendly" : "0",
+        "vegan-friendly" : "1",
+        "locally-sourced" : "0",
+        "environmentally-friendly" : "0",
+        "minority-owned" : "1",
+        "locally-owned" : "0"
+    },
+    "type" : "restaurant",
+    "pricing" : 2,
+    "rating" : 4.33333333333333,
+    "address" : "900 Dexter Ave N, Seattle, WA 98109, USA",
+    "desc" : "Vietnamese quick bites",
+    "website" : "http://phocyclocafe.com",
+    "menu" : "http://places.singleplatform.com",
+    "__v" : 0,
+    "id" : "58e681746cf2d01230089854",
+    "image" : "https://res.cloudinary.com/savoursip/image/upload/v1492668367/q5bchtd8hhqjidmhmfgu.jpg (65kB)
+"
+})
+```
+#### Sample 2
+```shell
+db.rest.insert({
+    "name" : "Flying Apron",
+    "location" : {
+        "LON" : "-122.3496414",
+        "LAT" : "47.6509795"
+    },
+    "phone" : "(206) 442-1115",
+    "hours" : {
+        "SAT" : "7:30 AM-7:00 PM",
+        "FRI" : "7:30 AM-7:00 PM",
+        "THU" : "7:30 AM-7:00 PM",
+        "WED" : "7:30 AM-7:00 PM",
+        "TUE" : "7:30 AM-7:00 PM",
+        "MON" : "7:30 AM-7:00 PM",
+        "SUN" : "7:30 AM-7:00 PM"
+    },
+    "filters" : {
+        "disability-friendly" : "1",
+        "vegan-friendly" : "1",
+        "locally-sourced" : "1",
+        "environmentally-friendly" : "1",
+        "minority-owned" : "0",
+        "locally-owned" : "1"
+    },
+    "type" : "cafe",
+    "pricing" : 3,
+    "rating" : 4.66666666666667,
+    "address" : "3510 Fremont Ave N, Seattle, WA 98103, USA",
+    "desc" : "Bake shop for gluten-free sweets like cupcakes & cookies plus savories like bread, pizza & lasagna.",
+    "website" : "http://flyingapron.com",
+    "menu" : "http://places.singleplatform.com/flying-apron-baking-co/menu?ref=google",
+    "image" : "https://res.cloudinary.com/savoursip/image/upload/v1490907411/tj0dbndsl5lgrdcbenl3.jpg (206kB)
+",
+    "__v" : 0,
+    "id" : "58dd71a14963d12efcf0b927"
+})
+```
+
 ## Server
-When installing packages on the server, please list them here
+Follow these instruction to set up server
 - [Set up Digital Ocean Node JS Machine.](https://cloud.digitalocean.com/support/suggestions?article=initial-server-setup-with-ubuntu-14-04&i=bbf02d&page=0&query=ubuntu%20setup)
 - [Connect To Droplet with SSH.](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-putty-on-digitalocean-droplets-windows-users) Essentially this just requires creating a new public/private key with PuTTY, saving the public key to the server, then saving the private key in PuTTY.
 - [Install mongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
 
-
-## Enviornment
-Instructions for setting up your dev eviornment
-- [Install Node.js (32 bit)](https://nodejs.org/en/download/)
-- [Install Node.js Tools for Visual Studio](https://www.visualstudio.com/vs/node-js/)
-- Pull the Savour Git repo and open the Visual Studio project
-- Missing Node Packages. Use the Command Prompt and navigate to the current directory with the Node Modules and use the command npm install or npm i
-
+When installing packages on the server, please list them here
+```shell
+npm install blueimp-file-upload
+npm install body-parser
+npm install cloudinary-jquery-file-upload
+npm install debug
+npm install express
+npm install mongodb
+npm install mongoose
+npm install morgan
+npm install toastr
+```
 
 ## Deploy to server
 How to deploy to the server
@@ -32,19 +130,6 @@ How to deploy to the server
 ## Talk to the database on the server
 From any directory, type `mongo --shell`
 CTRL^C to exit
-
-
-## Get data in your local database - please use camel case for table and key names
-- Run mongod.exe, then open new command prompt, run mongo.exe
-- `> use savour` //Creates Savour database
-- `> db.rest.insert({ name : 'Curbside', location : 'Queen Anne'});` _Restaurant collection is created, only using two properties for testing_
-- `> show collections` _to view the created collections/tables_
-- `> db.rest.find({})` _List all elements in Restaurant collection, should list 'curbside' at this point_
-- `> db.rest.insert({ name : '', location : ''});` _Repeat to add more restaurants_
-
-#### I added these two to my test db
-- `> db.rest.insert({ name : "Test Restaurant", phone : "(206) 421-1061", hours: "{'SUN': '9-5', 'MON': '9-5', 'TUE': '9-5', 'WED': '9-5', 'THU': '9-5', 'FRI': '9-5', 'SAT': '9-5'}",pricing:3, rating:3, address:"3307 3rd Ave W. Seattle, WA 98119", location:"{ 'LAT': '47.35124', 'LON': '124.1265' }", desc:"This is a test restaurant. Does not really exist.", website:"sample.com", menu:"sample.com/menu", green: true, local: true, ownership: true, vegan: true, aca: true});`
-- `> db.rest.insert({ name : "WEST Restaurant", phone : "(206) 421-1061", hours: "{'SUN': '9-5', 'MON': '9-5', 'TUE': '9-5', 'WED': '9-5', 'THU': '9-5', 'FRI': '9-5', 'SAT': '9-5'}",pricing:3, rating:3, address:"3307 3rd Ave W. Seattle, WA 98119", location:"{ 'LAT': '47.35124', 'LON': '124.1265' }", desc:"This is a test restaurant. Does not really exist.", website:"sample.com", menu:"sample.com/menu", green: true, local: true, ownership: true, vegan: false, aca: true});`
 
 #### Some good things to know
 - `> db.rest.find( { rating: 3 } )`

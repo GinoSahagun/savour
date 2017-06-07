@@ -284,7 +284,7 @@ function UpdateRestaurants() {
     var temp;
     var i = 0;
     var user = userMarker;
-    ClearMarkers()
+    ClearMarkers();
     if (userMarker != null) {
         bounds.extend(userMarker.position);
     }
@@ -383,6 +383,7 @@ function retrieveRestaurants() {
         } else {
             activeRestaurants = activeRestaurants.sort(dynamicSort("name")).sort(dynamicSort("rating")).reverse();
         }
+        ClearMarkers();
         // Display restaurants on map
         for (d of activeRestaurants) {
             AddMarker(GooglePOS(d.location), d);
