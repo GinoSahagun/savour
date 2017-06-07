@@ -107,17 +107,9 @@ router.get('/neighborhood-data', function (req, res) {
     console.log('Getting Neighborhood...');
 
     var neighborhoodStr;
-    var userLocation = req.query.location;
-    if (userLocation != "" && userLocation != null) {
-        console.log("User Location: ", userLocation.lat, userLocation.lng); //Check to see if we got user location
-        var o_id = mongoose.Types.ObjectId(userLocation.id); //convert into Object ID
-
-        //Default neighborhood for now - Queen Anne rom database
-        o_id = "58c0d26473beb886d72bbcf3"
-        console.log("obj: ", o_id); //Object ID check
 
         //then we query the database for the specifc Object ID
-        neighborhood.findById(o_id, function (err, doc) {
+        neighborhood.find( function (err, doc) {
             if (err) {
                 console.log("Error Occured");
                 res.send(err + '\nError Has Occurred') //respond with error occured
@@ -127,11 +119,6 @@ router.get('/neighborhood-data', function (req, res) {
                 res.send(neighborhoodStr); //send response back
             }
         });
-
-    }
-    else {
-        res.send(err + '\nError Has Occurred') //respond with error occured
-    }
 
 });
 

@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 //Define Restaurant schema
 var neighborhoodSchema = new Schema({
     id: String,
-    location: String,
+    location: Object,
     radius: Number,
     desc: String,
     name: String,

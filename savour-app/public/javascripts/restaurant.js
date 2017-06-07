@@ -135,6 +135,10 @@ $(function () {
         }
     });
 
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
     $("#favorite").click(function () {
         var src = $("#favorite").attr("src");
         if (src.indexOf("-i.png") < 0) {
