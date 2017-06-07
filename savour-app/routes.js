@@ -463,10 +463,10 @@ router.get("/login-check", function (req, res) {
     var password = req.query.password;
 
     if (username == "savourAdmin" && password == "savoursipSVC") {
-        res.render("admin", {"secret": "a2e7d053-b954-4620-b763-0f4240cd36bd",  title: "Administrator" });
+        res.send("{\"status\": 200, \"secret\": \"a2e7d053-b954-4620-b763-0f4240cd36bd\"}");
     }
     else {
-        res.render("login", {title: "Invalid Login" });
+        res.send("{\"status\": 401}");
     }
 });
 
