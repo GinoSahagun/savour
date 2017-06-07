@@ -208,7 +208,7 @@ function submitform(urlID) {
         //window.location = holdURL;
         $("#review-form").slideUp("slow");
         $("#comment").val("");
-
+        $("#title").val("");
         getReviewData(urlID); //reload review data
     });
 }
@@ -217,7 +217,7 @@ function submitform(urlID) {
 function reviewClass() {
     this.comment = $("#comment").val();
     this.rating = $("#review-rating").rate("getValue");
-    this.id = getUrlParameter('id');
+    this.id = getUrlParameter("id");
     this.name = $("#restName").text();
     this.title = $("#title").val();
 

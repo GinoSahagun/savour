@@ -10,6 +10,8 @@ var filter = require('./filter.model');
 var router = express.Router();
 var mongoose = require('mongoose');
 var app = express();
+var sanitize = require('mongo-sanitize');
+const assert = require("assert");
 
 // VERY BAD DONT DO THIS GLOBAL VARS ON SERVER ES NO BUENO
 var docLength;;
@@ -354,19 +356,31 @@ router.get("/filter-name-get", function (req, res) {
 router.get("/restaurant", function (req, res) {
     res.render("restaurant", { title: "Restaurant" });
 });
-
+//Prevent Javascript Injection 
+function textFromHtmlString(html) {
+    return $($.parseHTML(html)).text();
+}
 //Post review restaurant page
 router.post("/restaurant", function (req, res) {
     //Insert data into database test
     var deets = req.body;
+    //html = html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     console.log(deets.id + "  -  " + deets.comment);
+    deets.comment = deets.comment.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    deets.title = deets.title.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    /* First ensure that the input do no contains any special characters for the current NoSQL DB call API,
+here they are: ' " \ ; { } $
+*/
+    //Avoid regexp this time in order to made validation code more easy to read and understand...
+    var cleanComment = sanitize(deets.comment);
+    var cleanTitle = sanitize(deets.title);
 
     try {
         var tempReview = new review({
             id: deets.id,
-            title: deets.title,
+            title: cleanTitle,
             rating: parseFloat(deets.rating),
-            review: deets.comment,
+            review: cleanComment,
             name: deets.name
         });
     }
