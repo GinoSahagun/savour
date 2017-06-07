@@ -14,6 +14,7 @@ Instructions for setting up your dev eviornment
 - [Install Node.js (32 bit)](https://nodejs.org/en/download/)
 - [Install Node.js Tools for Visual Studio](https://www.visualstudio.com/vs/node-js/)
 - Pull the Savour Git repo and open the Visual Studio project
+- Missing Node Packages. Use the Command Prompt and navigate to the current directory with the Node Modules and use the command npm install or npm i
 
 
 ## Deploy to server
