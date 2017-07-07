@@ -139,6 +139,11 @@ CTRL^C to exit
 - '> Network
 	port: 27017
 	#comment out "bind_ip = 127.0.0.1"
+	
+## Renewing SSL Certificate
+-`> sudo service nginx stop`
+-`> sudo certbot renew`
+-`> sudo service nginx start`
 
 
 
